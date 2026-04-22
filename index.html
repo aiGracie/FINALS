@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
 <title>Meowtch 🐾</title>
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Nunito:wght@400;600;700;800&family=Fredoka+One&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css.css"/>
@@ -104,28 +104,18 @@
 <div class="page" id="page-discover">
   <div class="discover-overlay"></div>
 
-  <!-- APP NAV -->
+  <!-- FIX 1: APP NAV — single row, all icons consistent -->
   <nav class="app-nav">
     <a class="app-nav-logo" href="#"><img src="logotrans.png" alt="Meowtch"><span>Meowtch</span></a>
-    <div class="app-nav-tabs">
-      <button class="app-nav-tab active" onclick="switchDiscoverTab('discover',this)">₍^. .^₎⟆ Discover</button>
-    </div>
+    <span class="app-nav-title">₍^. .^₎⟆ Discover</span>
     <div class="app-nav-right">
       <button class="nav-icon-btn nav-badge" id="msgNavBtn" data-count="" onclick="showMatchesPanel()" title="Messages">✉</button>
-      <button class="nav-profile-btn" onclick="showDashboard()" title="My Profile">👤</button>
-      <button class="nav-logout-btn" onclick="doLogout()">Logout 👋</button>
+      <button class="nav-icon-btn" onclick="showDashboard()" title="My Profile">👤</button>
+      <button class="nav-icon-btn nav-icon-logout" onclick="doLogout()" title="Logout">⏻</button>
     </div>
   </nav>
 
-  <!-- STATS BAR (real-time, top) -->
-  <div class="stats-bar">
-    <div class="stat-item"><span class="stat-num" id="statCats">0</span><span class="stat-label">AVAILABLE CATS</span></div>
-    <div class="stat-item"><span class="stat-num" id="statMatches">0</span><span class="stat-label">MATCHES TODAY</span></div>
-    <div class="stat-item"><span class="stat-num" id="statAdopted">0</span><span class="stat-label">ADOPTED CATS</span></div>
-    <div class="stat-item"><span class="stat-num">3</span><span class="stat-label">NEARBY SHELTERS</span></div>
-  </div>
-
-  <!-- MAIN DISCOVER AREA -->
+  <!-- FIX 3 & 4: MAIN DISCOVER AREA — fills remaining space, no overflow -->
   <div class="discover-main">
     <div class="discover-body">
 
@@ -173,9 +163,35 @@
         <div class="swipe-hint"><span>👈 Pass</span><span>⭐ Super Like</span><span>💚 Adopt 👉</span></div>
       </div>
 
-      <!-- RIGHT: SIDEBAR -->
+      <!-- FIX 2 & 4: RIGHT SIDEBAR — stats blob + 2-col grid of blobs, no scroller -->
       <div class="discover-sidebar">
-        <!-- Filters -->
+
+        <!-- FIX 2: Stats as its own blob (full width) -->
+        <div class="sidebar-card stats-blob">
+          <div class="stats-row">
+            <div class="stat-item">
+              <span class="stat-num" id="statCats">0</span>
+              <span class="stat-label">AVAILABLE CATS</span>
+            </div>
+            <div class="stat-sep"></div>
+            <div class="stat-item">
+              <span class="stat-num" id="statMatches">0</span>
+              <span class="stat-label">MATCHES TODAY</span>
+            </div>
+            <div class="stat-sep"></div>
+            <div class="stat-item">
+              <span class="stat-num" id="statAdopted">0</span>
+              <span class="stat-label">ADOPTED CATS</span>
+            </div>
+            <div class="stat-sep"></div>
+            <div class="stat-item">
+              <span class="stat-num">3</span>
+              <span class="stat-label">NEARBY SHELTERS</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- FIX 7: Filters — no default active chips so all 3 cats show -->
         <div class="sidebar-card">
           <h3>🎛️ Filters</h3>
           <div class="filter-row">
@@ -189,11 +205,11 @@
             <span class="filter-val" id="distVal">10 km</span>
           </div>
           <input type="range" min="1" max="50" value="10" oninput="document.getElementById('distVal').textContent=this.value+' km'">
-          <div class="filter-label" style="margin-bottom:6px">Personality</div>
+          <div class="filter-label" style="margin-bottom:5px">Personality</div>
           <div class="filter-chips">
-            <div class="filter-chip active" data-trait="calm" onclick="toggleChip(this);applyFilters()">😴 Calm</div>
+            <div class="filter-chip" data-trait="calm" onclick="toggleChip(this);applyFilters()">😴 Calm</div>
             <div class="filter-chip" data-trait="playful" onclick="toggleChip(this);applyFilters()">🏃 Playful</div>
-            <div class="filter-chip active" data-trait="cuddly" onclick="toggleChip(this);applyFilters()">🤗 Cuddly</div>
+            <div class="filter-chip" data-trait="cuddly" onclick="toggleChip(this);applyFilters()">🤗 Cuddly</div>
             <div class="filter-chip" data-trait="sassy" onclick="toggleChip(this);applyFilters()">😼 Sassy</div>
             <div class="filter-chip" data-trait="active" onclick="toggleChip(this);applyFilters()">🐾 Active</div>
             <div class="filter-chip" data-trait="shy" onclick="toggleChip(this);applyFilters()">🌙 Shy</div>
@@ -211,18 +227,18 @@
           <h3>📍 Nearby Shelters</h3>
           <div class="shelter-item">
             <div class="shelter-icon" style="background:rgba(74,158,142,.12)">🏠</div>
-            <div class="shelter-info"><div class="shelter-name">Baguio Cat Rescue</div><div class="shelter-dist">⭐ 4.9 • 1.2 km away</div></div>
-            <span class="shelter-count">23 cats</span>
+            <div class="shelter-info"><div class="shelter-name">Baguio Cat Rescue</div><div class="shelter-dist">⭐ 4.9 • 1.2 km</div></div>
+            <span class="shelter-count">23</span>
           </div>
           <div class="shelter-item">
             <div class="shelter-icon" style="background:rgba(168,191,138,.2)">🐾</div>
-            <div class="shelter-info"><div class="shelter-name">PAWS Benguet</div><div class="shelter-dist">⭐ 4.7 • 3.5 km away</div></div>
-            <span class="shelter-count">41 cats</span>
+            <div class="shelter-info"><div class="shelter-name">PAWS Benguet</div><div class="shelter-dist">⭐ 4.7 • 3.5 km</div></div>
+            <span class="shelter-count">41</span>
           </div>
           <div class="shelter-item">
             <div class="shelter-icon" style="background:rgba(212,168,83,.12)">🌸</div>
-            <div class="shelter-info"><div class="shelter-name">Happy Paws Shelter</div><div class="shelter-dist">⭐ 4.8 • 6.1 km away</div></div>
-            <span class="shelter-count">17 cats</span>
+            <div class="shelter-info"><div class="shelter-name">Happy Paws Shelter</div><div class="shelter-dist">⭐ 4.8 • 6.1 km</div></div>
+            <span class="shelter-count">17</span>
           </div>
         </div>
 
@@ -231,10 +247,11 @@
           <h3>💡 Adoption Tip</h3>
           <p id="adoptionTip">Senior cats (7+ yrs) are often overlooked but make wonderful, calm companions! 🐾</p>
         </div>
-      </div>
-    </div>
 
-    <!-- MATCHES PANEL -->
+      </div><!-- end .discover-sidebar -->
+    </div><!-- end .discover-body -->
+
+    <!-- FIX 6: MATCHES PANEL — now position:fixed so overflow:hidden doesn't clip it -->
     <div class="side-panel" id="matchesPanel">
       <div class="panel-header">
         <div class="panel-title">♡ Your Matches</div>
@@ -265,12 +282,13 @@
         <button class="chat-send" onclick="sendMessage()">➤</button>
       </div>
     </div>
-  </div>
 
-  <!-- MOBILE BOTTOM NAV -->
+  </div><!-- end .discover-main -->
+
+  <!-- FIX 5: MOBILE BOTTOM NAV — stays fixed, card-area gets bottom padding on mobile -->
   <nav class="mobile-bottom-nav" id="mobileNav">
     <button class="mob-nav-btn active" id="mobDiscover" onclick="closePanels();setMobActive(this)"><span>🐾</span><span>Discover</span></button>
-    <button class="mob-nav-btn" id="mobMatches" onclick="showMatchesPanel();setMobActive(this)"><span>♡</span><span>Matches</span></button>
+    <button class="mob-nav-btn" id="mobMatches" onclick="showMatchesPanel();setMobActive(this)"><span>✉</span><span>Messages</span></button>
     <button class="mob-nav-btn" onclick="showDashboard()"><span>👤</span><span>Profile</span></button>
     <button class="mob-nav-btn" onclick="doLogout()"><span>⏻</span><span>Logout</span></button>
   </nav>
@@ -397,7 +415,7 @@ if(!LS.get('meowtch_cats'))    LS.set('meowtch_cats',[]);
 if(!LS.get('meowtch_matches')) LS.set('meowtch_matches',[]);
 if(!LS.get('meowtch_chats'))   LS.set('meowtch_chats',{});
 
-/* ─── DEMO CATS (corrected names) ─── */
+/* ─── DEMO CATS ─── */
 const demoCats=[
   {
     id:'demo-1',name:'Jellybean',ageNum:1,age:'1 yr',breed:'📍 Baguio City • Orange Tabby',
@@ -626,7 +644,6 @@ function loadSidebarMatches(){
   const matches=currentUser?(LS.get('meowtch_matches')||[]).filter(m=>m.adopterId===currentUser.uid):[];
 
   if(!matches.length){
-    // Show demo cats as placeholders with actual photos
     grid.innerHTML=demoCats.map(cat=>`
       <div class="match-bubble" onclick="showMatchesPanel()">
         <div class="match-avatar" style="border-color:var(--teal-light)">
@@ -637,7 +654,7 @@ function loadSidebarMatches(){
     return;
   }
 
-  grid.innerHTML=matches.slice(-6).reverse().map((m,i)=>`
+  grid.innerHTML=matches.slice(-4).reverse().map((m,i)=>`
     <div class="match-bubble" onclick="showMatchesPanel()">
       <div class="match-avatar" style="border-color:var(--teal-light)">
         ${m.catImgSrc
@@ -888,13 +905,6 @@ function loadMatchesList(){
     item.onclick=()=>openChat({id:m.catId,name:m.catName,imgEmoji:m.catEmoji||'🐱',imgSrc:m.catImgSrc||''});
     list.appendChild(item);
   });
-}
-
-/* ─── DISCOVER TAB ─── */
-function switchDiscoverTab(tab,el){
-  document.querySelectorAll('.app-nav-tab').forEach(t=>t.classList.remove('active'));
-  el.classList.add('active');
-  closePanels();
 }
 
 /* ─── OWNER DASHBOARD ─── */
