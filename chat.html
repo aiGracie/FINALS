@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Meowtch 🐾</title>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Nunito:wght@400;600;700;800&family=Fredoka+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js" defer></script>
+</head>
+<body>
+
+/* ─── CHAT ─── */
+function openChat(cat){
+  const avatarEl=document.getElementById('chatPartnerAvatar');
+  const allCats=[...demoCats,...(LS.get('meowtch_cats')||[])];
+  const catData=allCats.find(c=>c.id===cat.id||c.name===cat.name);
+  const imgSrc=catData?.imgSrc||catData?.photoURL||cat.imgSrc||'';
+
+  if(imgSrc){
+    avatarEl.innerHTML=`<img src="${imgSrc}" alt="${cat.name}"
+      style="width:100%;height:100%;object-fit:cover;border-radius:50%"
+      onerror="this.parentElement.textContent='${cat.imgEmoji||'🐱'}'">`;
+  } else {
+    avatarEl.textContent=cat.imgEmoji||'🐱';
+  }
+
+  document.getElementById('chatPartnerName').textContent=cat.name;
+  currentChatConvoId='chat_'+(cat.id||cat.name);
+  loadChatMessages(currentChatConvoId);
+
+  if(!document.getElementById('page-discover').classList.contains('active')){
+    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+    document.getElementById('page-discover').classList.add('active');
+  }
+  document.getElementById('matchesPanel').classList.remove('open');
+  document.getElementById('chatPanel').classList.add('open');
+}
+
+function loadChatMessages(convoId){
+  const mc=document.getElementById('chatMessages');
+  const msgs=(LS.get('meowtch_chats')||{})[convoId]||[];
+  if(!msgs.length){
+    mc.innerHTML='<div class="chat-empty"><div class="chat-empty-icon">💬</div><div>Say hello! Start the conversation 🐾</div></div>';
+    return;
+  }
+  mc.innerHTML='';
+  msgs.forEach(msg=>{
+    const isMe=msg.uid===currentUser?.uid;
+    const time=new Date(msg.timestamp).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+    const div=document.createElement('div');
+    div.className=`chat-bubble ${isMe?'bubble-me':'bubble-them'}`;
+    div.innerHTML=`${msg.text}<div class="bubble-time">${time}</div>`;
+    mc.appendChild(div);
+  });
+  mc.scrollTop=mc.scrollHeight;
+}
+
+function sendMessage(){
+  const input=document.getElementById('chatInput');
+  const text=input.value.trim();
+  if(!text||!currentUser||!currentChatConvoId) return;
+  input.value='';
+  const chats=LS.get('meowtch_chats');
+  if(!chats[currentChatConvoId]) chats[currentChatConvoId]=[];
+  chats[currentChatConvoId].push({text,uid:currentUser.uid,name:currentUser.displayName||'User',timestamp:Date.now()});
+  LS.set('meowtch_chats',chats);
+  loadChatMessages(currentChatConvoId);
+}
+function viewCatProfile(){toast('Cat profile view coming soon! 🐱');}
+
+/* ─── MATCHES LIST ─── */
+function loadMatchesList(){
+  const list=document.getElementById('matchesList');
+  list.innerHTML='';
+  if(!currentUser){
+    list.innerHTML='<div style="padding:24px;color:#aaa;font-size:14px;text-align:center">Log in to see your matches!</div>';
+    return;
+  }
+  const matches=(LS.get('meowtch_matches')||[]).filter(m=>m.adopterId===currentUser.uid);
+  if(!matches.length){
+    list.innerHTML='<div style="padding:32px;color:#bbb;font-size:14px;text-align:center">No matches yet — keep swiping! 🐾</div>';
+    return;
+  }
+  matches.forEach(m=>{
+    const msgs=((LS.get('meowtch_chats')||{})['chat_'+m.catId])||[];
+    const last=msgs[msgs.length-1];
+    const preview=last?last.text:'Tap to start chatting!';
+    const time=last?new Date(last.timestamp).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}):'';
+    const item=document.createElement('div');
+    item.className='match-list-item';
+    const avatarHtml=m.catImgSrc
+      ?`<img class="match-list-avatar" src="${m.catImgSrc}" alt="${m.catName}"
+          onerror="this.outerHTML='<div class=&quot;match-list-avatar-placeholder&quot;>${m.catEmoji||'🐱'}</div>'">`
+      :`<div class="match-list-avatar-placeholder">${m.catEmoji||'🐱'}</div>`;
+    item.innerHTML=`${avatarHtml}
+      <div class="match-list-info">
+        <div class="match-list-name">${m.catName}</div>
+        <div class="match-list-preview">${preview}</div>
+      </div>
+      <div class="match-list-meta"><div class="match-list-time">${time}</div></div>`;
+    item.onclick=()=>openChat({id:m.catId,name:m.catName,imgEmoji:m.catEmoji||'🐱',imgSrc:m.catImgSrc||''});
+    list.appendChild(item);
+  });
+}
+</body>
