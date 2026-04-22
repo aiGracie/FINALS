@@ -2,38 +2,26 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>Meowtch 🐾</title>
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Nunito:wght@400;600;700;800&family=Fredoka+One&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css.css"/>
-
-<!-- No Firebase — uses localStorage -->
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js" defer></script>
 </head>
 <body>
 
-<!-- ═══ FLOATING DECO ═══ -->
-<div class="deco" style="top:15%;left:3%;animation-delay:0s">🍃</div>
-<div class="deco" style="top:70%;left:6%;animation-delay:2s;font-size:16px">🌿</div>
-<div class="deco" style="top:40%;right:4%;animation-delay:1s">🐾</div>
-<div class="deco" style="top:85%;right:8%;animation-delay:3s;font-size:16px">🌸</div>
-
-<!-- ═══ HEARTS CONTAINER ═══ -->
+<div class="deco" style="top:28%;left:5%;animation-delay:0s">🍃</div>
+<div class="deco" style="top:68%;left:8%;animation-delay:2s;font-size:15px">🌿</div>
+<div class="deco" style="top:55%;right:6%;animation-delay:1s">🐾</div>
+<div class="deco" style="top:82%;right:10%;animation-delay:3s;font-size:15px">🌸</div>
 <div id="heartsContainer"></div>
-
-<!-- ═══ TOAST ═══ -->
 <div id="toast"></div>
 
-<!-- ══════════════════════════════════════════════════
-     PAGE 1: LANDING
-══════════════════════════════════════════════════ -->
+<!-- PAGE 1: LANDING -->
 <div class="page active" id="page-landing">
   <div class="landing-overlay"></div>
   <nav class="landing-nav">
-    <a class="landing-logo" href="#">
-      <img src="logotrans.png" alt="Meowtch Logo">
-      <span class="landing-logo-text">Meowtch</span>
-    </a>
+    <a class="landing-logo" href="#"><img src="logotrans.png" alt="Meowtch Logo"><span class="landing-logo-text">Meowtch</span></a>
     <div class="landing-nav-links">
       <button class="landing-nav-link" onclick="showAbout()">About Us</button>
       <button class="landing-nav-link" onclick="showContact()">Contact</button>
@@ -44,16 +32,12 @@
     <div class="landing-title">Meowtch</div>
     <div class="landing-title-front">Meowtch</div>
     <div class="landing-sub">A cat adoption app</div>
-    <button class="btn btn-ghost landing-join-btn" style="font-size:16px;padding:12px 36px" onclick="showPage('page-auth')">Join Now</button>
+    <button class="btn btn-ghost landing-join-btn" style="font-size:15px;padding:11px 34px" onclick="showPage('page-auth')">Join Now</button>
   </div>
-  <div class="landing-footer">Meowtch ∥ TAC0MI Company 2026 ∥
-   <a class="landing-footer" href="https://www.tumblr.com/decomposedmaw/793083043890036736/two-cats?source=share">BG: @decomposedmaw</a>
-  </div>
+  <div class="landing-footer">Meowtch ∥ TAC0MI Company 2026</div>
 </div>
 
-<!-- ══════════════════════════════════════════════════
-     PAGE 2: AUTH
-══════════════════════════════════════════════════ -->
+<!-- PAGE 2: AUTH -->
 <div class="page" id="page-auth">
   <div class="auth-overlay"></div>
   <div class="auth-box">
@@ -61,285 +45,243 @@
     <div class="auth-logo"><img src="logotrans.png" alt="Meowtch"></div>
     <div class="auth-title">Welcome to Meowtch</div>
     <div class="auth-sub">Find your purrfect match 🐾</div>
-
     <div class="auth-tabs">
       <button class="auth-tab active" id="tab-login" onclick="switchAuthTab('login')">Login</button>
       <button class="auth-tab" id="tab-signup" onclick="switchAuthTab('signup')">Sign Up</button>
     </div>
-
-    <!-- LOGIN FORM -->
+    <!-- LOGIN -->
     <div id="login-form">
       <button class="social-btn social-btn-google" onclick="doSocialLogin('google')">
-        <svg class="social-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
-          <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
-          <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
-          <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
-        </svg>
+        <svg class="social-icon" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
         Continue with Google
       </button>
       <button class="social-btn social-btn-facebook" onclick="doSocialLogin('facebook')">
-        <svg class="social-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" fill="#fff"/>
-        </svg>
+        <svg class="social-icon" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" fill="#fff"/></svg>
         Continue with Facebook
       </button>
       <div class="auth-divider">or</div>
-      <div class="form-group">
-        <label>Email</label>
-        <input type="email" id="login-email" placeholder="your@email.com">
-      </div>
-      <div class="form-group">
-        <label>Password</label>
-        <input type="password" id="login-pass" placeholder="••••••••">
-      </div>
-      <button class="btn btn-primary" style="width:100%;margin-top:6px" onclick="doLogin()">Login 🐾</button>
+      <div class="form-group"><label>Email</label><input type="email" id="login-email" placeholder="your@email.com"></div>
+      <div class="form-group"><label>Password</label><input type="password" id="login-pass" placeholder="••••••••"></div>
+      <button class="btn btn-primary" style="width:100%;margin-top:5px" onclick="doLogin()">Login 🐾</button>
     </div>
-
-    <!-- SIGNUP FORM -->
+    <!-- SIGNUP -->
     <div id="signup-form" style="display:none">
-      <!-- Step 1: Choose method -->
       <div id="signup-step-choose">
         <button class="social-btn social-btn-google" onclick="doSocialLogin('google')">
-          <svg class="social-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
-            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
-            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
-            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
-          </svg>
+          <svg class="social-icon" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
           Sign up with Google
         </button>
         <button class="social-btn social-btn-facebook" onclick="doSocialLogin('facebook')">
-          <svg class="social-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" fill="#fff"/>
-          </svg>
+          <svg class="social-icon" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" fill="#fff"/></svg>
           Sign up with Facebook
         </button>
         <div class="auth-divider">or</div>
         <button class="social-btn social-btn-email" onclick="showEmailSignup()">
-          <svg class="social-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z" fill="#4a9e8e"/>
-          </svg>
+          <svg class="social-icon" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z" fill="#4a9e8e"/></svg>
           Create account with Email
         </button>
       </div>
-
-      <!-- Step 2: Email/password form (hidden by default) -->
       <div id="signup-step-email" style="display:none">
         <button class="auth-back-inline" onclick="hideEmailSignup()">← Back</button>
         <div class="role-picker-section">
           <label>I am a...</label>
           <div class="role-picker">
-            <div class="role-card selected" id="role-adopter" onclick="selectRole('adopter')">
-              <div class="role-icon">🏠</div>
-              <div class="role-label">Adopter</div>
-              <div class="role-desc">I want to adopt a cat</div>
-            </div>
-            <div class="role-card" id="role-owner" onclick="selectRole('owner')">
-              <div class="role-icon">🐱</div>
-              <div class="role-label">Owner</div>
-              <div class="role-desc">I have cats to rehome</div>
-            </div>
+            <div class="role-card selected" id="role-adopter" onclick="selectRole('adopter')"><div class="role-icon">🏠</div><div class="role-label">Adopter</div><div class="role-desc">I want to adopt a cat</div></div>
+            <div class="role-card" id="role-owner" onclick="selectRole('owner')"><div class="role-icon">🐱</div><div class="role-label">Owner</div><div class="role-desc">I have cats to rehome</div></div>
           </div>
         </div>
-        <div class="form-group">
-          <label>Full Name</label>
-          <input type="text" id="signup-name" placeholder="Your name">
-        </div>
-        <div class="form-group">
-          <label>Email</label>
-          <input type="email" id="signup-email" placeholder="your@email.com">
-        </div>
-        <div class="form-group">
-          <label>Password</label>
-          <input type="password" id="signup-pass" placeholder="Min. 6 characters">
-        </div>
-        <div class="form-group">
-          <label>Location (City)</label>
-          <input type="text" id="signup-location" placeholder="e.g. Baguio City">
-        </div>
-        <button class="btn btn-primary" style="width:100%;margin-top:6px" onclick="doSignup()">Create Account 🐾</button>
+        <div class="form-group"><label>Full Name</label><input type="text" id="signup-name" placeholder="Your name"></div>
+        <div class="form-group"><label>Email</label><input type="email" id="signup-email" placeholder="your@email.com"></div>
+        <div class="form-group"><label>Password</label><input type="password" id="signup-pass" placeholder="Min. 6 characters"></div>
+        <div class="form-group"><label>Location (City)</label><input type="text" id="signup-location" placeholder="e.g. Baguio City"></div>
+        <button class="btn btn-primary" style="width:100%;margin-top:5px" onclick="doSignup()">Create Account 🐾</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ══════════════════════════════════════════════════
-     PAGE 3: DISCOVER
-══════════════════════════════════════════════════ -->
+<!-- PAGE 3: DISCOVER -->
 <div class="page" id="page-discover">
   <div class="discover-overlay"></div>
 
   <!-- APP NAV -->
   <nav class="app-nav">
-    <a class="app-nav-logo" href="#">
-      <img src="logotrans.png" alt="Meowtch">
-      <span>Meowtch</span>
-    </a>
+    <a class="app-nav-logo" href="#"><img src="logotrans.png" alt="Meowtch"><span>Meowtch</span></a>
     <div class="app-nav-tabs">
       <button class="app-nav-tab active" onclick="switchDiscoverTab('discover',this)">₍^. .^₎⟆ Discover</button>
-      <button class="app-nav-tab" onclick="switchDiscoverTab('matches',this)">♡ Matches</button>
-      <button class="app-nav-tab" onclick="switchDiscoverTab('nearby',this)">📍 Nearby</button>
     </div>
     <div class="app-nav-right">
-      <button class="nav-icon-btn nav-badge" data-count="2" onclick="showPage('page-matches')" title="Messages">✉</button>
-      <button class="nav-icon-btn" onclick="showDashboard()" title="My Profile">👤</button>
-      <button class="nav-icon-btn" onclick="doLogout()" title="Logout">⏻</button>
+      <button class="nav-icon-btn nav-badge" id="msgNavBtn" data-count="" onclick="showMatchesPanel()" title="Messages">✉</button>
+      <button class="nav-profile-btn" onclick="showDashboard()" title="My Profile">👤</button>
+      <button class="nav-logout-btn" onclick="doLogout()">Logout 👋</button>
     </div>
   </nav>
 
-  <!-- BODY -->
-  <div class="discover-body">
-    <!-- LEFT: SWIPE AREA -->
-    <div class="card-area">
-      <div class="card-tagline">swipe through adoptable cats, match with your favorite, and give them a forever home 🏠</div>
-      <div class="card-stack" id="cardStack">
-        <!-- Back cards -->
-        <div class="cat-card back-card-2" id="backCard2">
-          <div class="cat-card-img-placeholder" style="background:linear-gradient(135deg,rgba(74,158,142,.15),rgba(168,191,138,.2))">🐱</div>
-          <div class="card-info"><div class="card-name-row"><span class="card-name">?</span></div></div>
-        </div>
-        <div class="cat-card back-card-1" id="backCard1">
-          <div class="cat-card-img-placeholder" style="background:linear-gradient(135deg,rgba(168,191,138,.2),rgba(212,168,83,.15))">🐈</div>
-          <div class="card-info"><div class="card-name-row"><span class="card-name">?</span></div></div>
-        </div>
-        <!-- Front card -->
-        <div class="cat-card front-card" id="frontCard">
-          <div class="swipe-label swipe-like" id="swipeLike">ADOPT! 💚</div>
-          <div class="swipe-label swipe-nope" id="swipeNope">PASS 💔</div>
-          <img class="cat-card-img" id="cardImg" src="" alt="Cat photo" style="display:none">
-          <div class="cat-card-img-placeholder" id="cardImgPlaceholder">🐱</div>
-          <div class="card-info">
-            <div class="card-name-row">
-              <span class="card-name" id="cardName">Jellybean</span>
-              <span class="card-age" id="cardAge">1 yr</span>
-            </div>
-            <div class="card-breed" id="cardBreed">📍 Baguio City • Orange Tabby</div>
-            <div class="card-traits" id="cardTraits"></div>
-            <div class="card-bio" id="cardBio"></div>
-          </div>
-        </div>
-        <!-- No more -->
-        <div class="no-more-cats" id="noMoreCats">
-          <div class="big-emoji">😿</div>
-          <h3>You've seen them all!</h3>
-          <p>Check back soon for new cats, or expand your filters!</p>
-          <button class="btn btn-primary" onclick="resetCards()">🔄 Refresh Cats</button>
-        </div>
-      </div>
-
-      <div class="action-buttons">
-        <button class="action-btn btn-undo" onclick="undoSwipe()" title="Undo">↩️</button>
-        <button class="action-btn btn-nope" onclick="swipeLeft()" title="Pass">❌</button>
-        <button class="action-btn btn-super" onclick="superLike()" title="Super Like">⭐</button>
-        <button class="action-btn btn-like" onclick="swipeRight()" title="Adopt">💚</button>
-        <button class="action-btn btn-undo" onclick="boostCard()" title="Boost" style="font-size:16px">⚡</button>
-      </div>
-      <div class="swipe-hint">
-        <span>👈 Pass</span><span>⭐ Super Like</span><span>💚 Adopt 👉</span>
-      </div>
-    </div>
-
-    <!-- RIGHT: SIDEBAR -->
-    <div class="discover-sidebar">
-      <!-- Filters -->
-      <div class="sidebar-card">
-        <h3>🎛️ Filters</h3>
-        <div class="filter-row">
-          <span class="filter-label">Age</span>
-          <span class="filter-val" id="ageVal">0 yrs</span>
-        </div>
-        <input type="range" min="0" max="15" value="5" oninput="document.getElementById('ageVal').textContent=''+this.value+' yrs'">
-        <div class="filter-row">
-          <span class="filter-label">Distance</span>
-          <span class="filter-val" id="distVal">10 km</span>
-        </div>
-        <input type="range" min="1" max="50" value="10" oninput="document.getElementById('distVal').textContent=this.value+' km'">
-        <div class="filter-label" style="margin-bottom:7px">Personality</div>
-        <div class="filter-chips">
-          <div class="filter-chip active" onclick="toggleChip(this)">😴 Calm</div>
-          <div class="filter-chip" onclick="toggleChip(this)">🏃 Playful</div>
-          <div class="filter-chip active" onclick="toggleChip(this)">🤗 Cuddly</div>
-          <div class="filter-chip" onclick="toggleChip(this)">😼 Sassy</div>
-          <div class="filter-chip" onclick="toggleChip(this)">🐾 Active</div>
-          <div class="filter-chip" onclick="toggleChip(this)">🌙 Shy</div>
-        </div>
-      </div>
-
-      <!-- Recent Matches -->
-      <div class="sidebar-card">
-        <h3>♡ Recent Matches</h3>
-        <div class="matches-grid" id="sidebarMatchesGrid">
-          <!-- populated by JS -->
-          <div class="match-bubble" onclick="showPage('page-matches')">
-            <div class="match-avatar" style="background:rgba(74,158,142,.15);border-color:var(--teal-light)">🐱<span class="match-new-badge">!</span></div>
-            <span class="match-name">Jellybean</span>
-          </div>
-          <div class="match-bubble" onclick="showPage('page-matches')">
-            <div class="match-avatar" style="background:rgba(168,191,138,.2);border-color:var(--sage)">🐈</div>
-            <span class="match-name">Crinkles</span>
-          </div>
-          <div class="match-bubble" onclick="showPage('page-matches')">
-            <div class="match-avatar" style="background:rgba(212,168,83,.15);border-color:var(--amber-light)">😺</div>
-            <span class="match-name">Tala</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Nearby Shelters -->
-      <div class="sidebar-card">
-        <h3>📍 Nearby Shelters</h3>
-        <div class="shelter-item">
-          <div class="shelter-icon" style="background:rgba(74,158,142,.12)">🏠</div>
-          <div class="shelter-info">
-            <div class="shelter-name">Baguio Cat Rescue</div>
-            <div class="shelter-dist">⭐ 4.9 • 1.2 km away</div>
-          </div>
-          <span class="shelter-count">23 cats</span>
-        </div>
-        <div class="shelter-item">
-          <div class="shelter-icon" style="background:rgba(168,191,138,.2)">🐾</div>
-          <div class="shelter-info">
-            <div class="shelter-name">PAWS Benguet</div>
-            <div class="shelter-dist">⭐ 4.7 • 3.5 km away</div>
-          </div>
-          <span class="shelter-count">41 cats</span>
-        </div>
-        <div class="shelter-item">
-          <div class="shelter-icon" style="background:rgba(212,168,83,.12)">🌸</div>
-          <div class="shelter-info">
-            <div class="shelter-name">Happy Paws Shelter</div>
-            <div class="shelter-dist">⭐ 4.8 • 6.1 km away</div>
-          </div>
-          <span class="shelter-count">17 cats</span>
-        </div>
-      </div>
-
-      <!-- Adoption Tip -->
-      <div class="sidebar-card tip-card">
-        <h3 style="color:var(--sage-dark)">💡 Adoption Tip</h3>
-        <p id="adoptionTip">Senior cats (7+ yrs) are often overlooked but make wonderful, calm companions! They're usually already trained and love to cuddle. 🐾</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- STATS BAR -->
+  <!-- STATS BAR (real-time, top) -->
   <div class="stats-bar">
-    <div class="stat-item"><span class="stat-num" id="statCats">1,284</span><span class="stat-label">AVAILABLE CATS</span></div>
-    <div class="stat-item"><span class="stat-num" id="statMatches">342</span><span class="stat-label">MATCHES TODAY</span></div>
-    <div class="stat-item"><span class="stat-num">56</span><span class="stat-label">ADOPTED THIS WEEK</span></div>
-    <div class="stat-item"><span class="stat-num">12</span><span class="stat-label">NEARBY SHELTERS</span></div>
+    <div class="stat-item"><span class="stat-num" id="statCats">0</span><span class="stat-label">AVAILABLE CATS</span></div>
+    <div class="stat-item"><span class="stat-num" id="statMatches">0</span><span class="stat-label">MATCHES TODAY</span></div>
+    <div class="stat-item"><span class="stat-num" id="statAdopted">0</span><span class="stat-label">ADOPTED CATS</span></div>
+    <div class="stat-item"><span class="stat-num">3</span><span class="stat-label">NEARBY SHELTERS</span></div>
   </div>
+
+  <!-- MAIN DISCOVER AREA -->
+  <div class="discover-main">
+    <div class="discover-body">
+
+      <!-- LEFT: SWIPE AREA -->
+      <div class="card-area">
+        <div class="card-tagline">swipe through adoptable cats, match, and give them a forever home 🏠</div>
+        <div class="card-stack" id="cardStack">
+          <div class="cat-card back-card-2" id="backCard2">
+            <div class="cat-card-img-placeholder" style="font-size:0;background:linear-gradient(135deg,rgba(74,158,142,.1),rgba(168,191,138,.15))"></div>
+            <div class="card-info"><div class="card-name-row"><span class="card-name" style="color:#ccc">?</span></div></div>
+          </div>
+          <div class="cat-card back-card-1" id="backCard1">
+            <div class="cat-card-img-placeholder" style="font-size:0;background:linear-gradient(135deg,rgba(168,191,138,.15),rgba(212,168,83,.1))"></div>
+            <div class="card-info"><div class="card-name-row"><span class="card-name" style="color:#ccc">?</span></div></div>
+          </div>
+          <div class="cat-card front-card" id="frontCard">
+            <div class="swipe-label swipe-like" id="swipeLike">ADOPT! 💚</div>
+            <div class="swipe-label swipe-nope" id="swipeNope">PASS 💔</div>
+            <img class="cat-card-img" id="cardImg" src="" alt="Cat photo" style="display:none">
+            <div class="cat-card-img-placeholder" id="cardImgPlaceholder">🐱</div>
+            <div class="card-info">
+              <div class="card-name-row">
+                <span class="card-name" id="cardName">Jellybean</span>
+                <span class="card-age" id="cardAge">1 yr</span>
+              </div>
+              <div class="card-breed" id="cardBreed">📍 Baguio City • Orange Tabby</div>
+              <div class="card-traits" id="cardTraits"></div>
+              <div class="card-bio" id="cardBio"></div>
+            </div>
+          </div>
+          <div class="no-more-cats" id="noMoreCats">
+            <div class="big-emoji">😿</div>
+            <h3>You've seen them all!</h3>
+            <p>Check back soon or adjust your filters!</p>
+            <button class="btn btn-primary" onclick="resetCards()">🔄 Refresh Cats</button>
+          </div>
+        </div>
+        <div class="action-buttons">
+          <button class="action-btn btn-undo" onclick="undoSwipe()" title="Undo">↩️</button>
+          <button class="action-btn btn-nope" onclick="swipeLeft()" title="Pass">❌</button>
+          <button class="action-btn btn-super" onclick="superLike()" title="Super Like">⭐</button>
+          <button class="action-btn btn-like" onclick="swipeRight()" title="Adopt">💚</button>
+          <button class="action-btn btn-undo" onclick="boostCard()" title="Boost" style="font-size:15px">⚡</button>
+        </div>
+        <div class="swipe-hint"><span>👈 Pass</span><span>⭐ Super Like</span><span>💚 Adopt 👉</span></div>
+      </div>
+
+      <!-- RIGHT: SIDEBAR -->
+      <div class="discover-sidebar">
+        <!-- Filters -->
+        <div class="sidebar-card">
+          <h3>🎛️ Filters</h3>
+          <div class="filter-row">
+            <span class="filter-label">Max Age</span>
+            <span class="filter-val" id="ageVal">Any age</span>
+          </div>
+          <input type="range" id="ageSlider" min="0" max="15" value="15"
+            oninput="document.getElementById('ageVal').textContent=this.value>=15?'Any age':'0–'+this.value+' yrs';applyFilters()">
+          <div class="filter-row">
+            <span class="filter-label">Distance</span>
+            <span class="filter-val" id="distVal">10 km</span>
+          </div>
+          <input type="range" min="1" max="50" value="10" oninput="document.getElementById('distVal').textContent=this.value+' km'">
+          <div class="filter-label" style="margin-bottom:6px">Personality</div>
+          <div class="filter-chips">
+            <div class="filter-chip active" data-trait="calm" onclick="toggleChip(this);applyFilters()">😴 Calm</div>
+            <div class="filter-chip" data-trait="playful" onclick="toggleChip(this);applyFilters()">🏃 Playful</div>
+            <div class="filter-chip active" data-trait="cuddly" onclick="toggleChip(this);applyFilters()">🤗 Cuddly</div>
+            <div class="filter-chip" data-trait="sassy" onclick="toggleChip(this);applyFilters()">😼 Sassy</div>
+            <div class="filter-chip" data-trait="active" onclick="toggleChip(this);applyFilters()">🐾 Active</div>
+            <div class="filter-chip" data-trait="shy" onclick="toggleChip(this);applyFilters()">🌙 Shy</div>
+          </div>
+        </div>
+
+        <!-- Recent Matches -->
+        <div class="sidebar-card">
+          <h3>♡ Recent Matches</h3>
+          <div class="matches-grid" id="sidebarMatchesGrid"></div>
+        </div>
+
+        <!-- Nearby Shelters -->
+        <div class="sidebar-card">
+          <h3>📍 Nearby Shelters</h3>
+          <div class="shelter-item">
+            <div class="shelter-icon" style="background:rgba(74,158,142,.12)">🏠</div>
+            <div class="shelter-info"><div class="shelter-name">Baguio Cat Rescue</div><div class="shelter-dist">⭐ 4.9 • 1.2 km away</div></div>
+            <span class="shelter-count">23 cats</span>
+          </div>
+          <div class="shelter-item">
+            <div class="shelter-icon" style="background:rgba(168,191,138,.2)">🐾</div>
+            <div class="shelter-info"><div class="shelter-name">PAWS Benguet</div><div class="shelter-dist">⭐ 4.7 • 3.5 km away</div></div>
+            <span class="shelter-count">41 cats</span>
+          </div>
+          <div class="shelter-item">
+            <div class="shelter-icon" style="background:rgba(212,168,83,.12)">🌸</div>
+            <div class="shelter-info"><div class="shelter-name">Happy Paws Shelter</div><div class="shelter-dist">⭐ 4.8 • 6.1 km away</div></div>
+            <span class="shelter-count">17 cats</span>
+          </div>
+        </div>
+
+        <!-- Adoption Tip -->
+        <div class="sidebar-card tip-card">
+          <h3>💡 Adoption Tip</h3>
+          <p id="adoptionTip">Senior cats (7+ yrs) are often overlooked but make wonderful, calm companions! 🐾</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- MATCHES PANEL -->
+    <div class="side-panel" id="matchesPanel">
+      <div class="panel-header">
+        <div class="panel-title">♡ Your Matches</div>
+        <button class="panel-close" onclick="closePanel('matchesPanel')">✕</button>
+      </div>
+      <div class="matches-list" id="matchesList"></div>
+    </div>
+
+    <!-- CHAT PANEL -->
+    <div class="side-panel" id="chatPanel">
+      <div class="chat-nav">
+        <button class="chat-back" onclick="showMatchesPanel()">←</button>
+        <div class="chat-partner-info">
+          <div class="chat-partner-avatar-placeholder" id="chatPartnerAvatar">🐱</div>
+          <div>
+            <div class="chat-partner-name" id="chatPartnerName">Cat</div>
+            <div class="chat-partner-status">Active now</div>
+          </div>
+        </div>
+        <button class="btn btn-secondary" style="font-size:12px;padding:5px 13px" onclick="viewCatProfile()">View Profile</button>
+      </div>
+      <div class="chat-messages" id="chatMessages">
+        <div class="chat-empty"><div class="chat-empty-icon">💬</div><div>Say hello! Start the conversation 🐾</div></div>
+      </div>
+      <div class="chat-input-area">
+        <input class="chat-input" id="chatInput" placeholder="Type a message..."
+          onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMessage()}">
+        <button class="chat-send" onclick="sendMessage()">➤</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MOBILE BOTTOM NAV -->
+  <nav class="mobile-bottom-nav" id="mobileNav">
+    <button class="mob-nav-btn active" id="mobDiscover" onclick="closePanels();setMobActive(this)"><span>🐾</span><span>Discover</span></button>
+    <button class="mob-nav-btn" id="mobMatches" onclick="showMatchesPanel();setMobActive(this)"><span>♡</span><span>Matches</span></button>
+    <button class="mob-nav-btn" onclick="showDashboard()"><span>👤</span><span>Profile</span></button>
+    <button class="mob-nav-btn" onclick="doLogout()"><span>⏻</span><span>Logout</span></button>
+  </nav>
 </div>
 
-<!-- ══════════════════════════════════════════════════
-     MATCH POPUP
-══════════════════════════════════════════════════ -->
+<!-- MATCH POPUP -->
 <div class="match-popup" id="matchPopup">
   <div class="match-popup-inner">
     <span class="match-popup-emoji">ᓚᘏᗢ</span>
     <h2>It's a Meowtch!</h2>
-    <p id="matchPopupText">You and Jellybean could be a perfect pair!</p>
+    <p id="matchPopupText">You could be a perfect pair!</p>
     <div class="popup-btns">
       <button class="popup-btn popup-btn-primary" onclick="goToMatchChat()">✉ Send a Message</button>
       <button class="popup-btn popup-btn-secondary" onclick="closePopup()">Keep Swiping</button>
@@ -347,88 +289,35 @@
   </div>
 </div>
 
-<!-- ══════════════════════════════════════════════════
-     PAGE 4: CHAT
-══════════════════════════════════════════════════ -->
-<div class="page" id="page-chat">
-  <div class="chat-nav">
-    <button class="chat-back" onclick="showPage('page-matches')">←</button>
-    <div class="chat-partner-info">
-      <div class="chat-partner-avatar-placeholder" id="chatPartnerAvatar">🐱</div>
-      <div>
-        <div class="chat-partner-name" id="chatPartnerName">Jellybean</div>
-        <div class="chat-partner-status">Active now</div>
-      </div>
-    </div>
-    <button class="btn btn-secondary" style="font-size:12px;padding:6px 14px" onclick="viewCatProfile()">View Profile</button>
-  </div>
-  <div class="chat-messages" id="chatMessages">
-    <div class="chat-empty">
-      <div class="chat-empty-icon">💬</div>
-      <div>Say hello! Start the conversation 🐾</div>
-    </div>
-  </div>
-  <div class="chat-input-area">
-    <input class="chat-input" id="chatInput" placeholder="Type a message..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMessage()}">
-    <button class="chat-send" onclick="sendMessage()">➤</button>
-  </div>
-</div>
-
-<!-- ══════════════════════════════════════════════════
-     PAGE 5: MATCHES LIST
-══════════════════════════════════════════════════ -->
-<div class="page" id="page-matches">
-  <div class="matches-page-nav">
-    <div class="matches-page-title">♡ Your Matches</div>
-    <button class="nav-icon-btn" onclick="showPage('page-discover')" style="color:var(--teal-dark);background:rgba(74,158,142,.1)">✕</button>
-  </div>
-  <div class="matches-list" id="matchesList">
-    <!-- populated by JS -->
-  </div>
-</div>
-
-<!-- ══════════════════════════════════════════════════
-     PAGE 6: OWNER DASHBOARD
-══════════════════════════════════════════════════ -->
+<!-- PAGE 4: OWNER DASHBOARD -->
 <div class="page" id="page-owner">
   <div class="dashboard-nav">
     <div>
       <div class="dashboard-title">My Cats 🐾</div>
-      <div style="font-size:12px;color:#999;font-weight:600" id="ownerWelcome">Welcome back!</div>
+      <div style="font-size:12px;color:#888;font-weight:600" id="ownerWelcome">Welcome back!</div>
     </div>
-    <div style="display:flex;gap:8px;align-items:center">
-      <button class="btn btn-secondary" style="font-size:12px" onclick="showPage('page-discover')">← Discover</button>
-      <button class="btn btn-secondary" style="font-size:12px" onclick="showPage('page-matches')">✉ Messages</button>
-      <button class="btn btn-secondary" style="font-size:12px;color:var(--terracotta)" onclick="doLogout()">Logout</button>
+    <div style="display:flex;gap:7px;align-items:center">
+      <button class="btn btn-secondary" style="font-size:12px;padding:6px 14px" onclick="showPage('page-discover')">← Discover</button>
+      <button class="btn btn-secondary" style="font-size:12px;padding:6px 14px" onclick="showPage('page-discover');setTimeout(showMatchesPanel,50)">✉ Messages</button>
+      <button class="dash-logout-btn" onclick="doLogout()">Logout 👋</button>
     </div>
   </div>
   <div class="dashboard-body">
-    <div>
-      <div class="dash-section-title">Cat Profiles</div>
-      <div class="cat-profiles-grid" id="catProfilesGrid">
-        <!-- populated by JS -->
-      </div>
-    </div>
-    <div>
-      <div class="dash-section-title">Adoption Requests</div>
-      <div id="adoptionRequests" style="color:#999;font-size:14px">No pending requests.</div>
-    </div>
+    <div><div class="dash-section-title">Cat Profiles</div><div class="cat-profiles-grid" id="catProfilesGrid"></div></div>
+    <div><div class="dash-section-title">Adoption Requests</div><div id="adoptionRequests" style="color:#888;font-size:14px">No pending requests.</div></div>
   </div>
 </div>
 
-<!-- ══════════════════════════════════════════════════
-     PAGE 7: ADOPTER DASHBOARD
-══════════════════════════════════════════════════ -->
+<!-- PAGE 5: ADOPTER DASHBOARD -->
 <div class="page" id="page-adopter">
   <div class="dashboard-nav">
     <div>
       <div class="dashboard-title">My Profile 🏠</div>
-      <div style="font-size:12px;color:#999;font-weight:600" id="adopterWelcome">Welcome back!</div>
+      <div style="font-size:12px;color:#888;font-weight:600" id="adopterWelcome">Welcome back!</div>
     </div>
-    <div style="display:flex;gap:8px;align-items:center">
-      <button class="btn btn-secondary" style="font-size:12px" onclick="showPage('page-discover')">← Discover</button>
-      <button class="btn btn-secondary" style="font-size:12px" onclick="showPage('page-matches')">✉ Messages</button>
-      <button class="btn btn-secondary" style="font-size:12px;color:var(--terracotta)" onclick="doLogout()">Logout</button>
+    <div style="display:flex;gap:7px;align-items:center">
+      <button class="btn btn-secondary" style="font-size:12px;padding:6px 14px" onclick="showPage('page-discover')">← Discover</button>
+      <button class="dash-logout-btn" onclick="doLogout()">Logout 👋</button>
     </div>
   </div>
   <div class="adopter-profile-body">
@@ -444,70 +333,37 @@
         <div class="profile-badge">🏠 Adopter</div>
       </div>
     </div>
-
-    <div class="sidebar-card">
+    <div class="sidebar-card" style="background:white">
       <h3>✏️ Edit Profile</h3>
-      <div class="form-group">
-        <label>Bio</label>
-        <textarea id="adopterBio" rows="3" placeholder="Tell owners about yourself..."></textarea>
-      </div>
-      <div class="form-group">
-        <label>Location</label>
-        <input type="text" id="adopterLocation" placeholder="City">
-      </div>
+      <div class="form-group"><label>Bio</label><textarea id="adopterBio" rows="3" placeholder="Tell owners about yourself..."></textarea></div>
+      <div class="form-group"><label>Location</label><input type="text" id="adopterLocation" placeholder="City"></div>
       <div class="form-group">
         <label>Living Situation</label>
-        <select id="adopterLiving">
-          <option>House with yard</option>
-          <option>Apartment</option>
-          <option>Condo</option>
-          <option>Other</option>
-        </select>
+        <select id="adopterLiving"><option>House with yard</option><option>Apartment</option><option>Condo</option><option>Other</option></select>
       </div>
-      <button class="btn btn-primary" style="margin-top:8px" onclick="saveAdopterProfile()">Save Profile 🐾</button>
+      <button class="btn btn-primary" style="margin-top:7px" onclick="saveAdopterProfile()">Save Profile 🐾</button>
     </div>
-
     <div>
       <div class="dash-section-title">Cats I'm Adopting 🐾</div>
       <div class="adopted-cats-grid" id="adoptedCatsGrid">
-        <div style="color:#bbb;font-size:13px;grid-column:1/-1">Start swiping to find your match!</div>
+        <div style="color:#999;font-size:13px;grid-column:1/-1">Start swiping to find your match!</div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ══════════════════════════════════════════════════
-     CAT PROFILE MODAL (OWNER)
-══════════════════════════════════════════════════ -->
+<!-- CAT MODAL -->
 <div class="modal-overlay" id="catModal">
   <div class="modal-box">
     <div class="modal-title" id="catModalTitle">Add a Cat Profile</div>
     <img class="img-preview" id="catImgPreview" src="" alt="Cat preview">
-    <div class="upload-zone" onclick="document.getElementById('catImgInput').click()">
-      <span>📷</span>
-      <span>Upload Cat Photo</span>
-    </div>
+    <div class="upload-zone" onclick="document.getElementById('catImgInput').click()"><span>📷</span><span>Upload Cat Photo</span></div>
     <input type="file" id="catImgInput" accept="image/*" style="display:none" onchange="previewCatImg(this)">
-    <div class="form-group">
-      <label>Cat's Name</label>
-      <input type="text" id="catName" placeholder="e.g. Jellybean">
-    </div>
-    <div class="form-group">
-      <label>Age (years)</label>
-      <input type="number" id="catAge" placeholder="e.g. 2" min="0" max="20">
-    </div>
-    <div class="form-group">
-      <label>Breed</label>
-      <input type="text" id="catBreed" placeholder="e.g. Orange Tabby">
-    </div>
-    <div class="form-group">
-      <label>Location</label>
-      <input type="text" id="catLocation" placeholder="e.g. Baguio City">
-    </div>
-    <div class="form-group">
-      <label>Bio</label>
-      <textarea id="catBioInput" rows="3" placeholder="Tell adopters about this cat..."></textarea>
-    </div>
+    <div class="form-group"><label>Cat's Name</label><input type="text" id="catName" placeholder="e.g. Jellybean"></div>
+    <div class="form-group"><label>Age (years)</label><input type="number" id="catAge" placeholder="e.g. 2" min="0" max="20"></div>
+    <div class="form-group"><label>Breed</label><input type="text" id="catBreed" placeholder="e.g. Orange Tabby"></div>
+    <div class="form-group"><label>Location</label><input type="text" id="catLocation" placeholder="e.g. Baguio City"></div>
+    <div class="form-group"><label>Bio</label><textarea id="catBioInput" rows="3" placeholder="Tell adopters about this cat..."></textarea></div>
     <div class="form-group">
       <label>Personality</label>
       <div class="personality-grid">
@@ -530,326 +386,364 @@
 </div>
 
 <script>
-/* ════════════════════════════════════════════════
-   LOCAL STORAGE HELPERS
-════════════════════════════════════════════════ */
-const LS = {
-  get: (k) => { try { return JSON.parse(localStorage.getItem(k)); } catch { return null; } },
-  set: (k, v) => localStorage.setItem(k, JSON.stringify(v)),
-  del: (k) => localStorage.removeItem(k)
+/* ─── LOCAL STORAGE ─── */
+const LS={
+  get:k=>{try{return JSON.parse(localStorage.getItem(k))}catch{return null}},
+  set:(k,v)=>localStorage.setItem(k,JSON.stringify(v)),
+  del:k=>localStorage.removeItem(k)
 };
+if(!LS.get('meowtch_users'))   LS.set('meowtch_users',{});
+if(!LS.get('meowtch_cats'))    LS.set('meowtch_cats',[]);
+if(!LS.get('meowtch_matches')) LS.set('meowtch_matches',[]);
+if(!LS.get('meowtch_chats'))   LS.set('meowtch_chats',{});
 
-// Initialize storage buckets if empty
-if (!LS.get('meowtch_users'))   LS.set('meowtch_users', {});
-if (!LS.get('meowtch_cats'))    LS.set('meowtch_cats', []);
-if (!LS.get('meowtch_matches')) LS.set('meowtch_matches', []);
-if (!LS.get('meowtch_chats'))   LS.set('meowtch_chats', {});
-
-/* ════════════════════════════════════════════════
-   DEMO CAT DATA
-════════════════════════════════════════════════ */
-const demoCats = [
+/* ─── DEMO CATS (corrected names) ─── */
+const demoCats=[
   {
-    id:'demo-1', name:'Jellybean', age:'1 yr', breed:'📍 Baguio City • Orange Tabby',
-    imgSrc:'cat1.jpeg', imgEmoji:'🐱',
+    id:'demo-1',name:'Jellybean',ageNum:1,age:'1 yr',breed:'📍 Baguio City • Orange Tabby',
+    imgSrc:'cat1.jpeg',imgEmoji:'🐱',
     bio:"Hi! I'm Jellybean — squishy, sweet, and always ready for cuddles. I love watching the world from windowsills and making biscuits on your lap. Will you be my forever human? 🍊",
     traits:[['Cuddly','teal'],['Playful','sage'],['Vaccinated','amber'],['Indoor','terra']]
   },
   {
-    id:'demo-2', name:'Tala', age:'2 yrs', breed:'📍 La Trinidad • Siamese',
-    imgSrc:'cat2.jpeg', imgEmoji:'🐈',
+    id:'demo-2',name:'Tala',ageNum:2,age:'2 yrs',breed:'📍 La Trinidad • Tabby Mix',
+    imgSrc:'cat2.jpeg',imgEmoji:'🎄',
     bio:"Tala arrived wearing a tiny Santa hat and never looked back. She's festive, fearless, and secretly the most dramatic cat you'll ever meet. Ready for an adventure? 🎄",
     traits:[['Vocal','teal'],['Playful','sage'],['House-trained','amber'],['Vaccinated','teal']]
   },
   {
-    id:'demo-3', name:'Crinkles', age:'2 yrs', breed:'📍 Baguio City • Persian Himalayan',
-    imgSrc:'cat3.jpeg', imgEmoji:'😺',
+    id:'demo-3',name:'Crinkles',ageNum:2,age:'2 yrs',breed:'📍 Baguio City • Siamese',
+    imgSrc:'cat3.jpeg',imgEmoji:'😺',
     bio:"I'm Crinkles — a little blurry, a lot of love. I make the funniest faces and will talk your ear off. I'm looking for someone patient and warm to call home. 💙",
     traits:[['Sassy','terra'],['Cuddly','teal'],['Vaccinated','amber'],['Active','sage']]
   }
 ];
 
-const adoptionTips = [
+const adoptionTips=[
   "Senior cats (7+ yrs) are often overlooked but make wonderful, calm companions! 🐾",
-  "Giving a cat a few days to adjust to their new home is totally normal. Patience is key! 🏠",
+  "Give a new cat a few days to adjust — patience is the best welcome gift. 🏠",
   "Two cats are often happier than one — they keep each other company! 🐱🐱",
   "Regular vet checkups keep your cat healthy and happy for years to come! 🩺",
   "Cats feel safest with routine — try feeding them at the same time each day! 🕐"
 ];
 
-/* ════════════════════════════════════════════════
-   STATE
-════════════════════════════════════════════════ */
-let currentUser   = null;
-let currentUserData = null;
-let currentCats   = [...demoCats];
-let currentIndex  = 0;
-let swipeHistory  = [];
-let currentMatchedCat = null;
-let currentChatConvoId = null;
-let editingCatId  = null;
-let catImgFile    = null;
-let adopterAvatarFile = null;
-let userCats      = [];
+/* ─── STATE ─── */
+let currentUser=null,currentUserData=null;
+let baseCats=[],currentCats=[...demoCats];
+let currentIndex=0,swipeHistory=[];
+let currentMatchedCat=null,currentChatConvoId=null;
+let editingCatId=null,catImgFile=null,userCats=[];
 
-/* ════════════════════════════════════════════════
-   PAGE NAVIGATION
-════════════════════════════════════════════════ */
-function showPage(id) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+/* ─── PAGE NAV ─── */
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.getElementById(id).classList.add('active');
+  closePanels();
 }
 
-function showDashboard() {
-  if (!currentUserData) return;
-  if (currentUserData.role === 'owner') {
-    loadOwnerDashboard();
-    showPage('page-owner');
-  } else {
-    loadAdopterProfile();
-    showPage('page-adopter');
+/* ─── PANELS ─── */
+function showMatchesPanel(){
+  if(!document.getElementById('page-discover').classList.contains('active')){
+    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+    document.getElementById('page-discover').classList.add('active');
+  }
+  loadMatchesList();
+  document.getElementById('matchesPanel').classList.add('open');
+  document.getElementById('chatPanel').classList.remove('open');
+}
+function closePanel(id){document.getElementById(id).classList.remove('open')}
+function closePanels(){
+  document.getElementById('matchesPanel')?.classList.remove('open');
+  document.getElementById('chatPanel')?.classList.remove('open');
+}
+function setMobActive(btn){
+  document.querySelectorAll('.mob-nav-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+/* ─── TOAST ─── */
+function toast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2800);
+}
+
+/* ─── AUTH ─── */
+function switchAuthTab(tab){
+  document.getElementById('login-form').style.display=tab==='login'?'':'none';
+  document.getElementById('signup-form').style.display=tab==='signup'?'':'none';
+  document.getElementById('tab-login').classList.toggle('active',tab==='login');
+  document.getElementById('tab-signup').classList.toggle('active',tab==='signup');
+  if(tab==='signup'){
+    document.getElementById('signup-step-choose').style.display='';
+    document.getElementById('signup-step-email').style.display='none';
   }
 }
-
-/* ════════════════════════════════════════════════
-   TOAST
-════════════════════════════════════════════════ */
-function toast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 2800);
+let selectedRole='adopter';
+function selectRole(role){
+  selectedRole=role;
+  document.getElementById('role-adopter').classList.toggle('selected',role==='adopter');
+  document.getElementById('role-owner').classList.toggle('selected',role==='owner');
 }
-
-/* ════════════════════════════════════════════════
-   AUTH HELPERS
-════════════════════════════════════════════════ */
-function switchAuthTab(tab) {
-  document.getElementById('login-form').style.display  = tab==='login'  ? '' : 'none';
-  document.getElementById('signup-form').style.display = tab==='signup' ? '' : 'none';
-  document.getElementById('tab-login').classList.toggle('active',  tab==='login');
-  document.getElementById('tab-signup').classList.toggle('active', tab==='signup');
-  // Reset signup back to the choice screen when switching
-  if (tab === 'signup') {
-    const choose = document.getElementById('signup-step-choose');
-    const email  = document.getElementById('signup-step-email');
-    if (choose) choose.style.display = '';
-    if (email)  email.style.display  = 'none';
-  }
+function showEmailSignup(){
+  document.getElementById('signup-step-choose').style.display='none';
+  document.getElementById('signup-step-email').style.display='';
 }
-
-let selectedRole = 'adopter';
-function selectRole(role) {
-  selectedRole = role;
-  document.getElementById('role-adopter').classList.toggle('selected', role==='adopter');
-  document.getElementById('role-owner').classList.toggle('selected',   role==='owner');
+function hideEmailSignup(){
+  document.getElementById('signup-step-email').style.display='none';
+  document.getElementById('signup-step-choose').style.display='';
 }
-
-/* Show/hide the email signup sub-form */
-function showEmailSignup() {
-  document.getElementById('signup-step-choose').style.display = 'none';
-  document.getElementById('signup-step-email').style.display  = '';
+function doSocialLogin(provider){
+  const names={google:'Google User',facebook:'Facebook User'};
+  const uid=provider+'_'+Date.now();
+  const email=provider+'@demo.meowtch.com';
+  const userData={name:names[provider],email,role:'adopter',location:'Baguio City',createdAt:Date.now()};
+  const users=LS.get('meowtch_users');
+  users[uid]=userData; LS.set('meowtch_users',users);
+  LS.set('meowtch_session',{uid,...userData});
+  currentUserData=userData;
+  toast(`Signed in with ${provider==='google'?'Google':'Facebook'} 🐾`);
+  afterLogin({uid,displayName:names[provider],email},userData);
 }
-function hideEmailSignup() {
-  document.getElementById('signup-step-email').style.display  = 'none';
-  document.getElementById('signup-step-choose').style.display = '';
+function doSignup(){
+  const name=document.getElementById('signup-name').value.trim();
+  const email=document.getElementById('signup-email').value.trim();
+  const pass=document.getElementById('signup-pass').value;
+  const loc=document.getElementById('signup-location').value.trim();
+  if(!name||!email||!pass) return toast('Please fill all fields!');
+  if(pass.length<6) return toast('Password must be at least 6 characters!');
+  const users=LS.get('meowtch_users');
+  if(Object.values(users).find(u=>u.email===email)) return toast('Email already registered!');
+  const uid='user_'+Date.now();
+  const userData={name,email,passHash:btoa(pass),role:selectedRole,location:loc,createdAt:Date.now()};
+  users[uid]=userData; LS.set('meowtch_users',users);
+  LS.set('meowtch_session',{uid,...userData});
+  currentUserData=userData;
+  toast('Account created! Welcome 🐾');
+  afterLogin({uid,displayName:name,email},userData);
 }
-
-/* ── Social login (Google / Facebook) ─────────────────── */
-function doSocialLogin(provider) {
-  // localStorage-only: simulate social login as adopter
-  const names = { google: 'Google User', facebook: 'Facebook User' };
-  const uid   = provider + '_' + Date.now();
-  const email = provider + '@demo.meowtch.com';
-  const userData = { name: names[provider], email, role: 'adopter', location: 'Baguio City', createdAt: Date.now() };
-  const users = LS.get('meowtch_users');
-  users[uid]  = userData;
-  LS.set('meowtch_users', users);
-  LS.set('meowtch_session', { uid, ...userData });
-  currentUserData = userData;
-  toast(`Signed in with ${provider === 'google' ? 'Google' : 'Facebook'} 🐾`);
-  afterLogin({ uid, displayName: names[provider], email }, userData);
-}
-
-/* ── Email / password sign-up ──────────────────────────── */
-function doSignup() {
-  const name  = document.getElementById('signup-name').value.trim();
-  const email = document.getElementById('signup-email').value.trim();
-  const pass  = document.getElementById('signup-pass').value;
-  const loc   = document.getElementById('signup-location').value.trim();
-  if (!name || !email || !pass) return toast('Please fill all fields!');
-  if (pass.length < 6) return toast('Password must be at least 6 characters!');
-
-  const users = LS.get('meowtch_users');
-  // Check email already taken
-  const existing = Object.values(users).find(u => u.email === email);
-  if (existing) return toast('Email already registered! Try logging in.');
-
-  const uid = 'user_' + Date.now();
-  const userData = { name, email, passHash: btoa(pass), role: selectedRole, location: loc, createdAt: Date.now() };
-  users[uid] = userData;
-  LS.set('meowtch_users', users);
-  LS.set('meowtch_session', { uid, ...userData });
-  currentUserData = userData;
-  toast('Account created! Welcome to Meowtch 🐾');
-  afterLogin({ uid, displayName: name, email }, userData);
-}
-
-/* ── Email / password login ────────────────────────────── */
-function doLogin() {
-  const email = document.getElementById('login-email').value.trim();
-  const pass  = document.getElementById('login-pass').value;
-  if (!email || !pass) return toast('Please enter email and password!');
-
-  const users = LS.get('meowtch_users');
-  const entry = Object.entries(users).find(([, u]) => u.email === email);
-  if (!entry) return toast('No account found with that email.');
-  const [uid, userData] = entry;
-  if (userData.passHash && userData.passHash !== btoa(pass)) return toast('Wrong password!');
-
-  LS.set('meowtch_session', { uid, ...userData });
-  currentUserData = userData;
+function doLogin(){
+  const email=document.getElementById('login-email').value.trim();
+  const pass=document.getElementById('login-pass').value;
+  if(!email||!pass) return toast('Please enter email and password!');
+  const users=LS.get('meowtch_users');
+  const entry=Object.entries(users).find(([,u])=>u.email===email);
+  if(!entry) return toast('No account found with that email.');
+  const [uid,userData]=entry;
+  if(userData.passHash&&userData.passHash!==btoa(pass)) return toast('Wrong password!');
+  LS.set('meowtch_session',{uid,...userData});
+  currentUserData=userData;
   toast('Welcome back! 🐾');
-  afterLogin({ uid, displayName: userData.name, email }, userData);
+  afterLogin({uid,displayName:userData.name,email},userData);
 }
-
-function afterLogin(user, userData) {
-  currentUser = user;
+function afterLogin(user,userData){
+  currentUser=user;
   loadDiscoverCats();
   showPage('page-discover');
 }
-
-function doLogout() {
+function doLogout(){
   LS.del('meowtch_session');
-  currentUser     = null;
-  currentUserData = null;
+  currentUser=null; currentUserData=null;
   showPage('page-landing');
   toast('Logged out. See you soon! 🐾');
 }
 
-/* ════════════════════════════════════════════════
-   SESSION RESTORE ON LOAD
-════════════════════════════════════════════════ */
-window.addEventListener('load', () => {
-  const session = LS.get('meowtch_session');
-  if (session) {
-    currentUser     = { uid: session.uid, displayName: session.name, email: session.email };
-    currentUserData = session;
+/* ─── SESSION RESTORE ─── */
+window.addEventListener('load',()=>{
+  const session=LS.get('meowtch_session');
+  if(session){
+    currentUser={uid:session.uid,displayName:session.name,email:session.email};
+    currentUserData=session;
     loadDiscoverCats();
     showPage('page-discover');
+  } else {
+    loadCard(0);
   }
   rotateTip();
 });
 
-/* ════════════════════════════════════════════════
-   DISCOVER / SWIPE CARDS
-════════════════════════════════════════════════ */
-function loadDiscoverCats() {
-  // Load owner-created cats from localStorage, merged with demo cats
-  const storedCats = LS.get('meowtch_cats') || [];
-  currentCats = storedCats.length > 0 ? [...storedCats, ...demoCats] : [...demoCats];
-  currentIndex = 0;
-  swipeHistory = [];
-  loadCard(0);
+/* ─── DASHBOARD ─── */
+function showDashboard(){
+  if(!currentUserData) return;
+  if(currentUserData.role==='owner'){loadOwnerDashboard();showPage('page-owner');}
+  else{loadAdopterProfile();showPage('page-adopter');}
 }
 
-function loadCard(index) {
-  const front = document.getElementById('frontCard');
-  const noMore = document.getElementById('noMoreCats');
-  if (index >= currentCats.length) {
-    front.style.display = 'none';
-    noMore.classList.add('show');
-    return;
-  }
-  front.style.display = '';
-  noMore.classList.remove('show');
-  front.className = 'cat-card front-card';
+/* ─── DISCOVER + STATS ─── */
+function loadDiscoverCats(){
+  const stored=LS.get('meowtch_cats')||[];
+  baseCats=stored.length>0?[...stored,...demoCats]:[...demoCats];
+  applyFilters();
+  updateStats();
+  loadSidebarMatches();
+}
 
-  const cat = currentCats[index];
-  const imgEl = document.getElementById('cardImg');
-  const placeholderEl = document.getElementById('cardImgPlaceholder');
+function applyFilters(){
+  const slider=document.getElementById('ageSlider');
+  const maxAge=slider?parseInt(slider.value):15;
+  const activeChips=Array.from(document.querySelectorAll('.filter-chip.active'))
+    .map(c=>c.dataset.trait?.toLowerCase()).filter(Boolean);
 
-  if (cat.imgSrc || cat.photoURL) {
-    imgEl.src = cat.photoURL || cat.imgSrc;
-    imgEl.style.display = 'block';
-    placeholderEl.style.display = 'none';
-    imgEl.onerror = () => { imgEl.style.display='none'; placeholderEl.style.display='flex'; placeholderEl.textContent=cat.imgEmoji||'🐱'; };
-  } else {
-    imgEl.style.display = 'none';
-    placeholderEl.style.display = 'flex';
-    placeholderEl.textContent = cat.imgEmoji || '🐱';
-  }
-
-  document.getElementById('cardName').textContent  = cat.name;
-  document.getElementById('cardAge').textContent   = cat.age + (typeof cat.age === 'number' ? ' yr' : '');
-  document.getElementById('cardBreed').textContent = cat.breed;
-  document.getElementById('cardBio').textContent   = cat.bio;
-
-  const traitsEl = document.getElementById('cardTraits');
-  traitsEl.innerHTML = '';
-  (cat.traits||[]).forEach(([t,c]) => {
-    traitsEl.innerHTML += `<span class="trait trait-${c||'teal'}">${t}</span>`;
+  currentCats=(baseCats.length?baseCats:[...demoCats]).filter(cat=>{
+    const age=cat.ageNum!==undefined?cat.ageNum:parseInt(cat.age);
+    if(!isNaN(age)&&maxAge<15&&age>maxAge) return false;
+    if(activeChips.length>0){
+      const traitNames=(cat.traits||[]).map(t=>(Array.isArray(t)?t[0]:t).toLowerCase().replace(/[^\w\s]/gi,'').trim());
+      return activeChips.some(chip=>traitNames.some(tr=>tr.includes(chip)));
+    }
+    return true;
   });
 
-  document.getElementById('swipeLike').style.opacity = 0;
-  document.getElementById('swipeNope').style.opacity = 0;
-  front.style.transform = '';
-  front.style.opacity   = '';
-}
-
-function swipeRight() {
-  const cat = currentCats[currentIndex];
-  if (!cat) return;
-  const front = document.getElementById('frontCard');
-  front.classList.add('swiping-right');
-  swipeHistory.push(currentIndex);
-  currentMatchedCat = cat;
-  setTimeout(() => {
-    currentIndex++;
-    loadCard(currentIndex);
-    spawnHearts();
-    if (Math.random() > 0.45) setTimeout(() => showMatchPopup(cat), 600);
-  }, 450);
-}
-function swipeLeft() {
-  const front = document.getElementById('frontCard');
-  front.classList.add('swiping-left');
-  swipeHistory.push(currentIndex);
-  setTimeout(() => { currentIndex++; loadCard(currentIndex); }, 450);
-}
-function superLike() {
-  document.getElementById('swipeLike').textContent = 'SUPER! ⭐';
-  document.getElementById('swipeLike').style.opacity = 1;
-  swipeRight();
-}
-function boostCard() {
-  const c = document.getElementById('frontCard');
-  c.style.boxShadow = '0 0 0 6px var(--amber-light), 0 12px 40px rgba(212,168,83,.5)';
-  setTimeout(()=>c.style.boxShadow='',1000);
-}
-function undoSwipe() {
-  if (!swipeHistory.length) return;
-  currentIndex = swipeHistory.pop();
-  loadCard(currentIndex);
-}
-function resetCards() {
-  currentIndex = 0;
-  swipeHistory = [];
+  currentIndex=0; swipeHistory=[];
   loadCard(0);
 }
-function toggleChip(el) { el.classList.toggle('active'); }
 
-/* DRAG */
+function updateStats(){
+  const allCats=[...demoCats,...(LS.get('meowtch_cats')||[])];
+  const matches=LS.get('meowtch_matches')||[];
+  const today=new Date().toDateString();
+  const todayMatches=matches.filter(m=>new Date(m.timestamp||0).toDateString()===today);
+
+  const sc=document.getElementById('statCats');
+  const sm=document.getElementById('statMatches');
+  const sa=document.getElementById('statAdopted');
+  if(sc) sc.textContent=allCats.length;
+  if(sm) sm.textContent=todayMatches.length;
+  if(sa) sa.textContent=matches.length;
+
+  const msgBtn=document.getElementById('msgNavBtn');
+  if(msgBtn&&currentUser){
+    const userMatches=matches.filter(m=>m.adopterId===currentUser.uid);
+    const chats=LS.get('meowtch_chats')||{};
+    const unread=userMatches.filter(m=>!(chats['chat_'+m.catId]||[]).length).length;
+    msgBtn.setAttribute('data-count',unread>0?String(unread):'');
+  }
+}
+
+function loadSidebarMatches(){
+  const grid=document.getElementById('sidebarMatchesGrid');
+  if(!grid) return;
+  const matches=currentUser?(LS.get('meowtch_matches')||[]).filter(m=>m.adopterId===currentUser.uid):[];
+
+  if(!matches.length){
+    // Show demo cats as placeholders with actual photos
+    grid.innerHTML=demoCats.map(cat=>`
+      <div class="match-bubble" onclick="showMatchesPanel()">
+        <div class="match-avatar" style="border-color:var(--teal-light)">
+          <img src="${cat.imgSrc}" alt="${cat.name}" onerror="this.style.display='none';this.parentNode.innerHTML='${cat.imgEmoji}'">
+        </div>
+        <span class="match-name">${cat.name}</span>
+      </div>`).join('');
+    return;
+  }
+
+  grid.innerHTML=matches.slice(-6).reverse().map((m,i)=>`
+    <div class="match-bubble" onclick="showMatchesPanel()">
+      <div class="match-avatar" style="border-color:var(--teal-light)">
+        ${m.catImgSrc
+          ?`<img src="${m.catImgSrc}" alt="${m.catName}" onerror="this.style.display='none';this.parentNode.innerHTML='${m.catEmoji||'🐱'}'">` 
+          :(m.catEmoji||'🐱')}
+        ${i===0?'<span class="match-new-badge">!</span>':''}
+      </div>
+      <span class="match-name">${m.catName}</span>
+    </div>`).join('');
+}
+
+/* ─── CARDS ─── */
+function loadCard(index){
+  const front=document.getElementById('frontCard');
+  const noMore=document.getElementById('noMoreCats');
+  if(index>=currentCats.length){
+    front.style.display='none'; noMore.classList.add('show'); return;
+  }
+  front.style.display=''; noMore.classList.remove('show');
+  front.className='cat-card front-card';
+
+  const cat=currentCats[index];
+  const imgEl=document.getElementById('cardImg');
+  const phEl=document.getElementById('cardImgPlaceholder');
+
+  if(cat.imgSrc||cat.photoURL){
+    imgEl.src=cat.photoURL||cat.imgSrc;
+    imgEl.style.display='block'; phEl.style.display='none';
+    imgEl.onerror=()=>{imgEl.style.display='none';phEl.style.display='flex';phEl.textContent=cat.imgEmoji||'🐱'};
+  } else {
+    imgEl.style.display='none'; phEl.style.display='flex';
+    phEl.textContent=cat.imgEmoji||'🐱';
+  }
+
+  document.getElementById('cardName').textContent=cat.name;
+  document.getElementById('cardAge').textContent=cat.age+(typeof cat.age==='number'?' yr':'');
+  document.getElementById('cardBreed').textContent=cat.breed;
+  document.getElementById('cardBio').textContent=cat.bio;
+
+  const traitsEl=document.getElementById('cardTraits');
+  traitsEl.innerHTML='';
+  (cat.traits||[]).forEach(([t,c])=>{
+    traitsEl.innerHTML+=`<span class="trait trait-${c||'teal'}">${t}</span>`;
+  });
+
+  document.getElementById('swipeLike').style.opacity=0;
+  document.getElementById('swipeNope').style.opacity=0;
+  front.style.transform=''; front.style.opacity='';
+  initTilt();
+}
+
+function initTilt(){
+  const el=document.getElementById('frontCard');
+  if(typeof VanillaTilt==='undefined'||!el) return;
+  if(el.vanillaTilt) el.vanillaTilt.destroy();
+  VanillaTilt.init(el,{max:6,speed:400,glare:true,'max-glare':0.06,perspective:900});
+}
+
+function swipeRight(){
+  const cat=currentCats[currentIndex]; if(!cat) return;
+  const front=document.getElementById('frontCard');
+  if(front.vanillaTilt) front.vanillaTilt.destroy();
+  front.classList.add('swiping-right');
+  swipeHistory.push(currentIndex);
+  currentMatchedCat=cat;
+  setTimeout(()=>{
+    currentIndex++; loadCard(currentIndex); spawnHearts();
+    if(Math.random()>.45) setTimeout(()=>showMatchPopup(cat),600);
+  },450);
+}
+function swipeLeft(){
+  const front=document.getElementById('frontCard');
+  if(front.vanillaTilt) front.vanillaTilt.destroy();
+  front.classList.add('swiping-left');
+  swipeHistory.push(currentIndex);
+  setTimeout(()=>{currentIndex++;loadCard(currentIndex)},450);
+}
+function superLike(){
+  document.getElementById('swipeLike').textContent='SUPER! ⭐';
+  document.getElementById('swipeLike').style.opacity=1;
+  swipeRight();
+}
+function boostCard(){
+  const c=document.getElementById('frontCard');
+  c.style.boxShadow='0 0 0 6px var(--amber-light),0 12px 40px rgba(212,168,83,.5)';
+  setTimeout(()=>c.style.boxShadow='',1000);
+}
+function undoSwipe(){if(!swipeHistory.length)return;currentIndex=swipeHistory.pop();loadCard(currentIndex);}
+function resetCards(){loadDiscoverCats();}
+function toggleChip(el){el.classList.toggle('active');}
+
+/* ─── DRAG ─── */
 let isDragging=false,startX=0,startY=0,curX=0;
-const frontCard = document.getElementById('frontCard');
-frontCard.addEventListener('mousedown', e=>startDrag(e));
-frontCard.addEventListener('touchstart', e=>startDrag(e.touches[0]),{passive:true});
-document.addEventListener('mousemove', e=>drag(e));
-document.addEventListener('touchmove', e=>drag(e.touches[0]),{passive:true});
-document.addEventListener('mouseup', endDrag);
-document.addEventListener('touchend', endDrag);
+const frontCard=document.getElementById('frontCard');
+frontCard.addEventListener('mousedown',e=>startDrag(e));
+frontCard.addEventListener('touchstart',e=>startDrag(e.touches[0]),{passive:true});
+document.addEventListener('mousemove',e=>drag(e));
+document.addEventListener('touchmove',e=>drag(e.touches[0]),{passive:true});
+document.addEventListener('mouseup',endDrag);
+document.addEventListener('touchend',endDrag);
 
-function startDrag(e){ isDragging=true; startX=e.clientX; startY=e.clientY; curX=0; }
+function startDrag(e){
+  isDragging=true; startX=e.clientX; startY=e.clientY; curX=0;
+  const el=document.getElementById('frontCard');
+  if(el.vanillaTilt) el.vanillaTilt.destroy();
+}
 function drag(e){
   if(!isDragging) return;
   const card=document.getElementById('frontCard');
@@ -860,8 +754,7 @@ function drag(e){
   document.getElementById('swipeNope').style.opacity=Math.min(1,Math.max(0,-curX/80));
 }
 function endDrag(){
-  if(!isDragging) return;
-  isDragging=false;
+  if(!isDragging) return; isDragging=false;
   if(curX>80) swipeRight();
   else if(curX<-80) swipeLeft();
   else {
@@ -870,140 +763,155 @@ function endDrag(){
     card.style.transform='';
     document.getElementById('swipeLike').style.opacity=0;
     document.getElementById('swipeNope').style.opacity=0;
-    setTimeout(()=>card.style.transition='',400);
+    setTimeout(()=>{card.style.transition='';initTilt();},400);
   }
 }
-
 document.addEventListener('keydown',e=>{
   if(e.key==='ArrowRight') swipeRight();
   else if(e.key==='ArrowLeft') swipeLeft();
   else if(e.key==='ArrowUp') superLike();
 });
 
-/* ════════════════════════════════════════════════
-   MATCH POPUP
-════════════════════════════════════════════════ */
-function showMatchPopup(cat) {
-  document.getElementById('matchPopupText').textContent = `You and ${cat.name} could be a perfect pair! Ready to meet them? 🐾`;
+/* ─── MATCH POPUP ─── */
+function showMatchPopup(cat){
+  document.getElementById('matchPopupText').textContent=
+    `You and ${cat.name} could be a perfect pair! Ready to meet them? 🐾`;
   document.getElementById('matchPopup').classList.add('show');
   spawnHearts();
-
-  if (currentUser) {
-    const matches = LS.get('meowtch_matches');
-    const already = matches.find(m => m.adopterId === currentUser.uid && m.catId === cat.id);
-    if (!already) {
-      matches.push({ adopterId: currentUser.uid, catId: cat.id, catName: cat.name, catEmoji: cat.imgEmoji||'🐱', catImgSrc: cat.imgSrc||cat.photoURL||'', ownerId: cat.ownerId||null, timestamp: Date.now() });
-      LS.set('meowtch_matches', matches);
+  if(currentUser){
+    const matches=LS.get('meowtch_matches');
+    const already=matches.find(m=>m.adopterId===currentUser.uid&&m.catId===cat.id);
+    if(!already){
+      matches.push({
+        adopterId:currentUser.uid,catId:cat.id,catName:cat.name,
+        catEmoji:cat.imgEmoji||'🐱',catImgSrc:cat.imgSrc||cat.photoURL||'',
+        ownerId:cat.ownerId||null,timestamp:Date.now()
+      });
+      LS.set('meowtch_matches',matches);
+      updateStats();
+      loadSidebarMatches();
     }
   }
 }
-function closePopup() { document.getElementById('matchPopup').classList.remove('show'); }
-function goToMatchChat() {
-  closePopup();
-  if (currentMatchedCat) openChat(currentMatchedCat);
-}
+function closePopup(){document.getElementById('matchPopup').classList.remove('show');}
+function goToMatchChat(){closePopup();if(currentMatchedCat)openChat(currentMatchedCat);}
 
-/* ════════════════════════════════════════════════
-   CHAT (localStorage)
-════════════════════════════════════════════════ */
-function openChat(cat) {
-  document.getElementById('chatPartnerName').textContent = cat.name;
-  document.getElementById('chatPartnerAvatar').textContent = cat.imgEmoji || '🐱';
-  currentChatConvoId = 'chat_' + (cat.id || cat.name);
+/* ─── CHAT ─── */
+function openChat(cat){
+  const avatarEl=document.getElementById('chatPartnerAvatar');
+  const allCats=[...demoCats,...(LS.get('meowtch_cats')||[])];
+  const catData=allCats.find(c=>c.id===cat.id||c.name===cat.name);
+  const imgSrc=catData?.imgSrc||catData?.photoURL||cat.imgSrc||'';
+
+  if(imgSrc){
+    avatarEl.innerHTML=`<img src="${imgSrc}" alt="${cat.name}"
+      style="width:100%;height:100%;object-fit:cover;border-radius:50%"
+      onerror="this.parentElement.textContent='${cat.imgEmoji||'🐱'}'">`;
+  } else {
+    avatarEl.textContent=cat.imgEmoji||'🐱';
+  }
+
+  document.getElementById('chatPartnerName').textContent=cat.name;
+  currentChatConvoId='chat_'+(cat.id||cat.name);
   loadChatMessages(currentChatConvoId);
-  showPage('page-chat');
+
+  if(!document.getElementById('page-discover').classList.contains('active')){
+    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+    document.getElementById('page-discover').classList.add('active');
+  }
+  document.getElementById('matchesPanel').classList.remove('open');
+  document.getElementById('chatPanel').classList.add('open');
 }
 
-function loadChatMessages(convoId) {
-  const msgContainer = document.getElementById('chatMessages');
-  const chats = LS.get('meowtch_chats');
-  const msgs  = chats[convoId] || [];
-  if (!msgs.length) {
-    msgContainer.innerHTML = `<div class="chat-empty"><div class="chat-empty-icon">💬</div><div>Say hello! Start the conversation 🐾</div></div>`;
+function loadChatMessages(convoId){
+  const mc=document.getElementById('chatMessages');
+  const msgs=(LS.get('meowtch_chats')||{})[convoId]||[];
+  if(!msgs.length){
+    mc.innerHTML='<div class="chat-empty"><div class="chat-empty-icon">💬</div><div>Say hello! Start the conversation 🐾</div></div>';
     return;
   }
-  msgContainer.innerHTML = '';
-  msgs.forEach(msg => {
-    const isMe = msg.uid === currentUser?.uid;
-    const time = new Date(msg.timestamp).toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
-    const div  = document.createElement('div');
-    div.className = `chat-bubble ${isMe ? 'bubble-me' : 'bubble-them'}`;
-    div.innerHTML = `${msg.text}<div class="bubble-time">${time}</div>`;
-    msgContainer.appendChild(div);
+  mc.innerHTML='';
+  msgs.forEach(msg=>{
+    const isMe=msg.uid===currentUser?.uid;
+    const time=new Date(msg.timestamp).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+    const div=document.createElement('div');
+    div.className=`chat-bubble ${isMe?'bubble-me':'bubble-them'}`;
+    div.innerHTML=`${msg.text}<div class="bubble-time">${time}</div>`;
+    mc.appendChild(div);
   });
-  msgContainer.scrollTop = msgContainer.scrollHeight;
+  mc.scrollTop=mc.scrollHeight;
 }
 
-function sendMessage() {
-  const input = document.getElementById('chatInput');
-  const text  = input.value.trim();
-  if (!text || !currentUser || !currentChatConvoId) return;
-  input.value = '';
-  const chats = LS.get('meowtch_chats');
-  if (!chats[currentChatConvoId]) chats[currentChatConvoId] = [];
-  chats[currentChatConvoId].push({ text, uid: currentUser.uid, name: currentUser.displayName || 'User', timestamp: Date.now() });
-  LS.set('meowtch_chats', chats);
+function sendMessage(){
+  const input=document.getElementById('chatInput');
+  const text=input.value.trim();
+  if(!text||!currentUser||!currentChatConvoId) return;
+  input.value='';
+  const chats=LS.get('meowtch_chats');
+  if(!chats[currentChatConvoId]) chats[currentChatConvoId]=[];
+  chats[currentChatConvoId].push({text,uid:currentUser.uid,name:currentUser.displayName||'User',timestamp:Date.now()});
+  LS.set('meowtch_chats',chats);
   loadChatMessages(currentChatConvoId);
 }
+function viewCatProfile(){toast('Cat profile view coming soon! 🐱');}
 
-function viewCatProfile() { toast('Cat profile view coming soon! 🐱'); }
-
-/* ════════════════════════════════════════════════
-   MATCHES LIST PAGE (localStorage)
-════════════════════════════════════════════════ */
-function loadMatchesList() {
-  const list = document.getElementById('matchesList');
-  list.innerHTML = '';
-  if (!currentUser) {
-    list.innerHTML = '<div style="padding:20px;color:#bbb;font-size:14px;text-align:center">Log in to see your matches!</div>';
+/* ─── MATCHES LIST ─── */
+function loadMatchesList(){
+  const list=document.getElementById('matchesList');
+  list.innerHTML='';
+  if(!currentUser){
+    list.innerHTML='<div style="padding:24px;color:#aaa;font-size:14px;text-align:center">Log in to see your matches!</div>';
     return;
   }
-  const matches = (LS.get('meowtch_matches') || []).filter(m => m.adopterId === currentUser.uid);
-  if (!matches.length) {
-    list.innerHTML = '<div style="padding:30px;color:#bbb;font-size:14px;text-align:center">No matches yet — keep swiping! 🐾</div>';
+  const matches=(LS.get('meowtch_matches')||[]).filter(m=>m.adopterId===currentUser.uid);
+  if(!matches.length){
+    list.innerHTML='<div style="padding:32px;color:#bbb;font-size:14px;text-align:center">No matches yet — keep swiping! 🐾</div>';
     return;
   }
-  matches.forEach(m => {
-    const chats   = LS.get('meowtch_chats') || {};
-    const msgs    = chats['chat_' + m.catId] || [];
-    const last    = msgs[msgs.length - 1];
-    const preview = last ? last.text : 'Tap to start chatting!';
-    const time    = last ? new Date(last.timestamp).toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}) : '';
-    const item    = document.createElement('div');
-    item.className = 'match-list-item';
-    item.innerHTML = `
-      <div class="match-list-avatar-placeholder">${m.catEmoji || '🐱'}</div>
+  matches.forEach(m=>{
+    const msgs=((LS.get('meowtch_chats')||{})['chat_'+m.catId])||[];
+    const last=msgs[msgs.length-1];
+    const preview=last?last.text:'Tap to start chatting!';
+    const time=last?new Date(last.timestamp).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}):'';
+    const item=document.createElement('div');
+    item.className='match-list-item';
+    const avatarHtml=m.catImgSrc
+      ?`<img class="match-list-avatar" src="${m.catImgSrc}" alt="${m.catName}"
+          onerror="this.outerHTML='<div class=&quot;match-list-avatar-placeholder&quot;>${m.catEmoji||'🐱'}</div>'">`
+      :`<div class="match-list-avatar-placeholder">${m.catEmoji||'🐱'}</div>`;
+    item.innerHTML=`${avatarHtml}
       <div class="match-list-info">
         <div class="match-list-name">${m.catName}</div>
         <div class="match-list-preview">${preview}</div>
       </div>
-      <div class="match-list-meta">
-        <div class="match-list-time">${time}</div>
-      </div>`;
-    item.onclick = () => openChat({ id: m.catId, name: m.catName, imgEmoji: m.catEmoji || '🐱' });
+      <div class="match-list-meta"><div class="match-list-time">${time}</div></div>`;
+    item.onclick=()=>openChat({id:m.catId,name:m.catName,imgEmoji:m.catEmoji||'🐱',imgSrc:m.catImgSrc||''});
     list.appendChild(item);
   });
 }
 
-/* ════════════════════════════════════════════════
-   OWNER DASHBOARD (localStorage)
-════════════════════════════════════════════════ */
-function loadOwnerDashboard() {
-  document.getElementById('ownerWelcome').textContent = `Welcome back, ${currentUserData?.name || 'Owner'}!`;
-  const grid = document.getElementById('catProfilesGrid');
-  grid.innerHTML = '';
-  if (!currentUser) return;
+/* ─── DISCOVER TAB ─── */
+function switchDiscoverTab(tab,el){
+  document.querySelectorAll('.app-nav-tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  closePanels();
+}
 
-  const allCats = LS.get('meowtch_cats') || [];
-  userCats = allCats.filter(c => c.ownerId === currentUser.uid);
-
-  userCats.forEach(cat => {
-    const card = document.createElement('div');
-    card.className = 'cat-profile-card';
-    card.innerHTML = `
+/* ─── OWNER DASHBOARD ─── */
+function loadOwnerDashboard(){
+  document.getElementById('ownerWelcome').textContent=`Welcome back, ${currentUserData?.name||'Owner'}!`;
+  const grid=document.getElementById('catProfilesGrid');
+  grid.innerHTML='';
+  if(!currentUser) return;
+  const allCats=LS.get('meowtch_cats')||[];
+  userCats=allCats.filter(c=>c.ownerId===currentUser.uid);
+  userCats.forEach(cat=>{
+    const card=document.createElement('div');
+    card.className='cat-profile-card';
+    card.innerHTML=`
       ${cat.photoURL
-        ? `<img class="cat-profile-img" src="${cat.photoURL}" alt="${cat.name}">`
-        : `<div class="cat-profile-img-placeholder">🐱</div>`}
+        ?`<img class="cat-profile-img" src="${cat.photoURL}" alt="${cat.name}">`
+        :`<div class="cat-profile-img-placeholder">🐱</div>`}
       <div class="cat-profile-info">
         <div class="cat-profile-name">${cat.name}</div>
         <div class="cat-profile-breed">${cat.breed||''}</div>
@@ -1014,249 +922,199 @@ function loadOwnerDashboard() {
       </div>`;
     grid.appendChild(card);
   });
-
-  const addCard = document.createElement('div');
-  addCard.className = 'add-cat-card';
-  addCard.innerHTML = '<span>➕</span><span>Add a Cat</span>';
-  addCard.onclick = () => openAddCat();
-  grid.appendChild(addCard);
+  const add=document.createElement('div');
+  add.className='add-cat-card';
+  add.innerHTML='<span>➕</span><span>Add a Cat</span>';
+  add.onclick=()=>openAddCat();
+  grid.appendChild(add);
 }
 
-function openAddCat() {
-  editingCatId = null;
-  catImgFile = null;
-  document.getElementById('catModalTitle').textContent = 'Add a Cat Profile';
-  document.getElementById('catName').value = '';
-  document.getElementById('catAge').value  = '';
-  document.getElementById('catBreed').value = '';
-  document.getElementById('catLocation').value = currentUserData?.location || '';
-  document.getElementById('catBioInput').value = '';
+function openAddCat(){
+  editingCatId=null; catImgFile=null;
+  document.getElementById('catModalTitle').textContent='Add a Cat Profile';
+  ['catName','catAge','catBreed','catLocation','catBioInput'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('catLocation').value=currentUserData?.location||'';
   document.getElementById('catImgPreview').classList.remove('show');
-  document.querySelectorAll('.personality-chip').forEach(c => c.classList.remove('selected'));
+  document.querySelectorAll('.personality-chip').forEach(c=>c.classList.remove('selected'));
   document.getElementById('catModal').classList.add('show');
 }
-
-function openEditCat(id) {
-  const cat = userCats.find(c => c.id === id);
-  if (!cat) return;
-  editingCatId = id;
-  catImgFile = null;
-  document.getElementById('catModalTitle').textContent = 'Edit Cat Profile';
-  document.getElementById('catName').value = cat.name || '';
-  document.getElementById('catAge').value  = cat.ageNum || '';
-  document.getElementById('catBreed').value = cat.breed || '';
-  document.getElementById('catLocation').value = cat.location || '';
-  document.getElementById('catBioInput').value = cat.bio || '';
-  if (cat.photoURL) {
-    const prev = document.getElementById('catImgPreview');
-    prev.src = cat.photoURL; prev.classList.add('show');
-  } else {
-    document.getElementById('catImgPreview').classList.remove('show');
-  }
-  document.querySelectorAll('.personality-chip').forEach(c => {
-    c.classList.toggle('selected', (cat.traits||[]).some(t => t[0] === c.textContent.trim()));
+function openEditCat(id){
+  const cat=userCats.find(c=>c.id===id); if(!cat) return;
+  editingCatId=id; catImgFile=null;
+  document.getElementById('catModalTitle').textContent='Edit Cat Profile';
+  document.getElementById('catName').value=cat.name||'';
+  document.getElementById('catAge').value=cat.ageNum||'';
+  document.getElementById('catBreed').value=cat.breed||'';
+  document.getElementById('catLocation').value=cat.location||'';
+  document.getElementById('catBioInput').value=cat.bio||'';
+  if(cat.photoURL){const p=document.getElementById('catImgPreview');p.src=cat.photoURL;p.classList.add('show');}
+  else document.getElementById('catImgPreview').classList.remove('show');
+  document.querySelectorAll('.personality-chip').forEach(c=>{
+    c.classList.toggle('selected',(cat.traits||[]).some(t=>t[0]===c.textContent.trim()));
   });
   document.getElementById('catModal').classList.add('show');
 }
-
-function closeCatModal() { document.getElementById('catModal').classList.remove('show'); }
-
-function previewCatImg(input) {
-  catImgFile = input.files[0];
-  if (!catImgFile) return;
-  const reader = new FileReader();
-  reader.onload = e => {
-    const prev = document.getElementById('catImgPreview');
-    prev.src = e.target.result;
-    prev.classList.add('show');
-  };
-  reader.readAsDataURL(catImgFile);
+function closeCatModal(){document.getElementById('catModal').classList.remove('show');}
+function previewCatImg(input){
+  catImgFile=input.files[0]; if(!catImgFile) return;
+  const r=new FileReader();
+  r.onload=e=>{const p=document.getElementById('catImgPreview');p.src=e.target.result;p.classList.add('show');};
+  r.readAsDataURL(catImgFile);
 }
+async function saveCatProfile(){
+  if(!currentUser){toast('Please log in first!');return;}
+  const name=document.getElementById('catName').value.trim();
+  const age=document.getElementById('catAge').value;
+  const breed=document.getElementById('catBreed').value.trim();
+  const loc=document.getElementById('catLocation').value.trim();
+  const bio=document.getElementById('catBioInput').value.trim();
+  if(!name){toast('Please enter a cat name!');return;}
 
-async function saveCatProfile() {
-  if (!currentUser) { toast('Please log in first!'); return; }
-  const name  = document.getElementById('catName').value.trim();
-  const age   = document.getElementById('catAge').value;
-  const breed = document.getElementById('catBreed').value.trim();
-  const loc   = document.getElementById('catLocation').value.trim();
-  const bio   = document.getElementById('catBioInput').value.trim();
-  if (!name) { toast('Please enter a cat name!'); return; }
-
-  const traits = Array.from(document.querySelectorAll('.personality-chip.selected'))
-    .map(c => [c.textContent.trim(), 'teal']);
-
-  // Convert image to base64 for localStorage storage
-  let photoURL = '';
-  if (catImgFile) {
-    photoURL = await new Promise(res => {
-      const reader = new FileReader();
-      reader.onload = e => res(e.target.result);
-      reader.readAsDataURL(catImgFile);
-    });
-  } else if (editingCatId) {
-    const existing = userCats.find(c => c.id === editingCatId);
-    photoURL = existing?.photoURL || '';
+  const traits=Array.from(document.querySelectorAll('.personality-chip.selected')).map(c=>[c.textContent.trim(),'teal']);
+  let photoURL='';
+  if(catImgFile){
+    photoURL=await new Promise(res=>{const r=new FileReader();r.onload=e=>res(e.target.result);r.readAsDataURL(catImgFile);});
+  } else if(editingCatId){
+    photoURL=userCats.find(c=>c.id===editingCatId)?.photoURL||'';
   }
 
-  const data = {
-    name, ageNum: Number(age), age: age ? age + ' yr' : '?', breed,
-    location: loc, bio, traits, photoURL,
-    ownerId: currentUser.uid,
-    ownerName: currentUserData?.name || '',
-    updatedAt: Date.now()
-  };
+  const data={name,ageNum:Number(age),age:age?age+' yr':'?',breed,location:loc,bio,traits,photoURL,
+    ownerId:currentUser.uid,ownerName:currentUserData?.name||'',updatedAt:Date.now()};
 
-  const allCats = LS.get('meowtch_cats') || [];
-  if (editingCatId) {
-    const idx = allCats.findIndex(c => c.id === editingCatId);
-    if (idx > -1) allCats[idx] = { ...allCats[idx], ...data };
+  const allCats=LS.get('meowtch_cats')||[];
+  if(editingCatId){
+    const idx=allCats.findIndex(c=>c.id===editingCatId);
+    if(idx>-1) allCats[idx]={...allCats[idx],...data};
     toast('Cat profile updated! 🐾');
   } else {
-    data.id = 'cat_' + Date.now();
-    data.createdAt = Date.now();
-    allCats.push(data);
-    toast('Cat profile created! 🐾');
+    data.id='cat_'+Date.now(); data.createdAt=Date.now();
+    allCats.push(data); toast('Cat profile created! 🐾');
   }
-  LS.set('meowtch_cats', allCats);
+  LS.set('meowtch_cats',allCats);
   closeCatModal();
   loadOwnerDashboard();
+  const stored=LS.get('meowtch_cats')||[];
+  baseCats=[...stored,...demoCats];
+  updateStats();
 }
-
-function deleteCat(id) {
-  if (!confirm('Remove this cat profile?')) return;
-  const allCats = LS.get('meowtch_cats') || [];
-  LS.set('meowtch_cats', allCats.filter(c => c.id !== id));
+function deleteCat(id){
+  if(!confirm('Remove this cat profile?')) return;
+  LS.set('meowtch_cats',(LS.get('meowtch_cats')||[]).filter(c=>c.id!==id));
   toast('Cat profile removed.');
   loadOwnerDashboard();
+  const stored=LS.get('meowtch_cats')||[];
+  baseCats=stored.length>0?[...stored,...demoCats]:[...demoCats];
+  updateStats();
 }
 
-/* ════════════════════════════════════════════════
-   ADOPTER PROFILE (localStorage)
-════════════════════════════════════════════════ */
-function loadAdopterProfile() {
-  if (!currentUser) return;
-  document.getElementById('adopterName').textContent    = currentUserData?.name || 'Your Name';
-  document.getElementById('adopterEmail').textContent   = currentUser.email || '';
-  document.getElementById('adopterWelcome').textContent = `Welcome back, ${currentUserData?.name || 'Adopter'}!`;
-  if (currentUserData?.bio)      document.getElementById('adopterBio').value      = currentUserData.bio;
-  if (currentUserData?.location) document.getElementById('adopterLocation').value = currentUserData.location;
-  if (currentUserData?.living)   document.getElementById('adopterLiving').value   = currentUserData.living;
+/* ─── ADOPTER PROFILE ─── */
+function loadAdopterProfile(){
+  if(!currentUser) return;
+  document.getElementById('adopterName').textContent=currentUserData?.name||'Your Name';
+  document.getElementById('adopterEmail').textContent=currentUser.email||'';
+  document.getElementById('adopterWelcome').textContent=`Welcome back, ${currentUserData?.name||'Adopter'}!`;
+  if(currentUserData?.bio)      document.getElementById('adopterBio').value=currentUserData.bio;
+  if(currentUserData?.location) document.getElementById('adopterLocation').value=currentUserData.location;
+  if(currentUserData?.living)   document.getElementById('adopterLiving').value=currentUserData.living;
 
-  // Show adopted cats
-  const matches = (LS.get('meowtch_matches') || []).filter(m => m.adopterId === currentUser.uid);
-  const grid = document.getElementById('adoptedCatsGrid');
-  if (!matches.length) {
-    grid.innerHTML = '<div style="color:#bbb;font-size:13px;grid-column:1/-1">Start swiping to find your match!</div>';
+  const matches=(LS.get('meowtch_matches')||[]).filter(m=>m.adopterId===currentUser.uid);
+  const grid=document.getElementById('adoptedCatsGrid');
+  if(!matches.length){
+    grid.innerHTML='<div style="color:#999;font-size:13px;grid-column:1/-1">Start swiping to find your match!</div>';
     return;
   }
-  grid.innerHTML = '';
-  matches.forEach(m => {
-    const card = document.createElement('div');
-    card.className = 'adopted-cat-card';
-    card.innerHTML = m.catImgSrc
-      ? `<img class="adopted-cat-img" src="${m.catImgSrc}" alt="${m.catName}">`
-      : `<div class="adopted-cat-img-placeholder">${m.catEmoji||'🐱'}</div>`;
-    card.innerHTML += `<div class="adopted-cat-name">${m.catName}</div>`;
+  grid.innerHTML='';
+  matches.forEach(m=>{
+    const card=document.createElement('div');
+    card.className='adopted-cat-card';
+    if(m.catImgSrc){
+      card.innerHTML=`<img class="adopted-cat-img" src="${m.catImgSrc}" alt="${m.catName}"
+        onerror="this.outerHTML='<div class=&quot;adopted-cat-img-placeholder&quot;>${m.catEmoji||'🐱'}</div>'">`;
+    } else {
+      card.innerHTML=`<div class="adopted-cat-img-placeholder">${m.catEmoji||'🐱'}</div>`;
+    }
+    card.innerHTML+=`<div class="adopted-cat-name">${m.catName}</div>`;
     grid.appendChild(card);
   });
 }
-
-function saveAdopterProfile() {
-  if (!currentUser) return;
-  const bio = document.getElementById('adopterBio').value.trim();
-  const loc = document.getElementById('adopterLocation').value.trim();
-  const liv = document.getElementById('adopterLiving').value;
-  const users = LS.get('meowtch_users');
-  if (users[currentUser.uid]) {
-    users[currentUser.uid] = { ...users[currentUser.uid], bio, location: loc, living: liv };
-    LS.set('meowtch_users', users);
+function saveAdopterProfile(){
+  if(!currentUser) return;
+  const bio=document.getElementById('adopterBio').value.trim();
+  const loc=document.getElementById('adopterLocation').value.trim();
+  const liv=document.getElementById('adopterLiving').value;
+  const users=LS.get('meowtch_users');
+  if(users[currentUser.uid]){
+    users[currentUser.uid]={...users[currentUser.uid],bio,location:loc,living:liv};
+    LS.set('meowtch_users',users);
   }
-  currentUserData = { ...currentUserData, bio, location: loc, living: liv };
-  LS.set('meowtch_session', { uid: currentUser.uid, ...currentUserData });
+  currentUserData={...currentUserData,bio,location:loc,living:liv};
+  LS.set('meowtch_session',{uid:currentUser.uid,...currentUserData});
   toast('Profile saved! 🐾');
 }
-
-function uploadAdopterAvatar(input) {
-  if (!input.files[0] || !currentUser) return;
-  const reader = new FileReader();
-  reader.onload = e => {
-    const url = e.target.result;
-    const users = LS.get('meowtch_users');
-    if (users[currentUser.uid]) { users[currentUser.uid].avatarURL = url; LS.set('meowtch_users', users); }
-    currentUserData = { ...currentUserData, avatarURL: url };
-    LS.set('meowtch_session', { uid: currentUser.uid, ...currentUserData });
-    const el  = document.getElementById('adopterAvatarDisplay');
-    const img = document.createElement('img');
-    img.src = url; img.className = 'profile-avatar';
+function uploadAdopterAvatar(input){
+  if(!input.files[0]||!currentUser) return;
+  const r=new FileReader();
+  r.onload=e=>{
+    const url=e.target.result;
+    const users=LS.get('meowtch_users');
+    if(users[currentUser.uid]){users[currentUser.uid].avatarURL=url;LS.set('meowtch_users',users);}
+    currentUserData={...currentUserData,avatarURL:url};
+    LS.set('meowtch_session',{uid:currentUser.uid,...currentUserData});
+    const el=document.getElementById('adopterAvatarDisplay');
+    const img=document.createElement('img');
+    img.src=url; img.className='profile-avatar';
     el.replaceWith(img);
     toast('Avatar updated! 🐾');
   };
-  reader.readAsDataURL(input.files[0]);
+  r.readAsDataURL(input.files[0]);
 }
 
-/* ════════════════════════════════════════════════
-   DISCOVER TABS
-════════════════════════════════════════════════ */
-function switchDiscoverTab(tab, el) {
-  document.querySelectorAll('.app-nav-tab').forEach(t => t.classList.remove('active'));
-  el.classList.add('active');
-  if (tab === 'matches') { loadMatchesList(); showPage('page-matches'); }
-}
-
-/* ════════════════════════════════════════════════
-   HEARTS & EFFECTS
-════════════════════════════════════════════════ */
-function spawnHearts() {
-  const emojis = ['🐾','✨','💚','🌿','🍃','🌸','💛'];
-  const container = document.getElementById('heartsContainer');
-  for (let i=0;i<14;i++) {
+/* ─── HEARTS ─── */
+function spawnHearts(){
+  const emojis=['🐾','✨','💚','🌿','🍃','🌸','💛'];
+  const container=document.getElementById('heartsContainer');
+  for(let i=0;i<14;i++){
     setTimeout(()=>{
-      const h = document.createElement('span');
-      h.className = 'falling-heart';
-      h.textContent = emojis[Math.floor(Math.random()*emojis.length)];
-      h.style.left = Math.random()*100+'vw';
-      h.style.animationDuration = (.8+Math.random()*.8)+'s';
-      h.style.fontSize = (14+Math.random()*14)+'px';
+      const h=document.createElement('span');
+      h.className='falling-heart';
+      h.textContent=emojis[Math.floor(Math.random()*emojis.length)];
+      h.style.left=Math.random()*100+'vw';
+      h.style.animationDuration=(.8+Math.random()*.8)+'s';
+      h.style.fontSize=(14+Math.random()*14)+'px';
       container.appendChild(h);
       setTimeout(()=>h.remove(),1600);
-    }, i*80);
+    },i*80);
   }
 }
 
-document.addEventListener('mousemove', e => {
-  if (Math.random() > .97) {
-    const p = document.createElement('span');
-    p.className = 'paw-trail';
-    p.textContent = '🐾';
-    p.style.left = e.clientX+'px';
-    p.style.top  = e.clientY+'px';
+document.addEventListener('mousemove',e=>{
+  if(Math.random()>.97){
+    const p=document.createElement('span');
+    p.className='paw-trail'; p.textContent='🐾';
+    p.style.left=e.clientX+'px'; p.style.top=e.clientY+'px';
     document.body.appendChild(p);
     setTimeout(()=>p.remove(),900);
   }
 });
 
-/* ════════════════════════════════════════════════
-   ROTATING TIP
-════════════════════════════════════════════════ */
-let tipIndex = 0;
-function rotateTip() {
-  const el = document.getElementById('adoptionTip');
-  if (el) { el.style.opacity=0; setTimeout(()=>{ el.textContent=adoptionTips[tipIndex%adoptionTips.length]; tipIndex++; el.style.opacity=1; el.style.transition='opacity .6s'; },400); }
-  setTimeout(rotateTip, 8000);
+/* ─── ROTATING TIP ─── */
+let tipIndex=0;
+function rotateTip(){
+  const el=document.getElementById('adoptionTip');
+  if(el){
+    el.style.opacity=0;
+    setTimeout(()=>{
+      el.textContent=adoptionTips[tipIndex%adoptionTips.length];
+      tipIndex++;
+      el.style.transition='opacity .6s';
+      el.style.opacity=1;
+    },400);
+  }
+  setTimeout(rotateTip,8000);
 }
 
-/* ════════════════════════════════════════════════
-   SIMPLE MODALS
-════════════════════════════════════════════════ */
-function showAbout() {
-  toast('Meowtch — by TAC0MI Company 2026 🐾 Connecting cats with forever homes!');
-}
-function showContact() {
-  toast('Contact us at: hello@meowtch.com 🐾');
-}
-
-/* Init */
-loadCard(0);
+function showAbout(){toast('Meowtch — by TAC0MI Company 2026 🐾 Connecting cats with forever homes!');}
+function showContact(){toast('Contact us at: hello@meowtch.com 🐾');}
 </script>
 </body>
 </html>
