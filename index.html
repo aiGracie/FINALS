@@ -5,787 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Meowtch 🐾</title>
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Nunito:wght@400;600;700;800&family=Fredoka+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css.css"/>
 
-<!-- Firebase -->
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile }
-    from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-  import { getFirestore, doc, setDoc, getDoc, collection, addDoc, query, where, onSnapshot, orderBy, getDocs, updateDoc, arrayUnion, serverTimestamp }
-    from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-  import { getStorage, ref, uploadBytes, getDownloadURL }
-    from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
+<!-- No Firebase — uses localStorage -->
 
-  // ── PASTE YOUR FIREBASE CONFIG HERE ──────────────────────────────
-  const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_AUTH_DOMAIN",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_STORAGE_BUCKET",
-    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-    appId: "YOUR_APP_ID"
-  };
-  // ─────────────────────────────────────────────────────────────────
-
-  const app  = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const db   = getFirestore(app);
-  const storage = getStorage(app);
-
-  window._fb = { auth, db, storage,
-    createUserWithEmailAndPassword, signInWithEmailAndPassword,
-    signOut, onAuthStateChanged, updateProfile,
-    doc, setDoc, getDoc, collection, addDoc, query, where,
-    onSnapshot, orderBy, getDocs, updateDoc, arrayUnion, serverTimestamp };
-</script>
-
-<style>
-/* ═══════════════════════════════════════════════
-   ROOT & RESET
-═══════════════════════════════════════════════ */
-:root {
-  --teal:      #4a9e8e;
-  --teal-dark: #2d7a6a;
-  --teal-light:#7ecfc2;
-  --sage:      #a8bf8a;
-  --sage-dark: #6e8f56;
-  --cream:     #f5f0e8;
-  --amber:     #d4a853;
-  --amber-light:#f0c97a;
-  --terracotta:#b5694a;
-  --brown:     #6b4423;
-  --white:     #fffdf8;
-  --overlay:   rgba(30,55,45,0.55);
-  --card-bg:   rgba(255,253,248,0.92);
-  --glass:     rgba(255,253,248,0.15);
-  --glass-border: rgba(255,253,248,0.3);
-  --shadow:    0 8px 32px rgba(30,55,45,0.25);
-  --font-display: 'Caveat', cursive;
-  --font-body:    'Nunito', sans-serif;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%;overflow:hidden;font-family:var(--font-body)}
-body{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Ctext y='20' font-size='18'%3E🐾%3C/text%3E%3C/svg%3E") 12 12,auto}
-
-/* ═══════════════════════════════════════════════
-   PAGE SYSTEM
-═══════════════════════════════════════════════ */
-.page{position:fixed;inset:0;display:none;flex-direction:column;overflow:hidden}
-.page.active{display:flex}
-
-/* ═══════════════════════════════════════════════
-   SHARED COMPONENTS
-═══════════════════════════════════════════════ */
-.btn{
-  display:inline-flex;align-items:center;justify-content:center;gap:8px;
-  padding:10px 24px;border-radius:50px;border:none;cursor:pointer;
-  font-family:var(--font-body);font-weight:800;font-size:14px;
-  transition:transform .18s cubic-bezier(.175,.885,.32,1.275),box-shadow .18s;
-}
-.btn:hover{transform:translateY(-2px) scale(1.04)}
-.btn:active{transform:scale(.96)}
-.btn-primary{background:var(--teal);color:white;box-shadow:0 4px 16px rgba(74,158,142,.4)}
-.btn-secondary{background:var(--cream);color:var(--teal-dark);border:2px solid var(--teal-light)}
-.btn-amber{background:var(--amber);color:white;box-shadow:0 4px 16px rgba(212,168,83,.4)}
-.btn-ghost{background:var(--glass);color:white;border:1.5px solid var(--glass-border);backdrop-filter:blur(8px)}
-
-input,textarea,select{
-  width:100%;padding:10px 14px;border-radius:12px;
-  border:2px solid rgba(74,158,142,.3);
-  background:rgba(255,253,248,.85);backdrop-filter:blur(4px);
-  font-family:var(--font-body);font-size:14px;color:#333;
-  outline:none;transition:border-color .2s;
-}
-input:focus,textarea:focus,select:focus{border-color:var(--teal)}
-label{font-size:13px;font-weight:700;color:var(--teal-dark);margin-bottom:4px;display:block}
-
-.paw-trail{position:fixed;pointer-events:none;z-index:9999;font-size:16px;animation:pawFade .9s ease forwards}
-@keyframes pawFade{0%{opacity:.7;transform:scale(1)}100%{opacity:0;transform:scale(.5) translateY(-20px)}}
-.falling-heart{position:fixed;top:-30px;pointer-events:none;z-index:9999;animation:fallDown 1.4s ease-in forwards}
-@keyframes fallDown{0%{transform:translateY(0) rotate(0deg);opacity:1}100%{transform:translateY(110vh) rotate(360deg);opacity:0}}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
-@keyframes wiggle{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(8deg)}}
-@keyframes fadeIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-@keyframes slideIn{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:translateX(0)}}
-@keyframes popIn{from{opacity:0;transform:scale(.7)}to{opacity:1;transform:scale(1)}}
-
-/* ═══════════════════════════════════════════════
-   TOAST
-═══════════════════════════════════════════════ */
-#toast{
-  position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(80px);
-  background:var(--teal-dark);color:white;padding:12px 24px;border-radius:50px;
-  font-weight:700;font-size:14px;z-index:9999;
-  transition:transform .3s cubic-bezier(.175,.885,.32,1.275),opacity .3s;
-  opacity:0;pointer-events:none;white-space:nowrap;
-}
-#toast.show{transform:translateX(-50%) translateY(0);opacity:1}
-
-/* ════════════════════════════════════════════════════════
-   PAGE 1: LANDING
-════════════════════════════════════════════════════════ */
-#page-landing{
-  background:url('bg-landing.gif') center/cover no-repeat;
-}
-.landing-overlay{
-  position:absolute;inset:0;
-  background:linear-gradient(to bottom, rgba(20,40,30,.35) 0%, rgba(20,40,30,.5) 100%);
-}
-.landing-nav{
-  position:relative;z-index:10;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:18px 40px;
-}
-.landing-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
-.landing-logo img{height:52px;filter:drop-shadow(2px 2px 6px rgba(0,0,0,.4))}
-.landing-logo-text{
-  font-family:var(--font-display);font-size:36px;font-weight:700;
-  color:var(--cream);text-shadow:2px 3px 0 var(--teal-dark),-1px -1px 0 rgba(0,0,0,.3);
-}
-.landing-nav-links{display:flex;align-items:center;gap:12px}
-.landing-nav-link{
-  color:rgba(255,253,248,.85);font-weight:700;font-size:14px;
-  background:none;border:none;cursor:pointer;
-  padding:6px 14px;border-radius:50px;
-  transition:background .2s,color .2s;
-}
-.landing-nav-link:hover{background:var(--glass);backdrop-filter:blur(8px)}
-.landing-nav-btn{
-  background:rgba(255,253,248,.2);backdrop-filter:blur(12px);
-  border:1.5px solid rgba(255,253,248,.4);color:white;
-  padding:8px 20px;border-radius:50px;cursor:pointer;font-weight:800;font-size:14px;
-  transition:all .2s;
-}
-.landing-nav-btn:hover{background:rgba(255,253,248,.35)}
-
-.landing-hero {
-  position: relative;
-  z-index: 10;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  /* Adjusting this padding gives the bigger text a better frame */
-  padding: 0 8vw 10vh; 
-}
-
-.landing-title {
-  font-family: var(--font-display);
-  /* This bumps up the background shadow text size significantly */
-  font-size: clamp(90px, 18vw, 180px); 
-  font-weight: 700;
-  color: rgba(255, 253, 248, .18);
-  letter-spacing: -2px;
-  line-height: 1;
-  margin-bottom: 0;
-  text-shadow: none;
-  position: relative;
-}
-
-.landing-title-front {
-  font-family: var(--font-display);
-  /* This scales up the main white text */
-  font-size: clamp(80px, 15vw, 150px); 
-  font-weight: 700;
-  color: var(--cream);
-  text-shadow: 4px 6px 0 var(--teal-dark);
-  position: relative;
-  z-index: 2;
-  /* This negative margin pulls the white text up so it overlaps the shadow perfectly */
-  margin-top: -65px; 
-  margin-bottom: 12px;
-  animation: fadeIn .8s ease both;
-}
-
-.landing-sub {
-  /* Making the subtitle a bit bigger and more spaced out to match */
-  font-size: 20px; 
-  color: rgba(255, 253, 248, .9);
-  font-weight: 600;
-  letter-spacing: 3px;
-  margin-bottom: 36px;
-  animation: fadeIn .8s ease .2s both;
-}
-.landing-join-btn{
-  animation:fadeIn .8s ease .4s both;
-}
-.landing-footer{
-  position:relative;z-index:10;
-  text-align:center;padding:12px;
-  color:rgba(255,253,248,.6);font-size:12px;font-weight:600;
-}
-
-/* ════════════════════════════════════════════════════════
-   PAGE 2: AUTH (Login / Signup)
-════════════════════════════════════════════════════════ */
-#page-auth{
-  background:url('bg-landing.gif') center/cover no-repeat;
-  align-items:center;justify-content:center;
-}
-.auth-overlay{position:absolute;inset:0;background:var(--overlay)}
-.auth-box{
-  position:relative;z-index:10;
-  background:var(--card-bg);backdrop-filter:blur(20px);
-  border-radius:28px;padding:36px 40px;width:min(460px,92vw);
-  box-shadow:var(--shadow),0 0 0 1.5px rgba(255,253,248,.4);
-  animation:popIn .4s cubic-bezier(.175,.885,.32,1.275) both;
-}
-.auth-logo{text-align:center;margin-bottom:20px}
-.auth-logo img{height:64px}
-.auth-title{
-  font-family:var(--font-display);font-size:32px;font-weight:700;
-  color:var(--teal-dark);text-align:center;margin-bottom:4px;
-}
-.auth-sub{text-align:center;color:#888;font-size:13px;font-weight:600;margin-bottom:24px}
-.auth-tabs{display:flex;gap:0;background:rgba(74,158,142,.1);border-radius:12px;padding:4px;margin-bottom:24px}
-.auth-tab{
-  flex:1;padding:8px;border-radius:8px;border:none;background:none;
-  font-family:var(--font-body);font-weight:700;font-size:13px;color:#999;
-  cursor:pointer;transition:all .2s;
-}
-.auth-tab.active{background:var(--teal);color:white;box-shadow:0 2px 8px rgba(74,158,142,.3)}
-.form-group{margin-bottom:14px}
-.role-picker{display:flex;gap:10px;margin-bottom:14px}
-.role-card{
-  flex:1;border:2px solid rgba(74,158,142,.25);border-radius:14px;padding:14px 10px;
-  text-align:center;cursor:pointer;transition:all .2s;background:white;
-}
-.role-card.selected{border-color:var(--teal);background:rgba(74,158,142,.08)}
-.role-card .role-icon{font-size:28px;margin-bottom:6px}
-.role-card .role-label{font-weight:800;font-size:13px;color:var(--teal-dark)}
-.role-card .role-desc{font-size:11px;color:#999;margin-top:2px}
-.auth-divider{text-align:center;color:#ccc;font-size:12px;margin:12px 0;position:relative}
-.auth-divider::before,.auth-divider::after{content:'';position:absolute;top:50%;width:40%;height:1px;background:#eee}
-.auth-divider::before{left:0}
-.auth-divider::after{right:0}
-.auth-switch{text-align:center;margin-top:16px;font-size:13px;color:#888}
-.auth-switch span{color:var(--teal);font-weight:700;cursor:pointer}
-.auth-switch span:hover{text-decoration:underline}
-.social-btn{
-  width:100%;padding:11px 20px;border-radius:14px;border:2px solid;
-  font-family:var(--font-body);font-weight:800;font-size:14px;
-  display:flex;align-items:center;justify-content:center;gap:10px;
-  cursor:pointer;transition:all .18s cubic-bezier(.175,.885,.32,1.275);
-  margin-bottom:10px;
-}
-.social-btn:hover{transform:translateY(-2px) scale(1.02);box-shadow:0 6px 18px rgba(0,0,0,.12)}
-.social-btn:active{transform:scale(.97)}
-.social-btn-google{
-  background:#fff;border-color:#ddd;color:#444;
-}
-.social-btn-facebook{
-  background:#1877F2;border-color:#1877F2;color:#fff;
-}
-.social-btn-email{
-  background:#fff;border-color:rgba(74,158,142,.4);color:var(--teal-dark);
-}
-.social-icon{width:22px;height:22px;flex-shrink:0}
-.role-picker-section{margin-bottom:16px}
-.role-picker-section label{margin-bottom:8px}
-.auth-back-inline{
-  display:inline-flex;align-items:center;gap:5px;
-  background:none;border:none;cursor:pointer;
-  color:var(--teal);font-weight:700;font-size:13px;
-  margin-bottom:14px;padding:0;
-}
-.auth-back-inline:hover{text-decoration:underline}
-.auth-back{
-  position:absolute;top:20px;left:20px;
-  background:none;border:none;cursor:pointer;color:var(--teal);font-weight:700;font-size:13px;
-}
-
-/* ════════════════════════════════════════════════════════
-   PAGE 3: DISCOVER / SWIPE
-════════════════════════════════════════════════════════ */
-#page-discover{
-  background:url('bg-swipe.gif') center/cover no-repeat;
-}
-.discover-overlay{
-  position:absolute;inset:0;
-  background:linear-gradient(to bottom,rgba(45,80,60,.3) 0%,rgba(30,55,40,.5) 100%);
-}
-
-/* NAV BAR */
-.app-nav{
-  position:relative;z-index:20;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:12px 24px;
-  background:rgba(30,55,40,.6);backdrop-filter:blur(16px);
-  border-bottom:1px solid rgba(126,207,194,.2);
-}
-.app-nav-logo{display:flex;align-items:center;gap:8px;text-decoration:none}
-.app-nav-logo img{height:36px}
-.app-nav-logo span{font-family:var(--font-display);font-size:24px;font-weight:700;color:var(--cream)}
-.app-nav-tabs{display:flex;gap:4px}
-.app-nav-tab{
-  padding:7px 16px;border-radius:50px;border:none;background:none;
-  font-family:var(--font-body);font-weight:700;font-size:13px;
-  color:rgba(255,253,248,.6);cursor:pointer;transition:all .2s;
-  display:flex;align-items:center;gap:5px;
-}
-.app-nav-tab.active,.app-nav-tab:hover{
-  background:rgba(126,207,194,.2);color:var(--cream);
-}
-.app-nav-right{display:flex;align-items:center;gap:10px}
-.nav-icon-btn{
-  width:36px;height:36px;border-radius:50%;border:none;
-  background:rgba(255,253,248,.15);backdrop-filter:blur(8px);
-  color:white;cursor:pointer;font-size:16px;
-  display:flex;align-items:center;justify-content:center;
-  transition:all .2s;
-}
-.nav-icon-btn:hover{background:rgba(255,253,248,.28);transform:scale(1.08)}
-.nav-badge{
-  position:relative;
-}
-.nav-badge::after{
-  content:attr(data-count);position:absolute;top:-4px;right:-4px;
-  background:var(--terracotta);color:white;font-size:9px;font-weight:800;
-  width:16px;height:16px;border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  border:2px solid rgba(30,55,40,.6);
-}
-
-/* DISCOVER LAYOUT */
-.discover-body{
-  position:relative;z-index:10;
-  flex:1;display:grid;grid-template-columns:1fr 360px;gap:20px;
-  padding:16px 20px;overflow:hidden;
-  align-items:start;
-}
-
-/* LEFT: card area */
-.card-area{display:flex;flex-direction:column;align-items:center;gap:14px}
-.card-tagline{
-  font-family:var(--font-display);font-size:17px;font-weight:600;
-  color:rgba(255,253,248,.85);background:rgba(30,55,40,.45);
-  backdrop-filter:blur(8px);border-radius:50px;padding:6px 20px;
-  border:1px solid rgba(126,207,194,.25);
-  animation:float 3.5s ease-in-out infinite;
-}
-
-/* CARD STACK */
-.card-stack{position:relative;width:320px;height:460px}
-.cat-card{
-  position:absolute;inset:0;border-radius:24px;overflow:hidden;
-  background:var(--white);
-  box-shadow:0 12px 40px rgba(30,55,40,.35),0 4px 12px rgba(0,0,0,.1);
-  border:2.5px solid rgba(255,253,248,.7);
-  transition:transform .3s cubic-bezier(.175,.885,.32,1.275),opacity .3s;
-  cursor:grab;user-select:none;
-}
-.cat-card:active{cursor:grabbing}
-.cat-card.back-card-2{transform:rotate(-4deg) translateY(10px) scale(.93);z-index:1}
-.cat-card.back-card-1{transform:rotate(3deg) translateY(5px) scale(.96);z-index:2}
-.cat-card.front-card{z-index:3;transform:rotate(0)}
-.cat-card.swiping-left{transform:translateX(-130%) rotate(-22deg)!important;opacity:0;transition:transform .45s ease,opacity .45s ease}
-.cat-card.swiping-right{transform:translateX(130%) rotate(22deg)!important;opacity:0;transition:transform .45s ease,opacity .45s ease}
-
-.cat-card-img{width:100%;height:260px;object-fit:cover;display:block}
-.cat-card-img-placeholder{
-  width:100%;height:260px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:96px;
-}
-.card-info{padding:14px 18px}
-.card-name-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px}
-.card-name{font-family:var(--font-display);font-size:28px;font-weight:700;color:#2d4a3e}
-.card-age{
-  background:var(--teal-light);color:var(--teal-dark);
-  font-weight:800;font-size:12px;padding:3px 10px;border-radius:20px;
-}
-.card-breed{font-size:12px;color:#888;font-weight:600;margin-bottom:8px}
-.card-traits{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px}
-.trait{padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700}
-.trait-teal{background:rgba(74,158,142,.15);color:var(--teal-dark)}
-.trait-sage{background:rgba(168,191,138,.2);color:var(--sage-dark)}
-.trait-amber{background:rgba(212,168,83,.18);color:#8a6020}
-.trait-terra{background:rgba(181,105,74,.15);color:var(--terracotta)}
-.card-bio{font-size:12px;color:#666;line-height:1.5}
-
-.swipe-label{
-  position:absolute;top:24px;padding:6px 18px;border-radius:10px;
-  font-family:var(--font-display);font-size:26px;font-weight:700;
-  border:4px solid;opacity:0;transition:opacity .15s;
-  pointer-events:none;z-index:20;
-}
-.swipe-like{left:20px;color:#2ecc71;border-color:#2ecc71;transform:rotate(-14deg)}
-.swipe-nope{right:20px;color:#e74c3c;border-color:#e74c3c;transform:rotate(14deg)}
-
-/* ACTION BUTTONS */
-.action-buttons{display:flex;align-items:center;gap:12px}
-.action-btn{
-  border:none;cursor:pointer;border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  transition:transform .2s cubic-bezier(.175,.885,.32,1.275),box-shadow .2s;
-  font-size:20px;background:rgba(255,253,248,.9);backdrop-filter:blur(8px);
-}
-.action-btn:hover{transform:scale(1.18)}
-.action-btn:active{transform:scale(.9)}
-.btn-nope{width:58px;height:58px;box-shadow:0 4px 16px rgba(231,76,60,.3);border:2.5px solid #f8b4ae}
-.btn-super{width:50px;height:50px;box-shadow:0 4px 16px rgba(212,168,83,.4);border:2.5px solid var(--amber-light)}
-.btn-like{width:58px;height:58px;box-shadow:0 4px 16px rgba(74,158,142,.4);border:2.5px solid var(--teal-light)}
-.btn-undo{width:42px;height:42px;box-shadow:0 4px 14px rgba(107,68,35,.2);border:2.5px solid #c4a882;font-size:16px}
-.swipe-hint{font-size:11px;color:rgba(255,253,248,.7);font-weight:600;text-align:center;display:flex;gap:16px}
-
-/* NO MORE CATS */
-.no-more-cats{
-  position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;
-  background:var(--card-bg);border-radius:24px;text-align:center;padding:30px;
-}
-.no-more-cats.show{display:flex}
-.no-more-cats .big-emoji{font-size:60px;margin-bottom:12px}
-.no-more-cats h3{font-family:var(--font-display);font-size:24px;color:var(--teal-dark);margin-bottom:8px}
-.no-more-cats p{font-size:13px;color:#888;margin-bottom:16px}
-
-/* RIGHT SIDEBAR */
-.discover-sidebar{display:flex;flex-direction:column;gap:14px;overflow-y:auto;max-height:calc(100vh - 100px);padding-right:4px}
-.discover-sidebar::-webkit-scrollbar{width:4px}
-.discover-sidebar::-webkit-scrollbar-track{background:transparent}
-.discover-sidebar::-webkit-scrollbar-thumb{background:rgba(126,207,194,.4);border-radius:4px}
-
-.sidebar-card{
-  background:rgba(255,253,248,.88);backdrop-filter:blur(16px);
-  border-radius:20px;padding:16px;
-  border:1.5px solid rgba(126,207,194,.25);
-  box-shadow:0 4px 20px rgba(30,55,40,.15);
-}
-.sidebar-card h3{
-  font-family:var(--font-display);font-size:18px;font-weight:700;
-  color:var(--teal-dark);margin-bottom:12px;display:flex;align-items:center;gap:6px;
-}
-
-/* FILTERS */
-.filter-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
-.filter-label{font-size:12px;font-weight:700;color:#666}
-.filter-val{font-size:12px;font-weight:800;color:var(--teal)}
-input[type=range]{
-  width:100%;height:4px;accent-color:var(--teal);
-  background:rgba(74,158,142,.2);border-radius:4px;
-  outline:none;cursor:pointer;margin-bottom:12px;
-  padding:0;border:none;
-}
-.filter-chips{display:flex;flex-wrap:wrap;gap:5px}
-.filter-chip{
-  padding:4px 11px;border-radius:20px;
-  border:1.5px solid rgba(74,158,142,.25);background:white;
-  font-size:11px;font-weight:700;color:#999;
-  cursor:pointer;transition:all .15s;
-}
-.filter-chip.active{background:var(--teal);border-color:var(--teal);color:white}
-.filter-chip:hover:not(.active){border-color:var(--teal);color:var(--teal)}
-
-/* MATCHES GRID */
-.matches-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.match-bubble{display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;transition:transform .2s}
-.match-bubble:hover{transform:scale(1.08)}
-.match-avatar{
-  width:64px;height:64px;border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  font-size:32px;border:3px solid;position:relative;overflow:hidden;
-}
-.match-avatar img{width:100%;height:100%;object-fit:cover}
-.match-new-badge{
-  position:absolute;top:-2px;right:-2px;
-  background:var(--terracotta);color:white;
-  font-size:8px;font-weight:800;
-  width:16px;height:16px;border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  border:2px solid white;
-}
-.match-name{font-size:10px;font-weight:700;color:#555}
-
-/* NEARBY SHELTERS */
-.shelter-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1.5px dashed rgba(74,158,142,.2)}
-.shelter-item:last-child{border-bottom:none}
-.shelter-icon{width:38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
-.shelter-info{flex:1}
-.shelter-name{font-weight:800;font-size:12px;color:#444}
-.shelter-dist{font-size:10px;color:#aaa;font-weight:600}
-.shelter-count{background:rgba(212,168,83,.15);color:var(--amber);font-size:10px;font-weight:800;padding:2px 8px;border-radius:10px}
-
-/* ADOPTION TIP */
-.tip-card{background:linear-gradient(135deg,rgba(168,191,138,.3),rgba(212,168,83,.2));border-color:rgba(168,191,138,.4)!important}
-.tip-card p{font-size:12px;color:var(--sage-dark);font-weight:600;line-height:1.6}
-
-/* STATS BAR */
-.stats-bar{
-  position:relative;z-index:20;
-  background:rgba(20,40,30,.6);backdrop-filter:blur(12px);
-  border-top:1px solid rgba(126,207,194,.2);
-  padding:8px 24px;display:flex;justify-content:center;gap:36px;flex-wrap:wrap;
-}
-.stat-item{display:flex;flex-direction:column;align-items:center;gap:1px}
-.stat-num{font-family:var(--font-display);font-size:20px;font-weight:700;color:var(--teal-light)}
-.stat-label{font-size:10px;font-weight:700;color:rgba(255,253,248,.5);letter-spacing:.5px}
-
-/* ════════════════════════════════════════════════════════
-   MATCH POPUP
-════════════════════════════════════════════════════════ */
-.match-popup{
-  position:fixed;inset:0;z-index:1000;
-  display:flex;align-items:center;justify-content:center;
-  background:rgba(20,40,30,.7);backdrop-filter:blur(8px);
-  opacity:0;pointer-events:none;transition:opacity .3s;
-}
-.match-popup.show{opacity:1;pointer-events:all}
-.match-popup-inner{
-  background:var(--card-bg);border-radius:28px;
-  padding:36px 32px;text-align:center;
-  max-width:380px;width:92%;
-  box-shadow:var(--shadow);
-  animation:popIn .4s cubic-bezier(.175,.885,.32,1.275) both;
-  border:2px solid rgba(126,207,194,.3);
-}
-.match-popup-emoji{font-size:52px;display:block;margin-bottom:12px;animation:wiggle 1.5s ease-in-out infinite}
-.match-popup-inner h2{font-family:var(--font-display);font-size:34px;color:var(--teal-dark);margin-bottom:8px}
-.match-popup-inner p{color:#777;font-size:14px;margin-bottom:20px;line-height:1.5}
-.popup-btns{display:flex;flex-direction:column;gap:8px}
-.popup-btn{padding:12px 24px;border-radius:50px;font-family:var(--font-body);font-weight:800;font-size:14px;cursor:pointer;border:none;transition:all .2s}
-.popup-btn-primary{background:var(--teal);color:white}
-.popup-btn-primary:hover{background:var(--teal-dark)}
-.popup-btn-secondary{background:rgba(74,158,142,.1);color:var(--teal-dark)}
-.popup-btn-secondary:hover{background:rgba(74,158,142,.2)}
-
-/* ════════════════════════════════════════════════════════
-   PAGE 4: CHAT
-════════════════════════════════════════════════════════ */
-#page-chat{background:var(--cream)}
-.chat-nav{
-  display:flex;align-items:center;gap:12px;
-  padding:14px 20px;background:white;
-  border-bottom:1.5px solid rgba(74,158,142,.15);
-  box-shadow:0 2px 12px rgba(30,55,40,.08);
-}
-.chat-back{background:none;border:none;cursor:pointer;color:var(--teal);font-size:20px;padding:4px}
-.chat-partner-info{flex:1;display:flex;align-items:center;gap:10px}
-.chat-partner-avatar{width:42px;height:42px;border-radius:50%;object-fit:cover;border:2.5px solid var(--teal-light)}
-.chat-partner-avatar-placeholder{
-  width:42px;height:42px;border-radius:50%;
-  background:rgba(74,158,142,.2);border:2.5px solid var(--teal-light);
-  display:flex;align-items:center;justify-content:center;font-size:18px;
-}
-.chat-partner-name{font-weight:800;color:#333;font-size:15px}
-.chat-partner-status{font-size:11px;color:var(--teal);font-weight:600}
-.chat-messages{
-  flex:1;overflow-y:auto;padding:16px 20px;
-  display:flex;flex-direction:column;gap:10px;
-}
-.chat-messages::-webkit-scrollbar{width:4px}
-.chat-messages::-webkit-scrollbar-thumb{background:rgba(74,158,142,.3);border-radius:4px}
-.chat-bubble{
-  max-width:72%;padding:10px 16px;border-radius:18px;
-  font-size:14px;line-height:1.5;word-wrap:break-word;
-  animation:fadeIn .2s ease;
-}
-.bubble-them{background:white;color:#333;border-radius:18px 18px 18px 4px;align-self:flex-start;box-shadow:0 2px 8px rgba(0,0,0,.08)}
-.bubble-me{background:var(--teal);color:white;border-radius:18px 18px 4px 18px;align-self:flex-end}
-.bubble-time{font-size:10px;opacity:.6;margin-top:3px}
-.chat-input-area{
-  display:flex;align-items:center;gap:10px;
-  padding:12px 20px;background:white;
-  border-top:1.5px solid rgba(74,158,142,.15);
-}
-.chat-input{flex:1;border-radius:50px;padding:10px 18px;resize:none;border:2px solid rgba(74,158,142,.25)}
-.chat-send{
-  width:42px;height:42px;border-radius:50%;border:none;
-  background:var(--teal);color:white;cursor:pointer;font-size:18px;
-  display:flex;align-items:center;justify-content:center;
-  transition:all .2s;flex-shrink:0;
-}
-.chat-send:hover{background:var(--teal-dark);transform:scale(1.08)}
-.chat-empty{
-  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  color:#bbb;font-size:14px;gap:8px;
-}
-.chat-empty-icon{font-size:48px}
-
-/* ════════════════════════════════════════════════════════
-   PAGE 5: MATCHES LIST
-════════════════════════════════════════════════════════ */
-#page-matches{background:var(--cream)}
-.matches-page-nav{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:14px 20px;background:white;
-  border-bottom:1.5px solid rgba(74,158,142,.15);
-}
-.matches-page-title{font-family:var(--font-display);font-size:26px;font-weight:700;color:var(--teal-dark)}
-.matches-list{flex:1;overflow-y:auto;padding:16px}
-.match-list-item{
-  display:flex;align-items:center;gap:14px;padding:14px;
-  background:white;border-radius:18px;margin-bottom:10px;cursor:pointer;
-  border:1.5px solid rgba(74,158,142,.12);
-  box-shadow:0 2px 10px rgba(30,55,40,.06);
-  transition:all .2s;animation:fadeIn .3s ease;
-}
-.match-list-item:hover{transform:translateX(4px);border-color:rgba(74,158,142,.3)}
-.match-list-avatar{width:56px;height:56px;border-radius:50%;object-fit:cover;border:2.5px solid var(--teal-light);flex-shrink:0}
-.match-list-avatar-placeholder{
-  width:56px;height:56px;border-radius:50%;flex-shrink:0;
-  background:rgba(74,158,142,.15);border:2.5px solid var(--teal-light);
-  display:flex;align-items:center;justify-content:center;font-size:24px;
-}
-.match-list-info{flex:1;min-width:0}
-.match-list-name{font-weight:800;color:#333;font-size:15px}
-.match-list-preview{font-size:12px;color:#999;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.match-list-meta{display:flex;flex-direction:column;align-items:flex-end;gap:4px}
-.match-list-time{font-size:11px;color:#bbb;font-weight:600}
-.match-unread{
-  background:var(--teal);color:white;font-size:10px;font-weight:800;
-  width:18px;height:18px;border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-}
-
-/* ════════════════════════════════════════════════════════
-   PAGE 6: OWNER DASHBOARD
-════════════════════════════════════════════════════════ */
-#page-owner{background:var(--cream)}
-.dashboard-nav{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:14px 24px;background:white;
-  border-bottom:1.5px solid rgba(74,158,142,.15);
-  box-shadow:0 2px 12px rgba(30,55,40,.08);
-}
-.dashboard-title{font-family:var(--font-display);font-size:26px;font-weight:700;color:var(--teal-dark)}
-.dashboard-body{flex:1;overflow-y:auto;padding:20px 24px;display:flex;flex-direction:column;gap:20px}
-.dashboard-body::-webkit-scrollbar{width:4px}
-.dashboard-body::-webkit-scrollbar-thumb{background:rgba(74,158,142,.3);border-radius:4px}
-
-.dash-section-title{font-family:var(--font-display);font-size:20px;font-weight:700;color:var(--teal-dark);margin-bottom:10px}
-.cat-profiles-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px}
-.cat-profile-card{
-  background:white;border-radius:20px;overflow:hidden;
-  border:1.5px solid rgba(74,158,142,.15);
-  box-shadow:0 4px 16px rgba(30,55,40,.08);
-  transition:all .2s;cursor:pointer;
-}
-.cat-profile-card:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(30,55,40,.15)}
-.cat-profile-img{width:100%;height:140px;object-fit:cover}
-.cat-profile-img-placeholder{
-  width:100%;height:140px;
-  background:linear-gradient(135deg,rgba(74,158,142,.15),rgba(168,191,138,.2));
-  display:flex;align-items:center;justify-content:center;font-size:52px;
-}
-.cat-profile-info{padding:12px}
-.cat-profile-name{font-family:var(--font-display);font-size:18px;font-weight:700;color:#2d4a3e}
-.cat-profile-breed{font-size:11px;color:#999;font-weight:600;margin-bottom:8px}
-.cat-profile-actions{display:flex;gap:6px}
-.cat-profile-btn{
-  flex:1;padding:6px 8px;border-radius:10px;border:none;cursor:pointer;
-  font-family:var(--font-body);font-weight:700;font-size:11px;transition:all .2s;
-}
-.cat-profile-btn-edit{background:rgba(74,158,142,.1);color:var(--teal-dark)}
-.cat-profile-btn-edit:hover{background:rgba(74,158,142,.2)}
-.cat-profile-btn-delete{background:rgba(181,105,74,.1);color:var(--terracotta)}
-.cat-profile-btn-delete:hover{background:rgba(181,105,74,.2)}
-
-.add-cat-card{
-  background:rgba(74,158,142,.06);border-radius:20px;
-  border:2px dashed rgba(74,158,142,.3);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  min-height:200px;cursor:pointer;transition:all .2s;
-}
-.add-cat-card:hover{background:rgba(74,158,142,.12);border-color:var(--teal)}
-.add-cat-card span:first-child{font-size:36px;margin-bottom:8px}
-.add-cat-card span:last-child{font-weight:700;color:var(--teal);font-size:13px}
-
-/* CAT PROFILE MODAL */
-.modal-overlay{
-  position:fixed;inset:0;z-index:500;
-  background:rgba(20,40,30,.6);backdrop-filter:blur(8px);
-  display:flex;align-items:center;justify-content:center;
-  opacity:0;pointer-events:none;transition:opacity .3s;
-}
-.modal-overlay.show{opacity:1;pointer-events:all}
-.modal-box{
-  background:var(--white);border-radius:24px;
-  padding:28px 28px;width:min(520px,94vw);
-  max-height:90vh;overflow-y:auto;
-  box-shadow:var(--shadow);
-  animation:popIn .35s cubic-bezier(.175,.885,.32,1.275) both;
-}
-.modal-title{font-family:var(--font-display);font-size:26px;font-weight:700;color:var(--teal-dark);margin-bottom:18px}
-.modal-actions{display:flex;gap:10px;margin-top:20px}
-.img-preview{
-  width:100%;height:180px;border-radius:14px;object-fit:cover;
-  margin-bottom:12px;display:none;
-}
-.img-preview.show{display:block}
-.upload-zone{
-  width:100%;height:130px;border:2px dashed rgba(74,158,142,.3);
-  border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  cursor:pointer;gap:6px;transition:all .2s;background:rgba(74,158,142,.04);
-  margin-bottom:12px;
-}
-.upload-zone:hover{border-color:var(--teal);background:rgba(74,158,142,.08)}
-.upload-zone span:first-child{font-size:28px}
-.upload-zone span:last-child{font-size:12px;color:var(--teal);font-weight:700}
-.personality-grid{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
-.personality-chip{
-  padding:5px 12px;border-radius:20px;font-size:12px;font-weight:700;
-  border:1.5px solid rgba(74,158,142,.25);color:#999;cursor:pointer;transition:all .15s;
-}
-.personality-chip.selected{background:var(--teal);border-color:var(--teal);color:white}
-
-/* ════════════════════════════════════════════════════════
-   PAGE 7: ADOPTER PROFILE
-════════════════════════════════════════════════════════ */
-#page-adopter{background:var(--cream)}
-.adopter-profile-body{flex:1;overflow-y:auto;padding:20px 24px;display:flex;flex-direction:column;gap:16px}
-
-.profile-header-card{
-  background:white;border-radius:20px;padding:20px;
-  display:flex;align-items:center;gap:16px;
-  border:1.5px solid rgba(74,158,142,.15);
-  box-shadow:0 4px 16px rgba(30,55,40,.08);
-}
-.profile-avatar-wrap{position:relative}
-.profile-avatar{
-  width:80px;height:80px;border-radius:50%;object-fit:cover;
-  border:3px solid var(--teal-light);
-}
-.profile-avatar-placeholder{
-  width:80px;height:80px;border-radius:50%;
-  background:rgba(74,158,142,.15);border:3px solid var(--teal-light);
-  display:flex;align-items:center;justify-content:center;font-size:32px;
-}
-.profile-edit-avatar{
-  position:absolute;bottom:0;right:0;
-  width:26px;height:26px;border-radius:50%;border:2px solid white;
-  background:var(--teal);color:white;cursor:pointer;font-size:13px;
-  display:flex;align-items:center;justify-content:center;
-}
-.profile-details{flex:1}
-.profile-name{font-family:var(--font-display);font-size:24px;font-weight:700;color:#2d4a3e}
-.profile-email{font-size:12px;color:#999;font-weight:600}
-.profile-badge{
-  display:inline-flex;align-items:center;gap:4px;
-  background:rgba(74,158,142,.1);color:var(--teal-dark);
-  padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;margin-top:4px;
-}
-
-.adopted-cats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px}
-.adopted-cat-card{
-  background:white;border-radius:16px;overflow:hidden;
-  border:1.5px solid rgba(74,158,142,.12);
-  box-shadow:0 3px 12px rgba(30,55,40,.07);text-align:center;
-}
-.adopted-cat-img{width:100%;height:110px;object-fit:cover}
-.adopted-cat-img-placeholder{
-  width:100%;height:110px;
-  background:linear-gradient(135deg,rgba(74,158,142,.12),rgba(168,191,138,.15));
-  display:flex;align-items:center;justify-content:center;font-size:36px;
-}
-.adopted-cat-name{padding:8px;font-weight:800;font-size:13px;color:#2d4a3e}
-
-/* HEARTS CONTAINER */
-#heartsContainer{position:fixed;inset:0;pointer-events:none;z-index:9998;overflow:hidden}
-
-/* DECO FLOATERS */
-.deco{position:fixed;pointer-events:none;z-index:3;font-size:20px;animation:floatDeco 7s ease-in-out infinite;opacity:.4}
-@keyframes floatDeco{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-12px) rotate(8deg)}}
-</style>
 </head>
 <body>
 
@@ -823,7 +46,9 @@ input[type=range]{
     <div class="landing-sub">A cat adoption app</div>
     <button class="btn btn-ghost landing-join-btn" style="font-size:16px;padding:12px 36px" onclick="showPage('page-auth')">Join Now</button>
   </div>
-  <div class="landing-footer">Meowtch ∥ TAC0MI Company 2026</div>
+  <div class="landing-footer">Meowtch ∥ TAC0MI Company 2026 ∥
+   <a class="landing-footer" href="https://www.tumblr.com/decomposedmaw/793083043890036736/two-cats?source=share">BG: @decomposedmaw</a>
+  </div>
 </div>
 
 <!-- ══════════════════════════════════════════════════
@@ -833,7 +58,7 @@ input[type=range]{
   <div class="auth-overlay"></div>
   <div class="auth-box">
     <button class="auth-back" onclick="showPage('page-landing')">← Back</button>
-    <div class="auth-logo"><img src="logo.png" alt="Meowtch"></div>
+    <div class="auth-logo"><img src="logotrans.png" alt="Meowtch"></div>
     <div class="auth-title">Welcome to Meowtch</div>
     <div class="auth-sub">Find your purrfect match 🐾</div>
 
@@ -948,7 +173,7 @@ input[type=range]{
   <!-- APP NAV -->
   <nav class="app-nav">
     <a class="app-nav-logo" href="#">
-      <img src="logo.png" alt="Meowtch">
+      <img src="logotrans.png" alt="Meowtch">
       <span>Meowtch</span>
     </a>
     <div class="app-nav-tabs">
@@ -1022,9 +247,9 @@ input[type=range]{
         <h3>🎛️ Filters</h3>
         <div class="filter-row">
           <span class="filter-label">Age</span>
-          <span class="filter-val" id="ageVal">0–5 yrs</span>
+          <span class="filter-val" id="ageVal">0 yrs</span>
         </div>
-        <input type="range" min="0" max="15" value="5" oninput="document.getElementById('ageVal').textContent='0–'+this.value+' yrs'">
+        <input type="range" min="0" max="15" value="5" oninput="document.getElementById('ageVal').textContent=''+this.value+' yrs'">
         <div class="filter-row">
           <span class="filter-label">Distance</span>
           <span class="filter-val" id="distVal">10 km</span>
@@ -1306,7 +531,22 @@ input[type=range]{
 
 <script>
 /* ════════════════════════════════════════════════
-   DEMO CAT DATA (shown before Firebase loads)
+   LOCAL STORAGE HELPERS
+════════════════════════════════════════════════ */
+const LS = {
+  get: (k) => { try { return JSON.parse(localStorage.getItem(k)); } catch { return null; } },
+  set: (k, v) => localStorage.setItem(k, JSON.stringify(v)),
+  del: (k) => localStorage.removeItem(k)
+};
+
+// Initialize storage buckets if empty
+if (!LS.get('meowtch_users'))   LS.set('meowtch_users', {});
+if (!LS.get('meowtch_cats'))    LS.set('meowtch_cats', []);
+if (!LS.get('meowtch_matches')) LS.set('meowtch_matches', []);
+if (!LS.get('meowtch_chats'))   LS.set('meowtch_chats', {});
+
+/* ════════════════════════════════════════════════
+   DEMO CAT DATA
 ════════════════════════════════════════════════ */
 const demoCats = [
   {
@@ -1316,15 +556,15 @@ const demoCats = [
     traits:[['Cuddly','teal'],['Playful','sage'],['Vaccinated','amber'],['Indoor','terra']]
   },
   {
-    id:'demo-2', name:'Crinkles', age:'2 yrs', breed:'📍 La Trinidad • Siamese',
+    id:'demo-2', name:'Tala', age:'2 yrs', breed:'📍 La Trinidad • Siamese',
     imgSrc:'cat2.jpeg', imgEmoji:'🐈',
-    bio:"I'm Crinkles — a little blurry, a lot of love. I make the funniest faces and will talk your ear off. I'm looking for someone patient and warm to call home. 💙",
+    bio:"Tala arrived wearing a tiny Santa hat and never looked back. She's festive, fearless, and secretly the most dramatic cat you'll ever meet. Ready for an adventure? 🎄",
     traits:[['Vocal','teal'],['Playful','sage'],['House-trained','amber'],['Vaccinated','teal']]
   },
   {
-    id:'demo-3', name:'Tala', age:'2 yrs', breed:'📍 Baguio City • Persian Himalayan',
+    id:'demo-3', name:'Crinkles', age:'2 yrs', breed:'📍 Baguio City • Persian Himalayan',
     imgSrc:'cat3.jpeg', imgEmoji:'😺',
-    bio:"Tala arrived wearing a tiny Santa hat and never looked back. She's festive, fearless, and secretly the most dramatic cat you'll ever meet. Ready for an adventure? 🎄",
+    bio:"I'm Crinkles — a little blurry, a lot of love. I make the funniest faces and will talk your ear off. I'm looking for someone patient and warm to call home. 💙",
     traits:[['Sassy','terra'],['Cuddly','teal'],['Vaccinated','amber'],['Active','sage']]
   }
 ];
@@ -1347,7 +587,6 @@ let currentIndex  = 0;
 let swipeHistory  = [];
 let currentMatchedCat = null;
 let currentChatConvoId = null;
-let chatUnsubscribe = null;
 let editingCatId  = null;
 let catImgFile    = null;
 let adopterAvatarFile = null;
@@ -1417,68 +656,23 @@ function hideEmailSignup() {
 }
 
 /* ── Social login (Google / Facebook) ─────────────────── */
-async function doSocialLogin(provider) {
-  if (!window._fb) return _localSocialLogin(provider);
-  try {
-    const { auth } = window._fb;
-    const { GoogleAuthProvider, FacebookAuthProvider, signInWithPopup } =
-      await import('https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js');
-    const prov = provider === 'google'
-      ? new GoogleAuthProvider()
-      : new FacebookAuthProvider();
-    const cred = await signInWithPopup(auth, prov);
-    const user = cred.user;
-    const { db, doc, getDoc, setDoc } = window._fb;
-    const snap = await getDoc(doc(db, 'users', user.uid));
-    let userData = snap.exists() ? snap.data() : null;
-    if (!userData) {
-      userData = {
-        name: user.displayName || provider + ' User',
-        email: user.email || '',
-        role: 'adopter',
-        location: 'Baguio City',
-        createdAt: Date.now()
-      };
-      await setDoc(doc(db, 'users', user.uid), userData);
-    }
-    currentUserData = userData;
-    toast(`Welcome, ${userData.name}! 🐾`);
-    afterLogin(user, userData);
-  } catch(e) {
-    // If Firebase isn't configured, fall back to local demo login
-    if (e.code === 'auth/configuration-not-found' || e.message.includes('YOUR_')) {
-      _localSocialLogin(provider);
-    } else {
-      toast(e.message);
-    }
-  }
-}
-
-/* Local demo fallback when Firebase isn't set up yet */
-function _localSocialLogin(provider) {
-  const names   = { google: 'Google User', facebook: 'Facebook User' };
-  const avatars = { google: '🔵', facebook: '📘' };
-  const fakeUser = {
-    uid: provider + '_demo_' + Date.now(),
-    displayName: names[provider],
-    email: provider + '@demo.meowtch.com',
-    photoURL: null
-  };
-  const userData = {
-    name: names[provider],
-    email: fakeUser.email,
-    role: 'adopter',
-    location: 'Baguio City',
-    createdAt: Date.now(),
-    _demo: true
-  };
+function doSocialLogin(provider) {
+  // localStorage-only: simulate social login as adopter
+  const names = { google: 'Google User', facebook: 'Facebook User' };
+  const uid   = provider + '_' + Date.now();
+  const email = provider + '@demo.meowtch.com';
+  const userData = { name: names[provider], email, role: 'adopter', location: 'Baguio City', createdAt: Date.now() };
+  const users = LS.get('meowtch_users');
+  users[uid]  = userData;
+  LS.set('meowtch_users', users);
+  LS.set('meowtch_session', { uid, ...userData });
   currentUserData = userData;
   toast(`Signed in with ${provider === 'google' ? 'Google' : 'Facebook'} 🐾`);
-  afterLogin(fakeUser, userData);
+  afterLogin({ uid, displayName: names[provider], email }, userData);
 }
 
 /* ── Email / password sign-up ──────────────────────────── */
-async function doSignup() {
+function doSignup() {
   const name  = document.getElementById('signup-name').value.trim();
   const email = document.getElementById('signup-email').value.trim();
   const pass  = document.getElementById('signup-pass').value;
@@ -1486,60 +680,37 @@ async function doSignup() {
   if (!name || !email || !pass) return toast('Please fill all fields!');
   if (pass.length < 6) return toast('Password must be at least 6 characters!');
 
-  // Try Firebase if configured, else use local demo account
-  if (window._fb && !window._fb._isPlaceholder) {
-    try {
-      const { auth, db, createUserWithEmailAndPassword, updateProfile, doc, setDoc } = window._fb;
-      const cred = await createUserWithEmailAndPassword(auth, email, pass);
-      await updateProfile(cred.user, { displayName: name });
-      const userData = { name, email, role: selectedRole, location: loc, createdAt: Date.now() };
-      await setDoc(doc(db, 'users', cred.user.uid), userData);
-      currentUserData = userData;
-      toast('Welcome to Meowtch! 🐾');
-      afterLogin(cred.user, userData);
-      return;
-    } catch(e) {
-      if (!e.message.includes('YOUR_') && e.code !== 'auth/configuration-not-found') {
-        return toast(e.message);
-      }
-    }
-  }
-  // Local demo fallback
-  const fakeUser = { uid: 'local_' + Date.now(), displayName: name, email };
-  const userData = { name, email, role: selectedRole, location: loc, createdAt: Date.now(), _demo: true };
+  const users = LS.get('meowtch_users');
+  // Check email already taken
+  const existing = Object.values(users).find(u => u.email === email);
+  if (existing) return toast('Email already registered! Try logging in.');
+
+  const uid = 'user_' + Date.now();
+  const userData = { name, email, passHash: btoa(pass), role: selectedRole, location: loc, createdAt: Date.now() };
+  users[uid] = userData;
+  LS.set('meowtch_users', users);
+  LS.set('meowtch_session', { uid, ...userData });
   currentUserData = userData;
   toast('Account created! Welcome to Meowtch 🐾');
-  afterLogin(fakeUser, userData);
+  afterLogin({ uid, displayName: name, email }, userData);
 }
 
 /* ── Email / password login ────────────────────────────── */
-async function doLogin() {
+function doLogin() {
   const email = document.getElementById('login-email').value.trim();
   const pass  = document.getElementById('login-pass').value;
   if (!email || !pass) return toast('Please enter email and password!');
 
-  if (window._fb && !window._fb._isPlaceholder) {
-    try {
-      const { auth, db, signInWithEmailAndPassword, doc, getDoc } = window._fb;
-      const cred = await signInWithEmailAndPassword(auth, email, pass);
-      const snap = await getDoc(doc(db, 'users', cred.user.uid));
-      const userData = snap.data() || {};
-      currentUserData = userData;
-      toast('Welcome back! 🐾');
-      afterLogin(cred.user, userData);
-      return;
-    } catch(e) {
-      if (!e.message.includes('YOUR_') && e.code !== 'auth/configuration-not-found') {
-        return toast(e.message);
-      }
-    }
-  }
-  // Local demo fallback
-  const fakeUser = { uid: 'local_login_' + Date.now(), displayName: email.split('@')[0], email };
-  const userData = { name: email.split('@')[0], email, role: 'adopter', location: 'Baguio City', _demo: true };
+  const users = LS.get('meowtch_users');
+  const entry = Object.entries(users).find(([, u]) => u.email === email);
+  if (!entry) return toast('No account found with that email.');
+  const [uid, userData] = entry;
+  if (userData.passHash && userData.passHash !== btoa(pass)) return toast('Wrong password!');
+
+  LS.set('meowtch_session', { uid, ...userData });
   currentUserData = userData;
   toast('Welcome back! 🐾');
-  afterLogin(fakeUser, userData);
+  afterLogin({ uid, displayName: userData.name, email }, userData);
 }
 
 function afterLogin(user, userData) {
@@ -1548,47 +719,35 @@ function afterLogin(user, userData) {
   showPage('page-discover');
 }
 
-async function doLogout() {
-  if (window._fb && !currentUser?._demo) {
-    try { const { auth, signOut } = window._fb; await signOut(auth); } catch(e) {}
-  }
-  currentUser = null;
+function doLogout() {
+  LS.del('meowtch_session');
+  currentUser     = null;
   currentUserData = null;
   showPage('page-landing');
   toast('Logged out. See you soon! 🐾');
 }
 
 /* ════════════════════════════════════════════════
-   FIREBASE AUTH STATE
+   SESSION RESTORE ON LOAD
 ════════════════════════════════════════════════ */
 window.addEventListener('load', () => {
-  setTimeout(() => {
-    const { auth, db, onAuthStateChanged, doc, getDoc } = window._fb;
-    onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        currentUser = user;
-        const snap = await getDoc(doc(db, 'users', user.uid));
-        currentUserData = snap.data() || {};
-        loadDiscoverCats();
-        showPage('page-discover');
-      }
-    });
-    rotateTip();
-  }, 500);
+  const session = LS.get('meowtch_session');
+  if (session) {
+    currentUser     = { uid: session.uid, displayName: session.name, email: session.email };
+    currentUserData = session;
+    loadDiscoverCats();
+    showPage('page-discover');
+  }
+  rotateTip();
 });
 
 /* ════════════════════════════════════════════════
    DISCOVER / SWIPE CARDS
 ════════════════════════════════════════════════ */
-async function loadDiscoverCats() {
-  const { db, collection, getDocs } = window._fb;
-  try {
-    const snap = await getDocs(collection(db, 'cats'));
-    const dbCats = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-    currentCats = dbCats.length > 0 ? dbCats : [...demoCats];
-  } catch(e) {
-    currentCats = [...demoCats];
-  }
+function loadDiscoverCats() {
+  // Load owner-created cats from localStorage, merged with demo cats
+  const storedCats = LS.get('meowtch_cats') || [];
+  currentCats = storedCats.length > 0 ? [...storedCats, ...demoCats] : [...demoCats];
   currentIndex = 0;
   swipeHistory = [];
   loadCard(0);
@@ -1729,15 +888,13 @@ function showMatchPopup(cat) {
   document.getElementById('matchPopup').classList.add('show');
   spawnHearts();
 
-  if (currentUser && window._fb) {
-    const { db, collection, addDoc, serverTimestamp } = window._fb;
-    addDoc(collection(db, 'matches'), {
-      adopterId: currentUser.uid,
-      catId: cat.id,
-      catName: cat.name,
-      ownerId: cat.ownerId || null,
-      timestamp: serverTimestamp()
-    }).catch(()=>{});
+  if (currentUser) {
+    const matches = LS.get('meowtch_matches');
+    const already = matches.find(m => m.adopterId === currentUser.uid && m.catId === cat.id);
+    if (!already) {
+      matches.push({ adopterId: currentUser.uid, catId: cat.id, catName: cat.name, catEmoji: cat.imgEmoji||'🐱', catImgSrc: cat.imgSrc||cat.photoURL||'', ownerId: cat.ownerId||null, timestamp: Date.now() });
+      LS.set('meowtch_matches', matches);
+    }
   }
 }
 function closePopup() { document.getElementById('matchPopup').classList.remove('show'); }
@@ -1747,7 +904,7 @@ function goToMatchChat() {
 }
 
 /* ════════════════════════════════════════════════
-   CHAT
+   CHAT (localStorage)
 ════════════════════════════════════════════════ */
 function openChat(cat) {
   document.getElementById('chatPartnerName').textContent = cat.name;
@@ -1759,103 +916,86 @@ function openChat(cat) {
 
 function loadChatMessages(convoId) {
   const msgContainer = document.getElementById('chatMessages');
-  if (chatUnsubscribe) chatUnsubscribe();
-  if (!window._fb || !currentUser) {
+  const chats = LS.get('meowtch_chats');
+  const msgs  = chats[convoId] || [];
+  if (!msgs.length) {
     msgContainer.innerHTML = `<div class="chat-empty"><div class="chat-empty-icon">💬</div><div>Say hello! Start the conversation 🐾</div></div>`;
     return;
   }
-  const { db, collection, query, orderBy, onSnapshot } = window._fb;
-  const q = query(collection(db, 'chats', convoId, 'messages'), orderBy('timestamp'));
-  chatUnsubscribe = onSnapshot(q, (snap) => {
-    if (snap.empty) {
-      msgContainer.innerHTML = `<div class="chat-empty"><div class="chat-empty-icon">💬</div><div>Say hello! Start the conversation 🐾</div></div>`;
-      return;
-    }
-    msgContainer.innerHTML = '';
-    snap.docs.forEach(d => {
-      const msg = d.data();
-      const isMe = msg.uid === currentUser.uid;
-      const time = msg.timestamp?.toDate ? msg.timestamp.toDate().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}) : '';
-      const div = document.createElement('div');
-      div.className = `chat-bubble ${isMe ? 'bubble-me' : 'bubble-them'}`;
-      div.innerHTML = `${msg.text}<div class="bubble-time">${time}</div>`;
-      msgContainer.appendChild(div);
-    });
-    msgContainer.scrollTop = msgContainer.scrollHeight;
+  msgContainer.innerHTML = '';
+  msgs.forEach(msg => {
+    const isMe = msg.uid === currentUser?.uid;
+    const time = new Date(msg.timestamp).toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
+    const div  = document.createElement('div');
+    div.className = `chat-bubble ${isMe ? 'bubble-me' : 'bubble-them'}`;
+    div.innerHTML = `${msg.text}<div class="bubble-time">${time}</div>`;
+    msgContainer.appendChild(div);
   });
+  msgContainer.scrollTop = msgContainer.scrollHeight;
 }
 
-async function sendMessage() {
+function sendMessage() {
   const input = document.getElementById('chatInput');
-  const text = input.value.trim();
+  const text  = input.value.trim();
   if (!text || !currentUser || !currentChatConvoId) return;
   input.value = '';
-  const { db, collection, addDoc, serverTimestamp } = window._fb;
-  try {
-    await addDoc(collection(db, 'chats', currentChatConvoId, 'messages'), {
-      text, uid: currentUser.uid,
-      name: currentUser.displayName || 'User',
-      timestamp: serverTimestamp()
-    });
-  } catch(e) { toast('Could not send message.'); }
+  const chats = LS.get('meowtch_chats');
+  if (!chats[currentChatConvoId]) chats[currentChatConvoId] = [];
+  chats[currentChatConvoId].push({ text, uid: currentUser.uid, name: currentUser.displayName || 'User', timestamp: Date.now() });
+  LS.set('meowtch_chats', chats);
+  loadChatMessages(currentChatConvoId);
 }
 
 function viewCatProfile() { toast('Cat profile view coming soon! 🐱'); }
 
 /* ════════════════════════════════════════════════
-   MATCHES LIST PAGE
+   MATCHES LIST PAGE (localStorage)
 ════════════════════════════════════════════════ */
-async function loadMatchesList() {
+function loadMatchesList() {
   const list = document.getElementById('matchesList');
   list.innerHTML = '';
-  if (!currentUser || !window._fb) {
+  if (!currentUser) {
     list.innerHTML = '<div style="padding:20px;color:#bbb;font-size:14px;text-align:center">Log in to see your matches!</div>';
     return;
   }
-  const { db, collection, query, where, getDocs } = window._fb;
-  try {
-    const q = query(collection(db,'matches'), where('adopterId','==',currentUser.uid));
-    const snap = await getDocs(q);
-    if (snap.empty) {
-      list.innerHTML = '<div style="padding:30px;color:#bbb;font-size:14px;text-align:center">No matches yet — keep swiping! 🐾</div>';
-      return;
-    }
-    snap.docs.forEach(d => {
-      const m = d.data();
-      const item = document.createElement('div');
-      item.className = 'match-list-item';
-      item.innerHTML = `
-        <div class="match-list-avatar-placeholder">🐱</div>
-        <div class="match-list-info">
-          <div class="match-list-name">${m.catName}</div>
-          <div class="match-list-preview">Tap to start chatting!</div>
-        </div>
-        <div class="match-list-meta">
-          <div class="match-list-time">now</div>
-        </div>
-      `;
-      item.onclick = () => openChat({ id: m.catId, name: m.catName, imgEmoji:'🐱' });
-      list.appendChild(item);
-    });
-  } catch(e) {
-    list.innerHTML = '<div style="padding:20px;color:#bbb;font-size:14px">Could not load matches.</div>';
+  const matches = (LS.get('meowtch_matches') || []).filter(m => m.adopterId === currentUser.uid);
+  if (!matches.length) {
+    list.innerHTML = '<div style="padding:30px;color:#bbb;font-size:14px;text-align:center">No matches yet — keep swiping! 🐾</div>';
+    return;
   }
+  matches.forEach(m => {
+    const chats   = LS.get('meowtch_chats') || {};
+    const msgs    = chats['chat_' + m.catId] || [];
+    const last    = msgs[msgs.length - 1];
+    const preview = last ? last.text : 'Tap to start chatting!';
+    const time    = last ? new Date(last.timestamp).toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}) : '';
+    const item    = document.createElement('div');
+    item.className = 'match-list-item';
+    item.innerHTML = `
+      <div class="match-list-avatar-placeholder">${m.catEmoji || '🐱'}</div>
+      <div class="match-list-info">
+        <div class="match-list-name">${m.catName}</div>
+        <div class="match-list-preview">${preview}</div>
+      </div>
+      <div class="match-list-meta">
+        <div class="match-list-time">${time}</div>
+      </div>`;
+    item.onclick = () => openChat({ id: m.catId, name: m.catName, imgEmoji: m.catEmoji || '🐱' });
+    list.appendChild(item);
+  });
 }
 
 /* ════════════════════════════════════════════════
-   OWNER DASHBOARD
+   OWNER DASHBOARD (localStorage)
 ════════════════════════════════════════════════ */
-async function loadOwnerDashboard() {
+function loadOwnerDashboard() {
   document.getElementById('ownerWelcome').textContent = `Welcome back, ${currentUserData?.name || 'Owner'}!`;
   const grid = document.getElementById('catProfilesGrid');
   grid.innerHTML = '';
-  if (!currentUser || !window._fb) return;
-  const { db, collection, query, where, getDocs } = window._fb;
-  try {
-    const q = query(collection(db,'cats'), where('ownerId','==',currentUser.uid));
-    const snap = await getDocs(q);
-    userCats = snap.docs.map(d => ({ id:d.id, ...d.data() }));
-  } catch(e) { userCats = []; }
+  if (!currentUser) return;
+
+  const allCats = LS.get('meowtch_cats') || [];
+  userCats = allCats.filter(c => c.ownerId === currentUser.uid);
 
   userCats.forEach(cat => {
     const card = document.createElement('div');
@@ -1875,7 +1015,6 @@ async function loadOwnerDashboard() {
     grid.appendChild(card);
   });
 
-  // Add new cat button
   const addCard = document.createElement('div');
   addCard.className = 'add-cat-card';
   addCard.innerHTML = '<span>➕</span><span>Add a Cat</span>';
@@ -1935,7 +1074,7 @@ function previewCatImg(input) {
 }
 
 async function saveCatProfile() {
-  if (!currentUser || !window._fb) { toast('Please log in first!'); return; }
+  if (!currentUser) { toast('Please log in first!'); return; }
   const name  = document.getElementById('catName').value.trim();
   const age   = document.getElementById('catAge').value;
   const breed = document.getElementById('catBreed').value.trim();
@@ -1946,92 +1085,113 @@ async function saveCatProfile() {
   const traits = Array.from(document.querySelectorAll('.personality-chip.selected'))
     .map(c => [c.textContent.trim(), 'teal']);
 
-  const { db, storage, doc, setDoc, addDoc, collection, ref, uploadBytes, getDownloadURL } = window._fb;
-
+  // Convert image to base64 for localStorage storage
   let photoURL = '';
   if (catImgFile) {
-    try {
-      const storageRef = ref(storage, `cats/${currentUser.uid}/${Date.now()}_${catImgFile.name}`);
-      await uploadBytes(storageRef, catImgFile);
-      photoURL = await getDownloadURL(storageRef);
-    } catch(e) { toast('Photo upload failed. Saving without photo.'); }
+    photoURL = await new Promise(res => {
+      const reader = new FileReader();
+      reader.onload = e => res(e.target.result);
+      reader.readAsDataURL(catImgFile);
+    });
   } else if (editingCatId) {
     const existing = userCats.find(c => c.id === editingCatId);
     photoURL = existing?.photoURL || '';
   }
 
   const data = {
-    name, ageNum: Number(age), age: age + ' yr', breed,
+    name, ageNum: Number(age), age: age ? age + ' yr' : '?', breed,
     location: loc, bio, traits, photoURL,
     ownerId: currentUser.uid,
     ownerName: currentUserData?.name || '',
     updatedAt: Date.now()
   };
 
-  try {
-    if (editingCatId) {
-      await setDoc(doc(db, 'cats', editingCatId), data, { merge: true });
-      toast('Cat profile updated! 🐾');
-    } else {
-      await addDoc(collection(db, 'cats'), { ...data, createdAt: Date.now() });
-      toast('Cat profile created! 🐾');
-    }
-    closeCatModal();
-    loadOwnerDashboard();
-  } catch(e) { toast('Failed to save: ' + e.message); }
+  const allCats = LS.get('meowtch_cats') || [];
+  if (editingCatId) {
+    const idx = allCats.findIndex(c => c.id === editingCatId);
+    if (idx > -1) allCats[idx] = { ...allCats[idx], ...data };
+    toast('Cat profile updated! 🐾');
+  } else {
+    data.id = 'cat_' + Date.now();
+    data.createdAt = Date.now();
+    allCats.push(data);
+    toast('Cat profile created! 🐾');
+  }
+  LS.set('meowtch_cats', allCats);
+  closeCatModal();
+  loadOwnerDashboard();
 }
 
-async function deleteCat(id) {
+function deleteCat(id) {
   if (!confirm('Remove this cat profile?')) return;
-  const { db, doc } = window._fb;
-  try {
-    const { deleteDoc } = await import('https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js');
-    await deleteDoc(doc(db, 'cats', id));
-    toast('Cat profile removed.');
-    loadOwnerDashboard();
-  } catch(e) { toast('Could not delete.'); }
+  const allCats = LS.get('meowtch_cats') || [];
+  LS.set('meowtch_cats', allCats.filter(c => c.id !== id));
+  toast('Cat profile removed.');
+  loadOwnerDashboard();
 }
 
 /* ════════════════════════════════════════════════
-   ADOPTER PROFILE
+   ADOPTER PROFILE (localStorage)
 ════════════════════════════════════════════════ */
-async function loadAdopterProfile() {
-  if (!currentUser || !window._fb) return;
-  document.getElementById('adopterName').textContent  = currentUserData?.name || currentUser.displayName || 'Your Name';
-  document.getElementById('adopterEmail').textContent = currentUser.email || '';
+function loadAdopterProfile() {
+  if (!currentUser) return;
+  document.getElementById('adopterName').textContent    = currentUserData?.name || 'Your Name';
+  document.getElementById('adopterEmail').textContent   = currentUser.email || '';
   document.getElementById('adopterWelcome').textContent = `Welcome back, ${currentUserData?.name || 'Adopter'}!`;
-  if (currentUserData?.bio)      document.getElementById('adopterBio').value = currentUserData.bio;
+  if (currentUserData?.bio)      document.getElementById('adopterBio').value      = currentUserData.bio;
   if (currentUserData?.location) document.getElementById('adopterLocation').value = currentUserData.location;
+  if (currentUserData?.living)   document.getElementById('adopterLiving').value   = currentUserData.living;
+
+  // Show adopted cats
+  const matches = (LS.get('meowtch_matches') || []).filter(m => m.adopterId === currentUser.uid);
+  const grid = document.getElementById('adoptedCatsGrid');
+  if (!matches.length) {
+    grid.innerHTML = '<div style="color:#bbb;font-size:13px;grid-column:1/-1">Start swiping to find your match!</div>';
+    return;
+  }
+  grid.innerHTML = '';
+  matches.forEach(m => {
+    const card = document.createElement('div');
+    card.className = 'adopted-cat-card';
+    card.innerHTML = m.catImgSrc
+      ? `<img class="adopted-cat-img" src="${m.catImgSrc}" alt="${m.catName}">`
+      : `<div class="adopted-cat-img-placeholder">${m.catEmoji||'🐱'}</div>`;
+    card.innerHTML += `<div class="adopted-cat-name">${m.catName}</div>`;
+    grid.appendChild(card);
+  });
 }
 
-async function saveAdopterProfile() {
-  if (!currentUser || !window._fb) return;
-  const { db, doc, setDoc } = window._fb;
+function saveAdopterProfile() {
+  if (!currentUser) return;
   const bio = document.getElementById('adopterBio').value.trim();
   const loc = document.getElementById('adopterLocation').value.trim();
   const liv = document.getElementById('adopterLiving').value;
-  try {
-    await setDoc(doc(db, 'users', currentUser.uid), { bio, location: loc, living: liv }, { merge: true });
-    currentUserData = { ...currentUserData, bio, location: loc, living: liv };
-    toast('Profile saved! 🐾');
-  } catch(e) { toast('Could not save profile.'); }
+  const users = LS.get('meowtch_users');
+  if (users[currentUser.uid]) {
+    users[currentUser.uid] = { ...users[currentUser.uid], bio, location: loc, living: liv };
+    LS.set('meowtch_users', users);
+  }
+  currentUserData = { ...currentUserData, bio, location: loc, living: liv };
+  LS.set('meowtch_session', { uid: currentUser.uid, ...currentUserData });
+  toast('Profile saved! 🐾');
 }
 
-async function uploadAdopterAvatar(input) {
-  if (!input.files[0] || !currentUser || !window._fb) return;
-  const file = input.files[0];
-  const { storage, db, ref, uploadBytes, getDownloadURL, doc, setDoc } = window._fb;
-  try {
-    const storageRef = ref(storage, `avatars/${currentUser.uid}`);
-    await uploadBytes(storageRef, file);
-    const url = await getDownloadURL(storageRef);
-    await setDoc(doc(db, 'users', currentUser.uid), { avatarURL: url }, { merge: true });
-    const el = document.getElementById('adopterAvatarDisplay');
+function uploadAdopterAvatar(input) {
+  if (!input.files[0] || !currentUser) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    const url = e.target.result;
+    const users = LS.get('meowtch_users');
+    if (users[currentUser.uid]) { users[currentUser.uid].avatarURL = url; LS.set('meowtch_users', users); }
+    currentUserData = { ...currentUserData, avatarURL: url };
+    LS.set('meowtch_session', { uid: currentUser.uid, ...currentUserData });
+    const el  = document.getElementById('adopterAvatarDisplay');
     const img = document.createElement('img');
     img.src = url; img.className = 'profile-avatar';
     el.replaceWith(img);
     toast('Avatar updated! 🐾');
-  } catch(e) { toast('Avatar upload failed.'); }
+  };
+  reader.readAsDataURL(input.files[0]);
 }
 
 /* ════════════════════════════════════════════════
@@ -2094,12 +1254,6 @@ function showAbout() {
 function showContact() {
   toast('Contact us at: hello@meowtch.com 🐾');
 }
-
-/* ════════════════════════════════════════════════
-   MATCHES PAGE INTERCEPT
-════════════════════════════════════════════════ */
-document.getElementById('page-matches').addEventListener('animationend', ()=>{});
-const origShowPage = showPage;
 
 /* Init */
 loadCard(0);
