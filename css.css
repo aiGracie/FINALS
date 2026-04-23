@@ -497,27 +497,6 @@ input[type=range]{
 .tip-card h3{color:var(--cream)!important;font-size:13px!important;margin-bottom:4px}
 .tip-card p{font-size:12px;color:var(--cream);font-weight:600;line-height:1.4;opacity:.95}
 
-/* DISCOVER TAGLINE — same dark glass blob style as tip-card, sits at bottom of sidebar */
-.discover-tagline{
-  font-family:var(--font-display);font-size:16px;font-weight:600;
-  color:rgba(255,253,248,.92);
-  background:rgba(30,55,40,.55);backdrop-filter:blur(12px);
-  border-radius:var(--r-md);
-  padding:10px 16px;
-  border:1px solid rgba(126,207,194,.25);
-  box-shadow:0 4px 20px rgba(30,55,40,.15);
-  text-align:center;line-height:1.5;
-  animation:float 3.5s ease-in-out infinite;
-  flex-shrink:0;
-}
-
-/* NAV TITLE */
-.app-nav-title{
-  font-family:var(--font-display);font-size:18px;font-weight:700;
-  color:rgba(255,253,248,.95);
-  flex:1;text-align:center;pointer-events:none;white-space:nowrap;
-}
-
 /* ── SIDE PANELS (matches/chat) ── */
 .side-panel{
   position:absolute;top:0;right:0;bottom:0;
@@ -854,4 +833,25 @@ input[type=range]{
   .stats-bar{gap:10px}
   .stat-num{font-size:15px}
   .stat-label{font-size:10px;letter-spacing:0}
+}
+
+/* DISCOVER TAGLINE — dark glass blob matching tip-card row */
+.discover-tagline{
+  grid-column:1 / -1;
+  font-family:var(--font-display);font-size:16px;font-weight:600;
+  color:rgba(255,253,248,.92);
+  background:rgba(30,55,40,.55);backdrop-filter:blur(12px);
+  border-radius:var(--r-md);
+  padding:10px 16px;
+  border:1px solid rgba(126,207,194,.25);
+  box-shadow:0 4px 20px rgba(30,55,40,.15);
+  text-align:center;line-height:1.5;
+  animation:float 3.5s ease-in-out infinite;
+}
+
+/* NAV TITLE — cream white */
+.app-nav-title{
+  font-family:var(--font-display);font-size:18px;font-weight:700;
+  color:var(--cream);
+  flex:1;text-align:center;pointer-events:none;white-space:nowrap;
 }
