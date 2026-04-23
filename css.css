@@ -331,8 +331,8 @@ input[type=range]{width:100%;height:4px;accent-color:var(--teal);background:rgba
 
 /* ADOPTION TIP */
 .tip-card{background:linear-gradient(135deg,var(--teal-dark),var(--sage-dark))!important;border-color:rgba(126,207,194,.3)!important;border-radius:22px 30px 22px 30px / 30px 22px 30px 22px!important}
-.tip-card h3{color:var(--cream)!important;font-size:10px!important;margin-bottom:4px}
-.tip-card p{font-size:10px;color:var(--cream);font-weight:600;line-height:1.4;opacity:.95}
+.tip-card h3{color:var(--cream)!important;font-size:20px!important;margin-bottom:4px}
+.tip-card p{font-size:20px;color:var(--cream);font-weight:600;line-height:1.4;opacity:.95}
 
 /* ── SIDE PANELS (fixed so overflow:hidden doesn't clip them) ── */
 .side-panel{
