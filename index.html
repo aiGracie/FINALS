@@ -97,9 +97,10 @@
 <!-- PAGE 3: DISCOVER -->
 <div class="page" id="page-discover">
   <div class="discover-overlay"></div>
+
+  <!-- TOP NAV BAR -->
   <nav class="app-nav">
-    <a class="app-nav-logo" href="#"><img src="logotrans.png" alt="Meowtch"><span>Meowtch</span></a>
-    <span class="app-nav-title" id="discoverNavTitle">₍^. .^₎⟆ Discover</span>
+    <a class="app-nav-logo" href="#"><img src="logotrans.png" alt="Tacomi"><span>Tacomi</span></a>
     <div class="app-nav-right">
       <button class="nav-icon-btn nav-badge" id="msgNavBtn" data-count="" onclick="showMatchesPanel()" title="Messages">✉</button>
       <button class="nav-icon-btn" onclick="showDashboard()" title="Profile">
@@ -109,162 +110,181 @@
     </div>
   </nav>
 
+  <!-- MAIN DISCOVER AREA (new layout: card left | center stats+tagline | paw right) -->
   <div class="discover-main">
-    <div class="discover-body">
-      <!-- LEFT: SWIPE AREA -->
-      <div class="card-area">
-        <div class="card-stack" id="cardStack">
-          <div class="cat-card back-card-2" id="backCard2">
-            <div class="cat-card-img-placeholder" style="font-size:0;background:linear-gradient(135deg,rgba(74,158,142,.1),rgba(168,191,138,.15))"></div>
-            <div class="card-info"><div class="card-name-row"><span class="card-name" style="color:#ccc">?</span></div></div>
-          </div>
-          <div class="cat-card back-card-1" id="backCard1">
-            <div class="cat-card-img-placeholder" style="font-size:0;background:linear-gradient(135deg,rgba(168,191,138,.15),rgba(212,168,83,.1))"></div>
-            <div class="card-info"><div class="card-name-row"><span class="card-name" style="color:#ccc">?</span></div></div>
-          </div>
-          <div class="cat-card front-card" id="frontCard">
-            <div class="swipe-label swipe-like" id="swipeLike">ADOPT! 💚</div>
-            <div class="swipe-label swipe-nope" id="swipeNope">PASS 💔</div>
-            <img class="cat-card-img" id="cardImg" src="" alt="photo" style="display:none">
-            <div class="cat-card-img-placeholder" id="cardImgPlaceholder">🐱</div>
-            <div class="card-info">
-              <div class="card-name-row"><span class="card-name" id="cardName">Jellybean</span><span class="card-age" id="cardAge">1 yr</span></div>
-              <div class="card-breed" id="cardBreed">📍 Baguio City • Orange Tabby</div>
-              <div class="card-traits" id="cardTraits"></div>
-              <div class="card-bio" id="cardBio"></div>
-            </div>
-          </div>
-          <div class="no-more-cats" id="noMoreCats">
-            <div class="big-emoji">😿</div>
-            <h3>You've seen them all!</h3>
-            <p>Check back soon or adjust filters!</p>
-            <button class="btn btn-primary" onclick="resetCards()">🔄 Refresh</button>
-          </div>
-        </div>
-        <div class="action-buttons">
-          <button class="action-btn btn-undo" onclick="undoSwipe()" title="Undo">↩️</button>
-          <button class="action-btn btn-nope" onclick="swipeLeft()" title="Pass">❌</button>
-          <button class="action-btn btn-super" onclick="superLike()" title="Super">⭐</button>
-          <button class="action-btn btn-like" onclick="swipeRight()" title="Like">💚</button>
-          <button class="action-btn btn-undo" onclick="boostCard()" title="Boost">⚡</button>
-        </div>
-        <div class="swipe-hint"><span>👈 Pass</span><span>⭐ Super</span><span>💚 Like 👉</span></div>
-      </div>
 
-      <!-- RIGHT: SIDEBAR BLOBS -->
-      <div class="discover-sidebar">
-        <!-- Stats blob — full width -->
-        <div class="sidebar-card stats-blob">
-          <div class="stats-row">
-            <div class="stat-item"><span class="stat-num" id="statCats">0</span><span class="stat-label">AVAILABLE<br>CATS</span></div>
-            <div class="stat-sep"></div>
-            <div class="stat-item"><span class="stat-num" id="statMatches">0</span><span class="stat-label">MATCHES<br>TODAY</span></div>
-            <div class="stat-sep"></div>
-            <div class="stat-item"><span class="stat-num" id="statAdopted">0</span><span class="stat-label">ADOPTED<br>CATS</span></div>
-            <div class="stat-sep"></div>
-            <div class="stat-item"><span class="stat-num">3</span><span class="stat-label">NEARBY<br>SHELTERS</span></div>
+    <!-- LEFT: CAT CARD -->
+    <div class="new-card-area">
+      <div class="card-stack" id="cardStack">
+        <div class="cat-card back-card-2" id="backCard2">
+          <div class="cat-card-img-placeholder" style="font-size:0;background:linear-gradient(135deg,rgba(74,158,142,.1),rgba(168,191,138,.15))"></div>
+          <div class="card-info-v2"><div class="card-name-row"><span class="card-name" style="color:#ccc">?</span></div></div>
+        </div>
+        <div class="cat-card back-card-1" id="backCard1">
+          <div class="cat-card-img-placeholder" style="font-size:0;background:linear-gradient(135deg,rgba(168,191,138,.15),rgba(212,168,83,.1))"></div>
+          <div class="card-info-v2"><div class="card-name-row"><span class="card-name" style="color:#ccc">?</span></div></div>
+        </div>
+        <div class="cat-card front-card" id="frontCard">
+          <div class="swipe-label swipe-like" id="swipeLike">ADOPT! 💚</div>
+          <div class="swipe-label swipe-nope" id="swipeNope">PASS 💔</div>
+          <img class="cat-card-img" id="cardImg" src="" alt="photo" style="display:none">
+          <div class="cat-card-img-placeholder" id="cardImgPlaceholder">🐱</div>
+          <div class="card-info-v2">
+            <div class="card-name-row"><span class="card-name" id="cardName">Jellybean</span><span class="card-age" id="cardAge">1 yr</span></div>
+            <div class="card-breed" id="cardBreed">📍 Baguio City • Orange Tabby</div>
+            <div class="card-traits" id="cardTraits"></div>
+            <div class="card-bio" id="cardBio"></div>
           </div>
         </div>
-
-        <!-- Filters -->
-        <div class="sidebar-card">
-          <h3>🎛️ Filters</h3>
-          <div class="filter-row"><span class="filter-label">Max Age</span><span class="filter-val" id="ageVal">Any age</span></div>
-          <input type="range" id="ageSlider" min="0" max="15" value="15" oninput="document.getElementById('ageVal').textContent=this.value>=15?'Any age':'0–'+this.value+' yrs';applyFilters()">
-          <div class="filter-row"><span class="filter-label">Distance</span><span class="filter-val" id="distVal">10 km</span></div>
-          <input type="range" min="1" max="50" value="10" oninput="document.getElementById('distVal').textContent=this.value+' km'">
-          <div class="filter-label" style="margin-bottom:5px">Personality</div>
-          <div class="filter-chips">
-            <div class="filter-chip" data-trait="calm" onclick="toggleChip(this);applyFilters()">😴 Calm</div>
-            <div class="filter-chip" data-trait="playful" onclick="toggleChip(this);applyFilters()">🏃 Playful</div>
-            <div class="filter-chip" data-trait="cuddly" onclick="toggleChip(this);applyFilters()">🤗 Cuddly</div>
-            <div class="filter-chip" data-trait="sassy" onclick="toggleChip(this);applyFilters()">😼 Sassy</div>
-            <div class="filter-chip" data-trait="active" onclick="toggleChip(this);applyFilters()">🐾 Active</div>
-            <div class="filter-chip" data-trait="shy" onclick="toggleChip(this);applyFilters()">🌙 Shy</div>
-          </div>
-        </div>
-
-        <!-- Recent Matches — 2-col, bigger avatars -->
-        <div class="sidebar-card">
-          <h3>♡ Recent Matches</h3>
-          <div class="matches-grid" id="sidebarMatchesGrid"></div>
-        </div>
-
-        <!-- Nearby Shelters -->
-        <div class="sidebar-card">
-          <h3>📍 Nearby Shelters</h3>
-          <div class="shelter-item">
-            <div class="shelter-icon" style="background:rgba(74,158,142,.12)">🏠</div>
-            <div class="shelter-info"><div class="shelter-name">Baguio Cat Rescue</div><div class="shelter-dist">⭐ 4.9 • 1.2 km</div></div>
-            <span class="shelter-count">23</span>
-          </div>
-          <div class="shelter-item">
-            <div class="shelter-icon" style="background:rgba(168,191,138,.2)">🐾</div>
-            <div class="shelter-info"><div class="shelter-name">PAWS Benguet</div><div class="shelter-dist">⭐ 4.7 • 3.5 km</div></div>
-            <span class="shelter-count">41</span>
-          </div>
-          <div class="shelter-item">
-            <div class="shelter-icon" style="background:rgba(212,168,83,.12)">🌸</div>
-            <div class="shelter-info"><div class="shelter-name">Happy Paws Shelter</div><div class="shelter-dist">⭐ 4.8 • 6.1 km</div></div>
-            <span class="shelter-count">17</span>
-          </div>
-        </div>
-
-        <!-- Adoption Tip -->
-        <div class="sidebar-card tip-card">
-          <h3>💡 Adoption Tip</h3>
-          <p id="adoptionTip">Senior cats (7+ yrs) are often overlooked but make wonderful companions! 🐾</p>
-          <br>
-          <p id="adoptionTip">swipe through adoptable cats, match, and give them a forever home 🏠</p>
-        </div>
-
-        <!-- Tagline pill — full width, bottom of sidebar -->
-        <div class="discover-tagline">
-          <span id="discoverTagline"></span>
+        <div class="no-more-cats" id="noMoreCats">
+          <div class="big-emoji">😿</div>
+          <h3>You've seen them all!</h3>
+          <p>Check back soon or adjust filters!</p>
+          <button class="btn btn-primary" onclick="resetCards()">🔄 Refresh</button>
         </div>
       </div>
     </div>
 
-    <!-- MATCHES PANEL (position:fixed) -->
-    <div class="side-panel" id="matchesPanel">
-      <div class="panel-header">
-        <div class="panel-title">♡ Your Matches</div>
-        <button class="panel-close" onclick="closePanel('matchesPanel')">✕</button>
-      </div>
-      <div class="matches-list" id="matchesList"></div>
-    </div>
-
-    <!-- CHAT PANEL -->
-    <div class="side-panel" id="chatPanel">
-      <div class="chat-nav">
-        <button class="chat-back" onclick="showMatchesPanel()">←</button>
-        <div class="chat-partner-info">
-          <div class="chat-partner-avatar-placeholder" id="chatPartnerAvatar">🐱</div>
-          <div>
-            <div class="chat-partner-name" id="chatPartnerName">Cat</div>
-            <div class="chat-partner-status">Active now</div>
-          </div>
+    <!-- CENTER: STATS BOX + TAGLINE + UNDO -->
+    <div class="new-center-area">
+      <!-- Stats box (white bordered, center of screen) -->
+      <div class="discover-stats-box">
+        <div class="stat-box-item">
+          <span class="stat-box-label">Available Cats</span>
+          <span class="stat-box-num" id="statCats">0</span>
         </div>
-        <button class="btn btn-secondary" style="font-size:11px;padding:5px 10px" onclick="viewProfile()">👁 Profile</button>
+        <div class="stat-box-sep"></div>
+        <div class="stat-box-item">
+          <span class="stat-box-label">Matches Today</span>
+          <span class="stat-box-num" id="statMatches">0</span>
+        </div>
+        <div class="stat-box-sep"></div>
+        <div class="stat-box-item">
+          <span class="stat-box-label">Adopted Cats</span>
+          <span class="stat-box-num" id="statAdopted">0</span>
+        </div>
+        <div class="stat-box-sep"></div>
+        <div class="stat-box-item">
+          <span class="stat-box-label">Nearby Shelters</span>
+          <span class="stat-box-num">3</span>
+        </div>
       </div>
-      <div class="chat-messages" id="chatMessages">
-        <div class="chat-empty"><div class="chat-empty-icon">💬</div><div>Say hello! Start the conversation 🐾</div></div>
+
+      <div class="center-tagline">
+        swipe through adoptable cats, match<br>
+        with your favorite, and give them a<br>
+        forever home
       </div>
-      <div class="chat-input-area">
-        <input class="chat-input" id="chatInput" placeholder="Type a message..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMessage()}">
-        <button class="chat-send" onclick="sendMessage()">➤</button>
-      </div>
+
+      <!-- Undo button centered below tagline -->
+      <button class="card-undo-btn" onclick="undoSwipe()" title="Undo last swipe">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-5.59"/></svg>
+      </button>
     </div>
 
-    <!-- PROFILE VIEW PANEL (cat or adopter detail) -->
-    <div class="side-panel" id="profileViewPanel">
-      <div class="panel-header">
-        <button class="panel-close-back" onclick="closePanel('profileViewPanel');document.getElementById('chatPanel').classList.add('open')">←</button>
-        <div class="panel-title" id="profileViewTitle">Profile</div>
-        <div style="width:30px"></div>
+    <!-- RIGHT: PAW ICON BUTTONS -->
+    <div class="paw-buttons-col">
+      <div class="paw-btn-wrap" onclick="openPawPopup('filters')">
+        <img src="paw.png" alt="Filters" class="paw-btn-img">
+        <span class="paw-btn-label">Filters</span>
       </div>
-      <div class="profile-view-content" id="profileViewContent"></div>
+      <div class="paw-btn-wrap" onclick="openPawPopup('matches')">
+        <img src="paw.png" alt="Recent Matches" class="paw-btn-img">
+        <span class="paw-btn-label">Recent Matches</span>
+      </div>
+      <div class="paw-btn-wrap" onclick="openPawPopup('shelters')">
+        <img src="paw.png" alt="Nearby Shelters" class="paw-btn-img">
+        <span class="paw-btn-label">Nearby Shelters</span>
+      </div>
     </div>
+  </div>
+
+  <!-- PAW POPUP OVERLAY -->
+  <div class="paw-popup-overlay" id="pawPopupOverlay" onclick="closePawPopup()"></div>
+
+  <!-- FILTERS POPUP -->
+  <div class="paw-popup" id="pawPopupFilters">
+    <h3>Filters</h3>
+    <div class="filter-row"><span class="filter-label">Max Age</span><span class="filter-val" id="ageVal">Any age</span></div>
+    <input type="range" id="ageSlider" min="0" max="15" value="15" oninput="document.getElementById('ageVal').textContent=this.value>=15?'Any age':'0–'+this.value+' yrs';applyFilters()">
+    <div class="filter-row"><span class="filter-label">Distance</span><span class="filter-val" id="distVal">10 km</span></div>
+    <input type="range" min="1" max="50" value="10" oninput="document.getElementById('distVal').textContent=this.value+' km'">
+    <div class="filter-label" style="margin-bottom:8px;margin-top:4px">Personality</div>
+    <div class="filter-chips">
+      <div class="filter-chip" data-trait="calm" onclick="toggleChip(this);applyFilters()">😴 Calm</div>
+      <div class="filter-chip" data-trait="playful" onclick="toggleChip(this);applyFilters()">🏃 Playful</div>
+      <div class="filter-chip" data-trait="cuddly" onclick="toggleChip(this);applyFilters()">🤗 Cuddly</div>
+      <div class="filter-chip" data-trait="sassy" onclick="toggleChip(this);applyFilters()">😼 Sassy</div>
+      <div class="filter-chip" data-trait="active" onclick="toggleChip(this);applyFilters()">🐾 Active</div>
+      <div class="filter-chip" data-trait="shy" onclick="toggleChip(this);applyFilters()">🌙 Shy</div>
+    </div>
+  </div>
+
+  <!-- RECENT MATCHES POPUP -->
+  <div class="paw-popup" id="pawPopupMatches">
+    <h3>Recent Matches</h3>
+    <div class="paw-matches-grid" id="sidebarMatchesGrid"></div>
+  </div>
+
+  <!-- NEARBY SHELTERS POPUP -->
+  <div class="paw-popup" id="pawPopupShelters">
+    <h3>Nearby Shelters</h3>
+    <div class="shelter-item">
+      <div class="shelter-thumb"></div>
+      <div class="shelter-info"><div class="shelter-name">Baguio Cat Rescue</div><div class="shelter-dist">⭐ 4.9 • 1.2 km</div></div>
+    </div>
+    <div class="shelter-item">
+      <div class="shelter-thumb"></div>
+      <div class="shelter-info"><div class="shelter-name">PAWS Benguet</div><div class="shelter-dist">⭐ 4.7 • 3.5 km</div></div>
+    </div>
+    <div class="shelter-item">
+      <div class="shelter-thumb"></div>
+      <div class="shelter-info"><div class="shelter-name">Happy Paws Shelter</div><div class="shelter-dist">⭐ 4.8 • 6.1 km</div></div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="discover-footer">Meowtch ∥ Tacomi Company 2026</div>
+
+  <!-- MATCHES PANEL (position:fixed) -->
+  <div class="side-panel" id="matchesPanel">
+    <div class="panel-header">
+      <div class="panel-title">♡ Your Matches</div>
+      <button class="panel-close" onclick="closePanel('matchesPanel')">✕</button>
+    </div>
+    <div class="matches-list" id="matchesList"></div>
+  </div>
+
+  <!-- CHAT PANEL -->
+  <div class="side-panel" id="chatPanel">
+    <div class="chat-nav">
+      <button class="chat-back" onclick="showMatchesPanel()">←</button>
+      <div class="chat-partner-info">
+        <div class="chat-partner-avatar-placeholder" id="chatPartnerAvatar">🐱</div>
+        <div>
+          <div class="chat-partner-name" id="chatPartnerName">Cat</div>
+          <div class="chat-partner-status">Active now</div>
+        </div>
+      </div>
+      <button class="btn btn-secondary" style="font-size:11px;padding:5px 10px" onclick="viewProfile()">👁 Profile</button>
+    </div>
+    <div class="chat-messages" id="chatMessages">
+      <div class="chat-empty"><div class="chat-empty-icon">💬</div><div>Say hello! Start the conversation 🐾</div></div>
+    </div>
+    <div class="chat-input-area">
+      <input class="chat-input" id="chatInput" placeholder="Type a message..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMessage()}">
+      <button class="chat-send" onclick="sendMessage()">➤</button>
+    </div>
+  </div>
+
+  <!-- PROFILE VIEW PANEL (cat or adopter detail) -->
+  <div class="side-panel" id="profileViewPanel">
+    <div class="panel-header">
+      <button class="panel-close-back" onclick="closePanel('profileViewPanel');document.getElementById('chatPanel').classList.add('open')">←</button>
+      <div class="panel-title" id="profileViewTitle">Profile</div>
+      <div style="width:30px"></div>
+    </div>
+    <div class="profile-view-content" id="profileViewContent"></div>
   </div>
 
   <!-- MOBILE NAV -->
@@ -564,12 +584,10 @@ function afterLogin(user,userData){
   loadDiscoverContent();
   showPage('page-discover');
   if(userData.role==='owner'){
-    document.getElementById('discoverTagline').textContent='swipe through potential adopters and find the perfect home for your cats 🐱';
-    document.getElementById('discoverNavTitle').textContent='₍^. .^₎⟆ Find Adopters';
+    document.getElementById('discoverTagline') && (document.getElementById('discoverTagline').textContent='swipe through potential adopters and find the perfect home for your cats 🐱');
+    document.getElementById('discoverNavTitle') && (document.getElementById('discoverNavTitle').textContent='₍^. .^₎⟆ Find Adopters');
     document.getElementById('swipeLike').textContent='MATCH! 💚';
   } else {
-    document.getElementById('discoverTagline').textContent='swipe through adoptable cats, match, and give them a forever home 🏠';
-    document.getElementById('discoverNavTitle').textContent='₍^. .^₎⟆ Discover';
     document.getElementById('swipeLike').textContent='ADOPT! 💚';
   }
 }
@@ -584,13 +602,34 @@ window.addEventListener('load',()=>{
     currentUser={uid:session.uid,displayName:session.name,email:session.email};
     currentUserData=session;loadDiscoverContent();showPage('page-discover');
     if(session.role==='owner'){
-      document.getElementById('discoverTagline').textContent='swipe through potential adopters and find the perfect home for your cats 🐱';
-      document.getElementById('discoverNavTitle').textContent='₍^. .^₎⟆ Find Adopters';
       document.getElementById('swipeLike').textContent='MATCH! 💚';
     }
   } else {loadCard(0);}
   rotateTip();
 });
+
+/* PAW POPUP CONTROLS */
+let activePawPopup=null;
+function openPawPopup(type){
+  closePawPopup();
+  const map={filters:'pawPopupFilters',matches:'pawPopupMatches',shelters:'pawPopupShelters'};
+  const el=document.getElementById(map[type]);
+  if(!el)return;
+  document.getElementById('pawPopupOverlay').classList.add('show');
+  el.style.display='block';
+  // Force reflow for transition
+  el.offsetHeight;
+  el.classList.add('show');
+  activePawPopup=el;
+  if(type==='matches')loadSidebarMatches();
+}
+function closePawPopup(){
+  if(activePawPopup){
+    activePawPopup.classList.remove('show');
+    setTimeout(()=>{if(activePawPopup){activePawPopup.style.display='none';activePawPopup=null;}},250);
+  }
+  document.getElementById('pawPopupOverlay').classList.remove('show');
+}
 
 function showDashboard(){
   if(!currentUserData) return;
