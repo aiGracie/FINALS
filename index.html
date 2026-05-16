@@ -2,14 +2,13 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
 <title>Meowtch 🐾</title>
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Nunito:wght@400;600;700;800&family=Fredoka+One&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css.css"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js" defer></script>
 </head>
 <body>
-
 <div class="deco" style="top:28%;left:5%;animation-delay:0s">🍃</div>
 <div class="deco" style="top:68%;left:8%;animation-delay:2s;font-size:15px">🌿</div>
 <div class="deco" style="top:55%;right:6%;animation-delay:1s">🐾</div>
@@ -49,13 +48,12 @@
       <button class="auth-tab active" id="tab-login" onclick="switchAuthTab('login')">Login</button>
       <button class="auth-tab" id="tab-signup" onclick="switchAuthTab('signup')">Sign Up</button>
     </div>
-    <!-- LOGIN -->
     <div id="login-form">
-      <button class="social-btn social-btn-google" onclick="doSocialLogin('google')">
+      <button class="social-btn social-btn-google" onclick="doSocialLogin('google','adopter')">
         <svg class="social-icon" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
         Continue with Google
       </button>
-      <button class="social-btn social-btn-facebook" onclick="doSocialLogin('facebook')">
+      <button class="social-btn social-btn-facebook" onclick="doSocialLogin('facebook','adopter')">
         <svg class="social-icon" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" fill="#fff"/></svg>
         Continue with Facebook
       </button>
@@ -64,32 +62,28 @@
       <div class="form-group"><label>Password</label><input type="password" id="login-pass" placeholder="••••••••"></div>
       <button class="btn btn-primary" style="width:100%;margin-top:5px" onclick="doLogin()">Login 🐾</button>
     </div>
-    <!-- SIGNUP -->
     <div id="signup-form" style="display:none">
       <div id="signup-step-choose">
-        <button class="social-btn social-btn-google" onclick="doSocialLogin('google')">
-          <svg class="social-icon" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
-          Sign up with Google
-        </button>
-        <button class="social-btn social-btn-facebook" onclick="doSocialLogin('facebook')">
-          <svg class="social-icon" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" fill="#fff"/></svg>
-          Sign up with Facebook
-        </button>
-        <div class="auth-divider">or</div>
-        <button class="social-btn social-btn-email" onclick="showEmailSignup()">
-          <svg class="social-icon" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z" fill="#4a9e8e"/></svg>
-          Create account with Email
-        </button>
-      </div>
-      <div id="signup-step-email" style="display:none">
-        <button class="auth-back-inline" onclick="hideEmailSignup()">← Back</button>
-        <div class="role-picker-section">
-          <label>I am a...</label>
+        <div class="role-picker-section" style="margin-bottom:14px">
+          <label style="font-size:14px;font-weight:800;color:var(--teal-dark);margin-bottom:10px;display:block">I am joining as...</label>
           <div class="role-picker">
             <div class="role-card selected" id="role-adopter" onclick="selectRole('adopter')"><div class="role-icon">🏠</div><div class="role-label">Adopter</div><div class="role-desc">I want to adopt a cat</div></div>
             <div class="role-card" id="role-owner" onclick="selectRole('owner')"><div class="role-icon">🐱</div><div class="role-label">Owner</div><div class="role-desc">I have cats to rehome</div></div>
           </div>
         </div>
+        <button class="social-btn social-btn-google" onclick="doSocialSignup('google')">
+          <svg class="social-icon" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>Sign up with Google
+        </button>
+        <button class="social-btn social-btn-facebook" onclick="doSocialSignup('facebook')">
+          <svg class="social-icon" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" fill="#fff"/></svg>Sign up with Facebook
+        </button>
+        <div class="auth-divider">or</div>
+        <button class="social-btn social-btn-email" onclick="showEmailSignup()">
+          <svg class="social-icon" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z" fill="#4a9e8e"/></svg>Create account with Email
+        </button>
+      </div>
+      <div id="signup-step-email" style="display:none">
+        <button class="auth-back-inline" onclick="hideEmailSignup()">← Back</button>
         <div class="form-group"><label>Full Name</label><input type="text" id="signup-name" placeholder="Your name"></div>
         <div class="form-group"><label>Email</label><input type="email" id="signup-email" placeholder="your@email.com"></div>
         <div class="form-group"><label>Password</label><input type="password" id="signup-pass" placeholder="Min. 6 characters"></div>
@@ -103,35 +97,22 @@
 <!-- PAGE 3: DISCOVER -->
 <div class="page" id="page-discover">
   <div class="discover-overlay"></div>
-
-  <!-- APP NAV -->
   <nav class="app-nav">
     <a class="app-nav-logo" href="#"><img src="logotrans.png" alt="Meowtch"><span>Meowtch</span></a>
-    <div class="app-nav-tabs">
-      <button class="app-nav-tab active" onclick="switchDiscoverTab('discover',this)">₍^. .^₎⟆ Discover</button>
-    </div>
+    <span class="app-nav-title" id="discoverNavTitle">₍^. .^₎⟆ Discover</span>
     <div class="app-nav-right">
       <button class="nav-icon-btn nav-badge" id="msgNavBtn" data-count="" onclick="showMatchesPanel()" title="Messages">✉</button>
-      <button class="nav-profile-btn" onclick="showDashboard()" title="My Profile">👤</button>
-      <button class="nav-logout-btn" onclick="doLogout()">Logout 👋</button>
+      <button class="nav-icon-btn" onclick="showDashboard()" title="Profile">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
+      </button>
+      <button class="nav-icon-btn nav-icon-logout" onclick="doLogout()" title="Logout">⏻</button>
     </div>
   </nav>
 
-  <!-- STATS BAR (real-time, top) -->
-  <div class="stats-bar">
-    <div class="stat-item"><span class="stat-num" id="statCats">0</span><span class="stat-label">AVAILABLE CATS</span></div>
-    <div class="stat-item"><span class="stat-num" id="statMatches">0</span><span class="stat-label">MATCHES TODAY</span></div>
-    <div class="stat-item"><span class="stat-num" id="statAdopted">0</span><span class="stat-label">ADOPTED CATS</span></div>
-    <div class="stat-item"><span class="stat-num">3</span><span class="stat-label">NEARBY SHELTERS</span></div>
-  </div>
-
-  <!-- MAIN DISCOVER AREA -->
   <div class="discover-main">
     <div class="discover-body">
-
       <!-- LEFT: SWIPE AREA -->
       <div class="card-area">
-        <div class="card-tagline">swipe through adoptable cats, match, and give them a forever home 🏠</div>
         <div class="card-stack" id="cardStack">
           <div class="cat-card back-card-2" id="backCard2">
             <div class="cat-card-img-placeholder" style="font-size:0;background:linear-gradient(135deg,rgba(74,158,142,.1),rgba(168,191,138,.15))"></div>
@@ -144,13 +125,10 @@
           <div class="cat-card front-card" id="frontCard">
             <div class="swipe-label swipe-like" id="swipeLike">ADOPT! 💚</div>
             <div class="swipe-label swipe-nope" id="swipeNope">PASS 💔</div>
-            <img class="cat-card-img" id="cardImg" src="" alt="Cat photo" style="display:none">
+            <img class="cat-card-img" id="cardImg" src="" alt="photo" style="display:none">
             <div class="cat-card-img-placeholder" id="cardImgPlaceholder">🐱</div>
             <div class="card-info">
-              <div class="card-name-row">
-                <span class="card-name" id="cardName">Jellybean</span>
-                <span class="card-age" id="cardAge">1 yr</span>
-              </div>
+              <div class="card-name-row"><span class="card-name" id="cardName">Jellybean</span><span class="card-age" id="cardAge">1 yr</span></div>
               <div class="card-breed" id="cardBreed">📍 Baguio City • Orange Tabby</div>
               <div class="card-traits" id="cardTraits"></div>
               <div class="card-bio" id="cardBio"></div>
@@ -159,48 +137,54 @@
           <div class="no-more-cats" id="noMoreCats">
             <div class="big-emoji">😿</div>
             <h3>You've seen them all!</h3>
-            <p>Check back soon or adjust your filters!</p>
-            <button class="btn btn-primary" onclick="resetCards()">🔄 Refresh Cats</button>
+            <p>Check back soon or adjust filters!</p>
+            <button class="btn btn-primary" onclick="resetCards()">🔄 Refresh</button>
           </div>
         </div>
         <div class="action-buttons">
           <button class="action-btn btn-undo" onclick="undoSwipe()" title="Undo">↩️</button>
           <button class="action-btn btn-nope" onclick="swipeLeft()" title="Pass">❌</button>
-          <button class="action-btn btn-super" onclick="superLike()" title="Super Like">⭐</button>
-          <button class="action-btn btn-like" onclick="swipeRight()" title="Adopt">💚</button>
-          <button class="action-btn btn-undo" onclick="boostCard()" title="Boost" style="font-size:15px">⚡</button>
+          <button class="action-btn btn-super" onclick="superLike()" title="Super">⭐</button>
+          <button class="action-btn btn-like" onclick="swipeRight()" title="Like">💚</button>
+          <button class="action-btn btn-undo" onclick="boostCard()" title="Boost">⚡</button>
         </div>
-        <div class="swipe-hint"><span>👈 Pass</span><span>⭐ Super Like</span><span>💚 Adopt 👉</span></div>
+        <div class="swipe-hint"><span>👈 Pass</span><span>⭐ Super</span><span>💚 Like 👉</span></div>
       </div>
 
-      <!-- RIGHT: SIDEBAR -->
+      <!-- RIGHT: SIDEBAR BLOBS -->
       <div class="discover-sidebar">
+        <!-- Stats blob — full width -->
+        <div class="sidebar-card stats-blob">
+          <div class="stats-row">
+            <div class="stat-item"><span class="stat-num" id="statCats">0</span><span class="stat-label">AVAILABLE<br>CATS</span></div>
+            <div class="stat-sep"></div>
+            <div class="stat-item"><span class="stat-num" id="statMatches">0</span><span class="stat-label">MATCHES<br>TODAY</span></div>
+            <div class="stat-sep"></div>
+            <div class="stat-item"><span class="stat-num" id="statAdopted">0</span><span class="stat-label">ADOPTED<br>CATS</span></div>
+            <div class="stat-sep"></div>
+            <div class="stat-item"><span class="stat-num">3</span><span class="stat-label">NEARBY<br>SHELTERS</span></div>
+          </div>
+        </div>
+
         <!-- Filters -->
         <div class="sidebar-card">
           <h3>🎛️ Filters</h3>
-          <div class="filter-row">
-            <span class="filter-label">Max Age</span>
-            <span class="filter-val" id="ageVal">Any age</span>
-          </div>
-          <input type="range" id="ageSlider" min="0" max="15" value="15"
-            oninput="document.getElementById('ageVal').textContent=this.value>=15?'Any age':'0–'+this.value+' yrs';applyFilters()">
-          <div class="filter-row">
-            <span class="filter-label">Distance</span>
-            <span class="filter-val" id="distVal">10 km</span>
-          </div>
+          <div class="filter-row"><span class="filter-label">Max Age</span><span class="filter-val" id="ageVal">Any age</span></div>
+          <input type="range" id="ageSlider" min="0" max="15" value="15" oninput="document.getElementById('ageVal').textContent=this.value>=15?'Any age':'0–'+this.value+' yrs';applyFilters()">
+          <div class="filter-row"><span class="filter-label">Distance</span><span class="filter-val" id="distVal">10 km</span></div>
           <input type="range" min="1" max="50" value="10" oninput="document.getElementById('distVal').textContent=this.value+' km'">
-          <div class="filter-label" style="margin-bottom:6px">Personality</div>
+          <div class="filter-label" style="margin-bottom:5px">Personality</div>
           <div class="filter-chips">
-            <div class="filter-chip active" data-trait="calm" onclick="toggleChip(this);applyFilters()">😴 Calm</div>
+            <div class="filter-chip" data-trait="calm" onclick="toggleChip(this);applyFilters()">😴 Calm</div>
             <div class="filter-chip" data-trait="playful" onclick="toggleChip(this);applyFilters()">🏃 Playful</div>
-            <div class="filter-chip active" data-trait="cuddly" onclick="toggleChip(this);applyFilters()">🤗 Cuddly</div>
+            <div class="filter-chip" data-trait="cuddly" onclick="toggleChip(this);applyFilters()">🤗 Cuddly</div>
             <div class="filter-chip" data-trait="sassy" onclick="toggleChip(this);applyFilters()">😼 Sassy</div>
             <div class="filter-chip" data-trait="active" onclick="toggleChip(this);applyFilters()">🐾 Active</div>
             <div class="filter-chip" data-trait="shy" onclick="toggleChip(this);applyFilters()">🌙 Shy</div>
           </div>
         </div>
 
-        <!-- Recent Matches -->
+        <!-- Recent Matches — 2-col, bigger avatars -->
         <div class="sidebar-card">
           <h3>♡ Recent Matches</h3>
           <div class="matches-grid" id="sidebarMatchesGrid"></div>
@@ -211,30 +195,37 @@
           <h3>📍 Nearby Shelters</h3>
           <div class="shelter-item">
             <div class="shelter-icon" style="background:rgba(74,158,142,.12)">🏠</div>
-            <div class="shelter-info"><div class="shelter-name">Baguio Cat Rescue</div><div class="shelter-dist">⭐ 4.9 • 1.2 km away</div></div>
-            <span class="shelter-count">23 cats</span>
+            <div class="shelter-info"><div class="shelter-name">Baguio Cat Rescue</div><div class="shelter-dist">⭐ 4.9 • 1.2 km</div></div>
+            <span class="shelter-count">23</span>
           </div>
           <div class="shelter-item">
             <div class="shelter-icon" style="background:rgba(168,191,138,.2)">🐾</div>
-            <div class="shelter-info"><div class="shelter-name">PAWS Benguet</div><div class="shelter-dist">⭐ 4.7 • 3.5 km away</div></div>
-            <span class="shelter-count">41 cats</span>
+            <div class="shelter-info"><div class="shelter-name">PAWS Benguet</div><div class="shelter-dist">⭐ 4.7 • 3.5 km</div></div>
+            <span class="shelter-count">41</span>
           </div>
           <div class="shelter-item">
             <div class="shelter-icon" style="background:rgba(212,168,83,.12)">🌸</div>
-            <div class="shelter-info"><div class="shelter-name">Happy Paws Shelter</div><div class="shelter-dist">⭐ 4.8 • 6.1 km away</div></div>
-            <span class="shelter-count">17 cats</span>
+            <div class="shelter-info"><div class="shelter-name">Happy Paws Shelter</div><div class="shelter-dist">⭐ 4.8 • 6.1 km</div></div>
+            <span class="shelter-count">17</span>
           </div>
         </div>
 
         <!-- Adoption Tip -->
         <div class="sidebar-card tip-card">
           <h3>💡 Adoption Tip</h3>
-          <p id="adoptionTip">Senior cats (7+ yrs) are often overlooked but make wonderful, calm companions! 🐾</p>
+          <p id="adoptionTip">Senior cats (7+ yrs) are often overlooked but make wonderful companions! 🐾</p>
+          <br>
+          <p id="adoptionTip">swipe through adoptable cats, match, and give them a forever home 🏠</p>
+        </div>
+
+        <!-- Tagline pill — full width, bottom of sidebar -->
+        <div class="discover-tagline">
+          <span id="discoverTagline"></span>
         </div>
       </div>
     </div>
 
-    <!-- MATCHES PANEL -->
+    <!-- MATCHES PANEL (position:fixed) -->
     <div class="side-panel" id="matchesPanel">
       <div class="panel-header">
         <div class="panel-title">♡ Your Matches</div>
@@ -254,23 +245,32 @@
             <div class="chat-partner-status">Active now</div>
           </div>
         </div>
-        <button class="btn btn-secondary" style="font-size:12px;padding:5px 13px" onclick="viewCatProfile()">View Profile</button>
+        <button class="btn btn-secondary" style="font-size:11px;padding:5px 10px" onclick="viewProfile()">👁 Profile</button>
       </div>
       <div class="chat-messages" id="chatMessages">
         <div class="chat-empty"><div class="chat-empty-icon">💬</div><div>Say hello! Start the conversation 🐾</div></div>
       </div>
       <div class="chat-input-area">
-        <input class="chat-input" id="chatInput" placeholder="Type a message..."
-          onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMessage()}">
+        <input class="chat-input" id="chatInput" placeholder="Type a message..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMessage()}">
         <button class="chat-send" onclick="sendMessage()">➤</button>
       </div>
     </div>
+
+    <!-- PROFILE VIEW PANEL (cat or adopter detail) -->
+    <div class="side-panel" id="profileViewPanel">
+      <div class="panel-header">
+        <button class="panel-close-back" onclick="closePanel('profileViewPanel');document.getElementById('chatPanel').classList.add('open')">←</button>
+        <div class="panel-title" id="profileViewTitle">Profile</div>
+        <div style="width:30px"></div>
+      </div>
+      <div class="profile-view-content" id="profileViewContent"></div>
+    </div>
   </div>
 
-  <!-- MOBILE BOTTOM NAV -->
+  <!-- MOBILE NAV -->
   <nav class="mobile-bottom-nav" id="mobileNav">
     <button class="mob-nav-btn active" id="mobDiscover" onclick="closePanels();setMobActive(this)"><span>🐾</span><span>Discover</span></button>
-    <button class="mob-nav-btn" id="mobMatches" onclick="showMatchesPanel();setMobActive(this)"><span>♡</span><span>Matches</span></button>
+    <button class="mob-nav-btn" id="mobMatches" onclick="showMatchesPanel();setMobActive(this)"><span>✉</span><span>Matches</span></button>
     <button class="mob-nav-btn" onclick="showDashboard()"><span>👤</span><span>Profile</span></button>
     <button class="mob-nav-btn" onclick="doLogout()"><span>⏻</span><span>Logout</span></button>
   </nav>
@@ -293,7 +293,7 @@
 <div class="page" id="page-owner">
   <div class="dashboard-nav">
     <div>
-      <div class="dashboard-title">My Cats 🐾</div>
+      <div class="dashboard-title">Owner Dashboard 🐱</div>
       <div style="font-size:12px;color:#888;font-weight:600" id="ownerWelcome">Welcome back!</div>
     </div>
     <div style="display:flex;gap:7px;align-items:center">
@@ -303,8 +303,39 @@
     </div>
   </div>
   <div class="dashboard-body">
-    <div><div class="dash-section-title">Cat Profiles</div><div class="cat-profiles-grid" id="catProfilesGrid"></div></div>
-    <div><div class="dash-section-title">Adoption Requests</div><div id="adoptionRequests" style="color:#888;font-size:14px">No pending requests.</div></div>
+    <!-- Owner profile section -->
+    <div>
+      <div class="dash-section-title">My Profile</div>
+      <div class="owner-profile-card">
+        <div class="owner-profile-left">
+          <div class="profile-avatar-wrap">
+            <div class="profile-avatar-placeholder" id="ownerAvatarDisplay">🐱</div>
+            <div class="profile-edit-avatar" onclick="document.getElementById('ownerAvatarInput').click()">✏</div>
+            <input type="file" id="ownerAvatarInput" accept="image/*" style="display:none" onchange="uploadOwnerAvatar(this)">
+          </div>
+          <div>
+            <div class="profile-name" id="ownerNameDisplay">Your Name</div>
+            <div class="profile-badge" style="background:rgba(168,191,138,.2);color:var(--sage-dark);margin-bottom:4px">🐱 Cat Owner</div>
+            <div class="profile-email" id="ownerEmailDisplay" style="font-size:11px;color:#aaa"></div>
+          </div>
+        </div>
+        <div class="owner-profile-right">
+          <div class="form-group"><label>Bio (shown to adopters)</label><textarea id="ownerBio" rows="2" placeholder="Tell adopters about yourself..."></textarea></div>
+          <div class="form-group"><label>Location</label><input type="text" id="ownerLocationInput" placeholder="e.g. Baguio City"></div>
+          <button class="btn btn-primary" style="width:100%;margin-top:4px;font-size:13px" onclick="saveOwnerProfile()">Save Profile 🐾</button>
+        </div>
+      </div>
+    </div>
+    <!-- Cat profiles -->
+    <div>
+      <div class="dash-section-title">Your Cat Profiles</div>
+      <div class="cat-profiles-grid" id="catProfilesGrid"></div>
+    </div>
+    <!-- Adoption requests -->
+    <div>
+      <div class="dash-section-title">Interested Adopters</div>
+      <div id="adoptionRequests" style="color:#999;font-size:13px">No requests yet. Add your cats to get started!</div>
+    </div>
   </div>
 </div>
 
@@ -341,10 +372,10 @@
         <label>Living Situation</label>
         <select id="adopterLiving"><option>House with yard</option><option>Apartment</option><option>Condo</option><option>Other</option></select>
       </div>
-      <button class="btn btn-primary" style="margin-top:7px" onclick="saveAdopterProfile()">Save Profile 🐾</button>
+      <button class="btn btn-primary" style="margin-top:7px;width:100%" onclick="saveAdopterProfile()">Save Profile 🐾</button>
     </div>
     <div>
-      <div class="dash-section-title">Cats I'm Adopting 🐾</div>
+      <div class="dash-section-title">Cats I'm Matched With 🐾</div>
       <div class="adopted-cats-grid" id="adoptedCatsGrid">
         <div style="color:#999;font-size:13px;grid-column:1/-1">Start swiping to find your match!</div>
       </div>
@@ -362,14 +393,14 @@
     <div class="form-group"><label>Cat's Name</label><input type="text" id="catName" placeholder="e.g. Jellybean"></div>
     <div class="form-group"><label>Age (years)</label><input type="number" id="catAge" placeholder="e.g. 2" min="0" max="20"></div>
     <div class="form-group"><label>Breed</label><input type="text" id="catBreed" placeholder="e.g. Orange Tabby"></div>
-    <div class="form-group"><label>Location</label><input type="text" id="catLocation" placeholder="e.g. Baguio City"></div>
+    <div class="form-group"><label>Location / City</label><input type="text" id="catLocation" placeholder="e.g. Baguio City"></div>
     <div class="form-group"><label>Bio</label><textarea id="catBioInput" rows="3" placeholder="Tell adopters about this cat..."></textarea></div>
     <div class="form-group">
-      <label>Personality</label>
+      <label>Personality &amp; Status</label>
       <div class="personality-grid">
         <div class="personality-chip" onclick="this.classList.toggle('selected')">😴 Calm</div>
         <div class="personality-chip" onclick="this.classList.toggle('selected')">🏃 Playful</div>
-        <div class="personality-chip selected" onclick="this.classList.toggle('selected')">🤗 Cuddly</div>
+        <div class="personality-chip" onclick="this.classList.toggle('selected')">🤗 Cuddly</div>
         <div class="personality-chip" onclick="this.classList.toggle('selected')">😼 Sassy</div>
         <div class="personality-chip" onclick="this.classList.toggle('selected')">🐾 Active</div>
         <div class="personality-chip" onclick="this.classList.toggle('selected')">🌙 Shy</div>
@@ -386,7 +417,6 @@
 </div>
 
 <script>
-/* ─── LOCAL STORAGE ─── */
 const LS={
   get:k=>{try{return JSON.parse(localStorage.getItem(k))}catch{return null}},
   set:(k,v)=>localStorage.setItem(k,JSON.stringify(v)),
@@ -397,26 +427,28 @@ if(!LS.get('meowtch_cats'))    LS.set('meowtch_cats',[]);
 if(!LS.get('meowtch_matches')) LS.set('meowtch_matches',[]);
 if(!LS.get('meowtch_chats'))   LS.set('meowtch_chats',{});
 
-/* ─── DEMO CATS (corrected names) ─── */
 const demoCats=[
-  {
-    id:'demo-1',name:'Jellybean',ageNum:1,age:'1 yr',breed:'📍 Baguio City • Orange Tabby',
-    imgSrc:'cat1.jpeg',imgEmoji:'🐱',
-    bio:"Hi! I'm Jellybean — squishy, sweet, and always ready for cuddles. I love watching the world from windowsills and making biscuits on your lap. Will you be my forever human? 🍊",
-    traits:[['Cuddly','teal'],['Playful','sage'],['Vaccinated','amber'],['Indoor','terra']]
-  },
-  {
-    id:'demo-2',name:'Tala',ageNum:2,age:'2 yrs',breed:'📍 La Trinidad • Tabby Mix',
-    imgSrc:'cat2.jpeg',imgEmoji:'🎄',
-    bio:"Tala arrived wearing a tiny Santa hat and never looked back. She's festive, fearless, and secretly the most dramatic cat you'll ever meet. Ready for an adventure? 🎄",
-    traits:[['Vocal','teal'],['Playful','sage'],['House-trained','amber'],['Vaccinated','teal']]
-  },
-  {
-    id:'demo-3',name:'Crinkles',ageNum:2,age:'2 yrs',breed:'📍 Baguio City • Siamese',
-    imgSrc:'cat3.jpeg',imgEmoji:'😺',
-    bio:"I'm Crinkles — a little blurry, a lot of love. I make the funniest faces and will talk your ear off. I'm looking for someone patient and warm to call home. 💙",
-    traits:[['Sassy','terra'],['Cuddly','teal'],['Vaccinated','amber'],['Active','sage']]
-  }
+  {id:'demo-1',name:'Jellybean',ageNum:1,age:'1 yr',breed:'📍 Baguio City • Orange Tabby',imgSrc:'cat1.jpeg',imgEmoji:'🐱',
+   bio:"Hi! I'm Jellybean — squishy, sweet, and always ready for cuddles. I love watching the world from windowsills and making biscuits on your lap. Will you be my forever human? 🍊",
+   traits:[['Cuddly','teal'],['Playful','sage'],['Vaccinated','amber'],['Indoor','terra']]},
+  {id:'demo-2',name:'Crinkles',ageNum:2,age:'2 yrs',breed:'📍 La Trinidad • Siamese',imgSrc:'cat2.jpeg',imgEmoji:'🐈',
+   bio:"I'm Crinkles — a little blurry, a lot of love. I make the funniest faces and will talk your ear off. Looking for someone patient and warm to call home. 💙",
+   traits:[['Vocal','teal'],['Playful','sage'],['House-trained','amber'],['Vaccinated','teal']]},
+  {id:'demo-3',name:'Tala',ageNum:2,age:'2 yrs',breed:'📍 Baguio City • Persian Himalayan',imgSrc:'cat3.jpeg',imgEmoji:'🎄',
+   bio:"Tala arrived wearing a tiny Santa hat and never looked back. She's festive, fearless, and secretly the most dramatic cat you'll ever meet. Ready for an adventure? 🎄",
+   traits:[['Sassy','terra'],['Cuddly','teal'],['Vaccinated','amber'],['Active','sage']]}
+];
+
+const demoAdopters=[
+  {id:'demoA-1',name:'Maria Santos',ageNum:28,age:'28',breed:'📍 Baguio City • House with yard',imgSrc:'',imgEmoji:'👩',
+   bio:"Experienced cat owner with a quiet home and a big sunny yard. Looking for a gentle companion to share lazy afternoons with. I work from home and have no other pets! ☕🌿",
+   traits:[['Has yard','sage'],['Experienced','teal'],['WFH','amber'],['Non-smoker','teal']]},
+  {id:'demoA-2',name:'Jose Reyes',ageNum:35,age:'35',breed:'📍 La Trinidad • Apartment',imgSrc:'',imgEmoji:'👨',
+   bio:"Work-from-home developer looking for a feline coding buddy. Cozy apartment, always home, very patient. Would love a playful independent cat! 💻",
+   traits:[['WFH','teal'],['Apartment','amber'],['Kid-free','sage'],['Patient','teal']]},
+  {id:'demoA-3',name:'Anna Cruz',ageNum:24,age:'24',breed:'📍 Baguio City • Condo',imgSrc:'',imgEmoji:'👧',
+   bio:"Newly graduated nurse. Gentle, patient, and will absolutely spoil any cat I adopt. My condo has a balcony garden — perfect for a curious cat! 🌸",
+   traits:[['Gentle','teal'],['Indoor setup','amber'],['First-time','sage'],['Nurse','teal']]}
 ];
 
 const adoptionTips=[
@@ -427,21 +459,19 @@ const adoptionTips=[
   "Cats feel safest with routine — try feeding them at the same time each day! 🕐"
 ];
 
-/* ─── STATE ─── */
 let currentUser=null,currentUserData=null;
-let baseCats=[],currentCats=[...demoCats];
+let baseCats=[],currentCats=[];
 let currentIndex=0,swipeHistory=[];
-let currentMatchedCat=null,currentChatConvoId=null;
+let currentMatchedCat=null,currentChatConvoId=null,currentChatPartner=null;
 let editingCatId=null,catImgFile=null,userCats=[];
 
-/* ─── PAGE NAV ─── */
+const isOwner=()=>currentUserData&&currentUserData.role==='owner';
+
 function showPage(id){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   closePanels();
 }
-
-/* ─── PANELS ─── */
 function showMatchesPanel(){
   if(!document.getElementById('page-discover').classList.contains('active')){
     document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
@@ -450,25 +480,23 @@ function showMatchesPanel(){
   loadMatchesList();
   document.getElementById('matchesPanel').classList.add('open');
   document.getElementById('chatPanel').classList.remove('open');
+  document.getElementById('profileViewPanel').classList.remove('open');
 }
-function closePanel(id){document.getElementById(id).classList.remove('open')}
+function closePanel(id){document.getElementById(id).classList.remove('open');}
 function closePanels(){
-  document.getElementById('matchesPanel')?.classList.remove('open');
-  document.getElementById('chatPanel')?.classList.remove('open');
+  ['matchesPanel','chatPanel','profileViewPanel'].forEach(id=>document.getElementById(id)?.classList.remove('open'));
 }
 function setMobActive(btn){
   document.querySelectorAll('.mob-nav-btn').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
 }
-
-/* ─── TOAST ─── */
 function toast(msg){
   const t=document.getElementById('toast');
-  t.textContent=msg; t.classList.add('show');
+  t.textContent=msg;t.classList.add('show');
   setTimeout(()=>t.classList.remove('show'),2800);
 }
 
-/* ─── AUTH ─── */
+/* AUTH */
 function switchAuthTab(tab){
   document.getElementById('login-form').style.display=tab==='login'?'':'none';
   document.getElementById('signup-form').style.display=tab==='signup'?'':'none';
@@ -477,6 +505,9 @@ function switchAuthTab(tab){
   if(tab==='signup'){
     document.getElementById('signup-step-choose').style.display='';
     document.getElementById('signup-step-email').style.display='none';
+    selectedRole='adopter';
+    document.getElementById('role-adopter').classList.add('selected');
+    document.getElementById('role-owner').classList.remove('selected');
   }
 }
 let selectedRole='adopter';
@@ -485,24 +516,18 @@ function selectRole(role){
   document.getElementById('role-adopter').classList.toggle('selected',role==='adopter');
   document.getElementById('role-owner').classList.toggle('selected',role==='owner');
 }
-function showEmailSignup(){
-  document.getElementById('signup-step-choose').style.display='none';
-  document.getElementById('signup-step-email').style.display='';
-}
-function hideEmailSignup(){
-  document.getElementById('signup-step-email').style.display='none';
-  document.getElementById('signup-step-choose').style.display='';
-}
-function doSocialLogin(provider){
+function showEmailSignup(){document.getElementById('signup-step-choose').style.display='none';document.getElementById('signup-step-email').style.display='';}
+function hideEmailSignup(){document.getElementById('signup-step-email').style.display='none';document.getElementById('signup-step-choose').style.display='';}
+function doSocialSignup(provider){doSocialLogin(provider,selectedRole);}
+function doSocialLogin(provider,role){
+  role=role||'adopter';
   const names={google:'Google User',facebook:'Facebook User'};
   const uid=provider+'_'+Date.now();
   const email=provider+'@demo.meowtch.com';
-  const userData={name:names[provider],email,role:'adopter',location:'Baguio City',createdAt:Date.now()};
-  const users=LS.get('meowtch_users');
-  users[uid]=userData; LS.set('meowtch_users',users);
-  LS.set('meowtch_session',{uid,...userData});
-  currentUserData=userData;
-  toast(`Signed in with ${provider==='google'?'Google':'Facebook'} 🐾`);
+  const userData={name:names[provider],email,role,location:'Baguio City',createdAt:Date.now()};
+  const users=LS.get('meowtch_users');users[uid]=userData;LS.set('meowtch_users',users);
+  LS.set('meowtch_session',{uid,...userData});currentUserData=userData;
+  toast(`Signed in as ${role} 🐾`);
   afterLogin({uid,displayName:names[provider],email},userData);
 }
 function doSignup(){
@@ -516,9 +541,8 @@ function doSignup(){
   if(Object.values(users).find(u=>u.email===email)) return toast('Email already registered!');
   const uid='user_'+Date.now();
   const userData={name,email,passHash:btoa(pass),role:selectedRole,location:loc,createdAt:Date.now()};
-  users[uid]=userData; LS.set('meowtch_users',users);
-  LS.set('meowtch_session',{uid,...userData});
-  currentUserData=userData;
+  users[uid]=userData;LS.set('meowtch_users',users);
+  LS.set('meowtch_session',{uid,...userData});currentUserData=userData;
   toast('Account created! Welcome 🐾');
   afterLogin({uid,displayName:name,email},userData);
 }
@@ -531,102 +555,106 @@ function doLogin(){
   if(!entry) return toast('No account found with that email.');
   const [uid,userData]=entry;
   if(userData.passHash&&userData.passHash!==btoa(pass)) return toast('Wrong password!');
-  LS.set('meowtch_session',{uid,...userData});
-  currentUserData=userData;
+  LS.set('meowtch_session',{uid,...userData});currentUserData=userData;
   toast('Welcome back! 🐾');
   afterLogin({uid,displayName:userData.name,email},userData);
 }
 function afterLogin(user,userData){
   currentUser=user;
-  loadDiscoverCats();
+  loadDiscoverContent();
   showPage('page-discover');
+  if(userData.role==='owner'){
+    document.getElementById('discoverTagline').textContent='swipe through potential adopters and find the perfect home for your cats 🐱';
+    document.getElementById('discoverNavTitle').textContent='₍^. .^₎⟆ Find Adopters';
+    document.getElementById('swipeLike').textContent='MATCH! 💚';
+  } else {
+    document.getElementById('discoverTagline').textContent='swipe through adoptable cats, match, and give them a forever home 🏠';
+    document.getElementById('discoverNavTitle').textContent='₍^. .^₎⟆ Discover';
+    document.getElementById('swipeLike').textContent='ADOPT! 💚';
+  }
 }
 function doLogout(){
-  LS.del('meowtch_session');
-  currentUser=null; currentUserData=null;
-  showPage('page-landing');
-  toast('Logged out. See you soon! 🐾');
+  LS.del('meowtch_session');currentUser=null;currentUserData=null;
+  showPage('page-landing');toast('Logged out. See you soon! 🐾');
 }
 
-/* ─── SESSION RESTORE ─── */
 window.addEventListener('load',()=>{
   const session=LS.get('meowtch_session');
   if(session){
     currentUser={uid:session.uid,displayName:session.name,email:session.email};
-    currentUserData=session;
-    loadDiscoverCats();
-    showPage('page-discover');
-  } else {
-    loadCard(0);
-  }
+    currentUserData=session;loadDiscoverContent();showPage('page-discover');
+    if(session.role==='owner'){
+      document.getElementById('discoverTagline').textContent='swipe through potential adopters and find the perfect home for your cats 🐱';
+      document.getElementById('discoverNavTitle').textContent='₍^. .^₎⟆ Find Adopters';
+      document.getElementById('swipeLike').textContent='MATCH! 💚';
+    }
+  } else {loadCard(0);}
   rotateTip();
 });
 
-/* ─── DASHBOARD ─── */
 function showDashboard(){
   if(!currentUserData) return;
-  if(currentUserData.role==='owner'){loadOwnerDashboard();showPage('page-owner');}
+  if(isOwner()){loadOwnerDashboard();showPage('page-owner');}
   else{loadAdopterProfile();showPage('page-adopter');}
 }
 
-/* ─── DISCOVER + STATS ─── */
+/* DISCOVER CONTENT */
+function loadDiscoverContent(){
+  if(isOwner()) loadOwnerDiscover();
+  else loadDiscoverCats();
+}
 function loadDiscoverCats(){
   const stored=LS.get('meowtch_cats')||[];
-  baseCats=stored.length>0?[...stored,...demoCats]:[...demoCats];
-  applyFilters();
-  updateStats();
-  loadSidebarMatches();
+  baseCats=stored.length?[...stored,...demoCats]:[...demoCats];
+  applyFilters();updateStats();loadSidebarMatches();
 }
-
+function loadOwnerDiscover(){
+  const users=LS.get('meowtch_users')||{};
+  const regAdopters=Object.entries(users)
+    .filter(([,u])=>u.role==='adopter')
+    .map(([id,u])=>({
+      id,name:u.name,ageNum:0,age:'',
+      breed:`📍 ${u.location||'Unknown'} • ${u.living||'Home'}`,
+      imgSrc:u.avatarURL||'',imgEmoji:'👤',
+      bio:u.bio||`${u.name} is looking for a furry companion in ${u.location||'their area'}.`,
+      traits:[[u.living||'Home','sage'],['Adopter','teal']]
+    }));
+  baseCats=[...regAdopters,...demoAdopters];
+  applyFilters();updateStats();loadSidebarMatches();
+}
 function applyFilters(){
   const slider=document.getElementById('ageSlider');
   const maxAge=slider?parseInt(slider.value):15;
-  const activeChips=Array.from(document.querySelectorAll('.filter-chip.active'))
-    .map(c=>c.dataset.trait?.toLowerCase()).filter(Boolean);
-
+  const activeChips=Array.from(document.querySelectorAll('.filter-chip.active')).map(c=>c.dataset.trait?.toLowerCase()).filter(Boolean);
   currentCats=(baseCats.length?baseCats:[...demoCats]).filter(cat=>{
-    const age=cat.ageNum!==undefined?cat.ageNum:parseInt(cat.age);
-    if(!isNaN(age)&&maxAge<15&&age>maxAge) return false;
+    if(!isOwner()){const age=cat.ageNum!==undefined?cat.ageNum:parseInt(cat.age);if(!isNaN(age)&&maxAge<15&&age>maxAge)return false;}
     if(activeChips.length>0){
-      const traitNames=(cat.traits||[]).map(t=>(Array.isArray(t)?t[0]:t).toLowerCase().replace(/[^\w\s]/gi,'').trim());
-      return activeChips.some(chip=>traitNames.some(tr=>tr.includes(chip)));
+      const tn=(cat.traits||[]).map(t=>(Array.isArray(t)?t[0]:t).toLowerCase().replace(/[^\w\s]/gi,'').trim());
+      return activeChips.some(chip=>tn.some(tr=>tr.includes(chip)));
     }
     return true;
   });
-
-  currentIndex=0; swipeHistory=[];
-  loadCard(0);
+  currentIndex=0;swipeHistory=[];loadCard(0);
 }
-
 function updateStats(){
   const allCats=[...demoCats,...(LS.get('meowtch_cats')||[])];
   const matches=LS.get('meowtch_matches')||[];
   const today=new Date().toDateString();
-  const todayMatches=matches.filter(m=>new Date(m.timestamp||0).toDateString()===today);
-
-  const sc=document.getElementById('statCats');
-  const sm=document.getElementById('statMatches');
-  const sa=document.getElementById('statAdopted');
-  if(sc) sc.textContent=allCats.length;
-  if(sm) sm.textContent=todayMatches.length;
-  if(sa) sa.textContent=matches.length;
-
+  const todayM=matches.filter(m=>new Date(m.timestamp||0).toDateString()===today);
+  const sc=document.getElementById('statCats');const sm=document.getElementById('statMatches');const sa=document.getElementById('statAdopted');
+  if(sc)sc.textContent=allCats.length;if(sm)sm.textContent=todayM.length;if(sa)sa.textContent=matches.length;
   const msgBtn=document.getElementById('msgNavBtn');
   if(msgBtn&&currentUser){
-    const userMatches=matches.filter(m=>m.adopterId===currentUser.uid);
+    const um=matches.filter(m=>m.adopterId===currentUser.uid||m.ownerId===currentUser.uid);
     const chats=LS.get('meowtch_chats')||{};
-    const unread=userMatches.filter(m=>!(chats['chat_'+m.catId]||[]).length).length;
+    const unread=um.filter(m=>!(chats['chat_'+m.catId]||[]).length).length;
     msgBtn.setAttribute('data-count',unread>0?String(unread):'');
   }
 }
-
 function loadSidebarMatches(){
-  const grid=document.getElementById('sidebarMatchesGrid');
-  if(!grid) return;
+  const grid=document.getElementById('sidebarMatchesGrid');if(!grid)return;
   const matches=currentUser?(LS.get('meowtch_matches')||[]).filter(m=>m.adopterId===currentUser.uid):[];
-
   if(!matches.length){
-    // Show demo cats as placeholders with actual photos
     grid.innerHTML=demoCats.map(cat=>`
       <div class="match-bubble" onclick="showMatchesPanel()">
         <div class="match-avatar" style="border-color:var(--teal-light)">
@@ -636,89 +664,56 @@ function loadSidebarMatches(){
       </div>`).join('');
     return;
   }
-
-  grid.innerHTML=matches.slice(-6).reverse().map((m,i)=>`
-    <div class="match-bubble" onclick="showMatchesPanel()">
+  grid.innerHTML=matches.slice(-4).reverse().map((m,i)=>`
+    <div class="match-bubble" onclick="openChat({id:'${m.catId}',name:'${m.catName}',imgEmoji:'${m.catEmoji||'🐱'}',imgSrc:'${(m.catImgSrc||'').replace(/'/g,'')}' })">
       <div class="match-avatar" style="border-color:var(--teal-light)">
-        ${m.catImgSrc
-          ?`<img src="${m.catImgSrc}" alt="${m.catName}" onerror="this.style.display='none';this.parentNode.innerHTML='${m.catEmoji||'🐱'}'">` 
-          :(m.catEmoji||'🐱')}
+        ${m.catImgSrc?`<img src="${m.catImgSrc}" alt="${m.catName}" onerror="this.parentNode.textContent='${m.catEmoji||'🐱'}'">` :(m.catEmoji||'🐱')}
         ${i===0?'<span class="match-new-badge">!</span>':''}
       </div>
       <span class="match-name">${m.catName}</span>
     </div>`).join('');
 }
 
-/* ─── CARDS ─── */
+/* CARDS */
 function loadCard(index){
-  const front=document.getElementById('frontCard');
-  const noMore=document.getElementById('noMoreCats');
-  if(index>=currentCats.length){
-    front.style.display='none'; noMore.classList.add('show'); return;
-  }
-  front.style.display=''; noMore.classList.remove('show');
-  front.className='cat-card front-card';
-
-  const cat=currentCats[index];
-  const imgEl=document.getElementById('cardImg');
-  const phEl=document.getElementById('cardImgPlaceholder');
-
-  if(cat.imgSrc||cat.photoURL){
-    imgEl.src=cat.photoURL||cat.imgSrc;
-    imgEl.style.display='block'; phEl.style.display='none';
-    imgEl.onerror=()=>{imgEl.style.display='none';phEl.style.display='flex';phEl.textContent=cat.imgEmoji||'🐱'};
-  } else {
-    imgEl.style.display='none'; phEl.style.display='flex';
-    phEl.textContent=cat.imgEmoji||'🐱';
-  }
-
-  document.getElementById('cardName').textContent=cat.name;
-  document.getElementById('cardAge').textContent=cat.age+(typeof cat.age==='number'?' yr':'');
-  document.getElementById('cardBreed').textContent=cat.breed;
-  document.getElementById('cardBio').textContent=cat.bio;
-
-  const traitsEl=document.getElementById('cardTraits');
-  traitsEl.innerHTML='';
-  (cat.traits||[]).forEach(([t,c])=>{
-    traitsEl.innerHTML+=`<span class="trait trait-${c||'teal'}">${t}</span>`;
-  });
-
-  document.getElementById('swipeLike').style.opacity=0;
-  document.getElementById('swipeNope').style.opacity=0;
-  front.style.transform=''; front.style.opacity='';
-  initTilt();
+  const front=document.getElementById('frontCard');const noMore=document.getElementById('noMoreCats');
+  if(!currentCats.length||index>=currentCats.length){front.style.display='none';noMore.classList.add('show');return;}
+  front.style.display='';noMore.classList.remove('show');front.className='cat-card front-card';
+  const item=currentCats[index];
+  const imgEl=document.getElementById('cardImg');const phEl=document.getElementById('cardImgPlaceholder');
+  if(item.imgSrc||item.photoURL){
+    imgEl.src=item.photoURL||item.imgSrc;imgEl.style.display='block';phEl.style.display='none';
+    imgEl.onerror=()=>{imgEl.style.display='none';phEl.style.display='flex';phEl.textContent=item.imgEmoji||'🐱'};
+  } else {imgEl.style.display='none';phEl.style.display='flex';phEl.textContent=item.imgEmoji||'🐱';}
+  document.getElementById('cardName').textContent=item.name;
+  document.getElementById('cardAge').textContent=item.age||'';
+  document.getElementById('cardBreed').textContent=item.breed||'';
+  document.getElementById('cardBio').textContent=item.bio||'';
+  const traitsEl=document.getElementById('cardTraits');traitsEl.innerHTML='';
+  (item.traits||[]).forEach(([t,c])=>{traitsEl.innerHTML+=`<span class="trait trait-${c||'teal'}">${t}</span>`;});
+  document.getElementById('swipeLike').style.opacity=0;document.getElementById('swipeNope').style.opacity=0;
+  front.style.transform='';front.style.opacity='';initTilt();
 }
-
 function initTilt(){
   const el=document.getElementById('frontCard');
-  if(typeof VanillaTilt==='undefined'||!el) return;
-  if(el.vanillaTilt) el.vanillaTilt.destroy();
+  if(typeof VanillaTilt==='undefined'||!el)return;
+  if(el.vanillaTilt)el.vanillaTilt.destroy();
   VanillaTilt.init(el,{max:6,speed:400,glare:true,'max-glare':0.06,perspective:900});
 }
-
 function swipeRight(){
-  const cat=currentCats[currentIndex]; if(!cat) return;
-  const front=document.getElementById('frontCard');
-  if(front.vanillaTilt) front.vanillaTilt.destroy();
-  front.classList.add('swiping-right');
-  swipeHistory.push(currentIndex);
-  currentMatchedCat=cat;
-  setTimeout(()=>{
-    currentIndex++; loadCard(currentIndex); spawnHearts();
-    if(Math.random()>.45) setTimeout(()=>showMatchPopup(cat),600);
-  },450);
+  const item=currentCats[currentIndex];if(!item)return;
+  const front=document.getElementById('frontCard');if(front.vanillaTilt)front.vanillaTilt.destroy();
+  front.classList.add('swiping-right');swipeHistory.push(currentIndex);currentMatchedCat=item;
+  setTimeout(()=>{currentIndex++;loadCard(currentIndex);spawnHearts();if(Math.random()>.45)setTimeout(()=>showMatchPopup(item),600);},450);
 }
 function swipeLeft(){
-  const front=document.getElementById('frontCard');
-  if(front.vanillaTilt) front.vanillaTilt.destroy();
-  front.classList.add('swiping-left');
-  swipeHistory.push(currentIndex);
+  const front=document.getElementById('frontCard');if(front.vanillaTilt)front.vanillaTilt.destroy();
+  front.classList.add('swiping-left');swipeHistory.push(currentIndex);
   setTimeout(()=>{currentIndex++;loadCard(currentIndex)},450);
 }
 function superLike(){
-  document.getElementById('swipeLike').textContent='SUPER! ⭐';
-  document.getElementById('swipeLike').style.opacity=1;
-  swipeRight();
+  document.getElementById('swipeLike').textContent=isOwner()?'GREAT FIT! ⭐':'SUPER! ⭐';
+  document.getElementById('swipeLike').style.opacity=1;swipeRight();
 }
 function boostCard(){
   const c=document.getElementById('frontCard');
@@ -726,192 +721,185 @@ function boostCard(){
   setTimeout(()=>c.style.boxShadow='',1000);
 }
 function undoSwipe(){if(!swipeHistory.length)return;currentIndex=swipeHistory.pop();loadCard(currentIndex);}
-function resetCards(){loadDiscoverCats();}
+function resetCards(){loadDiscoverContent();}
 function toggleChip(el){el.classList.toggle('active');}
 
-/* ─── DRAG ─── */
 let isDragging=false,startX=0,startY=0,curX=0;
-const frontCard=document.getElementById('frontCard');
-frontCard.addEventListener('mousedown',e=>startDrag(e));
-frontCard.addEventListener('touchstart',e=>startDrag(e.touches[0]),{passive:true});
+document.getElementById('frontCard').addEventListener('mousedown',e=>startDrag(e));
+document.getElementById('frontCard').addEventListener('touchstart',e=>startDrag(e.touches[0]),{passive:true});
 document.addEventListener('mousemove',e=>drag(e));
 document.addEventListener('touchmove',e=>drag(e.touches[0]),{passive:true});
 document.addEventListener('mouseup',endDrag);
 document.addEventListener('touchend',endDrag);
-
-function startDrag(e){
-  isDragging=true; startX=e.clientX; startY=e.clientY; curX=0;
-  const el=document.getElementById('frontCard');
-  if(el.vanillaTilt) el.vanillaTilt.destroy();
-}
+function startDrag(e){isDragging=true;startX=e.clientX;startY=e.clientY;curX=0;const el=document.getElementById('frontCard');if(el.vanillaTilt)el.vanillaTilt.destroy();}
 function drag(e){
-  if(!isDragging) return;
-  const card=document.getElementById('frontCard');
-  curX=e.clientX-startX;
-  const dy=(e.clientY-startY)*.3;
+  if(!isDragging)return;const card=document.getElementById('frontCard');
+  curX=e.clientX-startX;const dy=(e.clientY-startY)*.3;
   card.style.transform=`translate(${curX}px,${dy}px) rotate(${curX*.07}deg)`;
   document.getElementById('swipeLike').style.opacity=Math.min(1,Math.max(0,curX/80));
   document.getElementById('swipeNope').style.opacity=Math.min(1,Math.max(0,-curX/80));
 }
 function endDrag(){
-  if(!isDragging) return; isDragging=false;
-  if(curX>80) swipeRight();
-  else if(curX<-80) swipeLeft();
-  else {
+  if(!isDragging)return;isDragging=false;
+  if(curX>80)swipeRight();else if(curX<-80)swipeLeft();
+  else{
     const card=document.getElementById('frontCard');
-    card.style.transition='transform .4s cubic-bezier(.175,.885,.32,1.275)';
-    card.style.transform='';
-    document.getElementById('swipeLike').style.opacity=0;
-    document.getElementById('swipeNope').style.opacity=0;
+    card.style.transition='transform .4s cubic-bezier(.175,.885,.32,1.275)';card.style.transform='';
+    document.getElementById('swipeLike').style.opacity=0;document.getElementById('swipeNope').style.opacity=0;
     setTimeout(()=>{card.style.transition='';initTilt();},400);
   }
 }
 document.addEventListener('keydown',e=>{
-  if(e.key==='ArrowRight') swipeRight();
-  else if(e.key==='ArrowLeft') swipeLeft();
-  else if(e.key==='ArrowUp') superLike();
+  if(e.key==='ArrowRight')swipeRight();else if(e.key==='ArrowLeft')swipeLeft();else if(e.key==='ArrowUp')superLike();
 });
 
-/* ─── MATCH POPUP ─── */
-function showMatchPopup(cat){
-  document.getElementById('matchPopupText').textContent=
-    `You and ${cat.name} could be a perfect pair! Ready to meet them? 🐾`;
-  document.getElementById('matchPopup').classList.add('show');
-  spawnHearts();
+/* MATCH POPUP */
+function showMatchPopup(item){
+  const label=isOwner()?`${item.name} looks like a great adopter for your cats! 🐾`:`You and ${item.name} could be a perfect pair! 🐾`;
+  document.getElementById('matchPopupText').textContent=label;
+  document.getElementById('matchPopup').classList.add('show');spawnHearts();
   if(currentUser){
     const matches=LS.get('meowtch_matches');
-    const already=matches.find(m=>m.adopterId===currentUser.uid&&m.catId===cat.id);
+    const key=isOwner()?item.id+currentUser.uid:currentUser.uid+item.id;
+    const already=matches.find(m=>(m.adopterId===currentUser.uid&&m.catId===item.id)||(m.ownerId===currentUser.uid&&m.catId===item.id));
     if(!already){
       matches.push({
-        adopterId:currentUser.uid,catId:cat.id,catName:cat.name,
-        catEmoji:cat.imgEmoji||'🐱',catImgSrc:cat.imgSrc||cat.photoURL||'',
-        ownerId:cat.ownerId||null,timestamp:Date.now()
+        adopterId:isOwner()?item.id:currentUser.uid,
+        catId:isOwner()?currentUser.uid:item.id,
+        catName:item.name,catEmoji:item.imgEmoji||'🐱',
+        catImgSrc:item.imgSrc||item.photoURL||'',
+        ownerId:isOwner()?currentUser.uid:(item.ownerId||null),
+        timestamp:Date.now()
       });
-      LS.set('meowtch_matches',matches);
-      updateStats();
-      loadSidebarMatches();
+      LS.set('meowtch_matches',matches);updateStats();loadSidebarMatches();
     }
   }
 }
 function closePopup(){document.getElementById('matchPopup').classList.remove('show');}
 function goToMatchChat(){closePopup();if(currentMatchedCat)openChat(currentMatchedCat);}
 
-/* ─── CHAT ─── */
-function openChat(cat){
+/* CHAT */
+function openChat(item){
+  currentChatPartner=item;
   const avatarEl=document.getElementById('chatPartnerAvatar');
-  const allCats=[...demoCats,...(LS.get('meowtch_cats')||[])];
-  const catData=allCats.find(c=>c.id===cat.id||c.name===cat.name);
-  const imgSrc=catData?.imgSrc||catData?.photoURL||cat.imgSrc||'';
-
+  const allItems=[...demoCats,...demoAdopters,...(LS.get('meowtch_cats')||[])];
+  const found=allItems.find(c=>c.id===item.id||c.name===item.name);
+  const imgSrc=found?.imgSrc||found?.photoURL||item.imgSrc||'';
   if(imgSrc){
-    avatarEl.innerHTML=`<img src="${imgSrc}" alt="${cat.name}"
-      style="width:100%;height:100%;object-fit:cover;border-radius:50%"
-      onerror="this.parentElement.textContent='${cat.imgEmoji||'🐱'}'">`;
-  } else {
-    avatarEl.textContent=cat.imgEmoji||'🐱';
-  }
-
-  document.getElementById('chatPartnerName').textContent=cat.name;
-  currentChatConvoId='chat_'+(cat.id||cat.name);
+    avatarEl.innerHTML=`<img src="${imgSrc}" alt="${item.name}" style="width:100%;height:100%;object-fit:cover;border-radius:50%" onerror="this.parentElement.textContent='${item.imgEmoji||'🐱'}'">`;
+  } else {avatarEl.textContent=item.imgEmoji||'🐱';}
+  document.getElementById('chatPartnerName').textContent=item.name;
+  currentChatConvoId='chat_'+(item.id||item.name);
   loadChatMessages(currentChatConvoId);
-
   if(!document.getElementById('page-discover').classList.contains('active')){
     document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
     document.getElementById('page-discover').classList.add('active');
   }
   document.getElementById('matchesPanel').classList.remove('open');
+  document.getElementById('profileViewPanel').classList.remove('open');
   document.getElementById('chatPanel').classList.add('open');
 }
-
 function loadChatMessages(convoId){
   const mc=document.getElementById('chatMessages');
   const msgs=(LS.get('meowtch_chats')||{})[convoId]||[];
-  if(!msgs.length){
-    mc.innerHTML='<div class="chat-empty"><div class="chat-empty-icon">💬</div><div>Say hello! Start the conversation 🐾</div></div>';
-    return;
-  }
+  if(!msgs.length){mc.innerHTML='<div class="chat-empty"><div class="chat-empty-icon">💬</div><div>Say hello! Start the conversation 🐾</div></div>';return;}
   mc.innerHTML='';
   msgs.forEach(msg=>{
     const isMe=msg.uid===currentUser?.uid;
     const time=new Date(msg.timestamp).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
-    const div=document.createElement('div');
-    div.className=`chat-bubble ${isMe?'bubble-me':'bubble-them'}`;
-    div.innerHTML=`${msg.text}<div class="bubble-time">${time}</div>`;
-    mc.appendChild(div);
+    const div=document.createElement('div');div.className=`chat-bubble ${isMe?'bubble-me':'bubble-them'}`;
+    div.innerHTML=`${msg.text}<div class="bubble-time">${time}</div>`;mc.appendChild(div);
   });
   mc.scrollTop=mc.scrollHeight;
 }
-
 function sendMessage(){
-  const input=document.getElementById('chatInput');
-  const text=input.value.trim();
-  if(!text||!currentUser||!currentChatConvoId) return;
-  input.value='';
-  const chats=LS.get('meowtch_chats');
-  if(!chats[currentChatConvoId]) chats[currentChatConvoId]=[];
+  const input=document.getElementById('chatInput');const text=input.value.trim();
+  if(!text||!currentUser||!currentChatConvoId)return;input.value='';
+  const chats=LS.get('meowtch_chats');if(!chats[currentChatConvoId])chats[currentChatConvoId]=[];
   chats[currentChatConvoId].push({text,uid:currentUser.uid,name:currentUser.displayName||'User',timestamp:Date.now()});
-  LS.set('meowtch_chats',chats);
-  loadChatMessages(currentChatConvoId);
+  LS.set('meowtch_chats',chats);loadChatMessages(currentChatConvoId);
 }
-function viewCatProfile(){toast('Cat profile view coming soon! 🐱');}
 
-/* ─── MATCHES LIST ─── */
+/* PROFILE VIEW PANEL */
+function viewProfile(){
+  if(!currentChatPartner){toast('No profile available.');return;}
+  const allItems=[...demoCats,...demoAdopters,...(LS.get('meowtch_cats')||[])];
+  const item=allItems.find(c=>c.id===currentChatPartner.id||c.name===currentChatPartner.name)||currentChatPartner;
+  const isAdopter=item.id?.startsWith('demoA')||item.id?.startsWith('user_');
+  document.getElementById('profileViewTitle').textContent=isAdopter?'Adopter Profile':'Cat Profile';
+  const imgBlock=item.imgSrc||item.photoURL
+    ?`<img class="pv-hero-img" src="${item.photoURL||item.imgSrc}" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><div class="pv-hero-emoji" style="display:none">${item.imgEmoji||'🐱'}</div>`
+    :`<div class="pv-hero-emoji">${item.imgEmoji||'🐱'}</div>`;
+  const traitsHtml=(item.traits||[]).map(([t,c])=>`<span class="trait trait-${c||'teal'}">${t}</span>`).join('');
+  const editBtn=!isAdopter&&currentUser&&item.ownerId===currentUser.uid
+    ?`<button class="btn btn-primary" style="width:100%;margin-top:16px" onclick="closePanel('profileViewPanel');openEditCat('${item.id}')">✏️ Edit This Profile</button>`:'';
+  document.getElementById('profileViewContent').innerHTML=`
+    <div class="pv-hero">${imgBlock}</div>
+    <div class="pv-body">
+      <div class="pv-header">
+        <div><div class="pv-name">${item.name}</div><div class="pv-sub">${item.breed||''}</div></div>
+        ${item.age?`<span class="card-age">${item.age}</span>`:''}
+      </div>
+      ${traitsHtml?`<div class="pv-traits">${traitsHtml}</div>`:''}
+      <div class="pv-section"><div class="pv-section-title">About ${item.name}</div><div class="pv-section-body">${item.bio||'No bio available.'}</div></div>
+      ${!isAdopter&&item.ownerName?`<div class="pv-section"><div class="pv-section-title">Owner</div><div class="pv-section-body">${item.ownerName}</div></div>`:''}
+      ${editBtn}
+    </div>`;
+  document.getElementById('chatPanel').classList.remove('open');
+  document.getElementById('profileViewPanel').classList.add('open');
+}
+
+/* MATCHES LIST */
 function loadMatchesList(){
-  const list=document.getElementById('matchesList');
-  list.innerHTML='';
-  if(!currentUser){
-    list.innerHTML='<div style="padding:24px;color:#aaa;font-size:14px;text-align:center">Log in to see your matches!</div>';
-    return;
-  }
-  const matches=(LS.get('meowtch_matches')||[]).filter(m=>m.adopterId===currentUser.uid);
-  if(!matches.length){
-    list.innerHTML='<div style="padding:32px;color:#bbb;font-size:14px;text-align:center">No matches yet — keep swiping! 🐾</div>';
-    return;
-  }
+  const list=document.getElementById('matchesList');list.innerHTML='';
+  if(!currentUser){list.innerHTML='<div style="padding:24px;color:#aaa;font-size:14px;text-align:center">Log in to see your matches!</div>';return;}
+  const matches=(LS.get('meowtch_matches')||[]).filter(m=>m.adopterId===currentUser.uid||m.ownerId===currentUser.uid);
+  if(!matches.length){list.innerHTML='<div style="padding:32px;color:#bbb;font-size:14px;text-align:center">No matches yet — keep swiping! 🐾</div>';return;}
   matches.forEach(m=>{
     const msgs=((LS.get('meowtch_chats')||{})['chat_'+m.catId])||[];
     const last=msgs[msgs.length-1];
     const preview=last?last.text:'Tap to start chatting!';
     const time=last?new Date(last.timestamp).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}):'';
-    const item=document.createElement('div');
-    item.className='match-list-item';
-    const avatarHtml=m.catImgSrc
-      ?`<img class="match-list-avatar" src="${m.catImgSrc}" alt="${m.catName}"
-          onerror="this.outerHTML='<div class=&quot;match-list-avatar-placeholder&quot;>${m.catEmoji||'🐱'}</div>'">`
-      :`<div class="match-list-avatar-placeholder">${m.catEmoji||'🐱'}</div>`;
-    item.innerHTML=`${avatarHtml}
-      <div class="match-list-info">
-        <div class="match-list-name">${m.catName}</div>
-        <div class="match-list-preview">${preview}</div>
-      </div>
-      <div class="match-list-meta"><div class="match-list-time">${time}</div></div>`;
+    const item=document.createElement('div');item.className='match-list-item';
+    const av=m.catImgSrc?`<img class="match-list-avatar" src="${m.catImgSrc}" alt="${m.catName}" onerror="this.outerHTML='<div class=match-list-avatar-placeholder>${m.catEmoji||'🐱'}</div>'">`:`<div class="match-list-avatar-placeholder">${m.catEmoji||'🐱'}</div>`;
+    item.innerHTML=`${av}<div class="match-list-info"><div class="match-list-name">${m.catName}</div><div class="match-list-preview">${preview}</div></div><div class="match-list-meta"><div class="match-list-time">${time}</div></div>`;
     item.onclick=()=>openChat({id:m.catId,name:m.catName,imgEmoji:m.catEmoji||'🐱',imgSrc:m.catImgSrc||''});
     list.appendChild(item);
   });
 }
 
-/* ─── DISCOVER TAB ─── */
-function switchDiscoverTab(tab,el){
-  document.querySelectorAll('.app-nav-tab').forEach(t=>t.classList.remove('active'));
-  el.classList.add('active');
-  closePanels();
-}
-
-/* ─── OWNER DASHBOARD ─── */
+/* OWNER DASHBOARD */
 function loadOwnerDashboard(){
-  document.getElementById('ownerWelcome').textContent=`Welcome back, ${currentUserData?.name||'Owner'}!`;
-  const grid=document.getElementById('catProfilesGrid');
-  grid.innerHTML='';
-  if(!currentUser) return;
+  const n=currentUserData?.name||'Owner';
+  document.getElementById('ownerWelcome').textContent=`Welcome back, ${n}!`;
+  document.getElementById('ownerNameDisplay').textContent=n;
+  document.getElementById('ownerEmailDisplay').textContent=currentUser.email||'';
+  if(currentUserData?.bio)document.getElementById('ownerBio').value=currentUserData.bio;
+  if(currentUserData?.location)document.getElementById('ownerLocationInput').value=currentUserData.location;
+  if(currentUserData?.avatarURL){
+    const el=document.getElementById('ownerAvatarDisplay');
+    el.style.backgroundImage=`url(${currentUserData.avatarURL})`;el.style.backgroundSize='cover';el.textContent='';
+  }
+  const allMatches=LS.get('meowtch_matches')||[];
+  const myMatches=allMatches.filter(m=>m.ownerId===currentUser.uid);
+  const reqEl=document.getElementById('adoptionRequests');
+  if(myMatches.length){
+    reqEl.innerHTML=myMatches.map(m=>`
+      <div class="match-list-item">
+        <div class="match-list-avatar-placeholder" style="width:44px;height:44px;font-size:20px">👤</div>
+        <div class="match-list-info"><div class="match-list-name">Interested Adopter</div><div class="match-list-preview">Interested in ${m.catName||'your cat'}</div></div>
+        <button class="btn btn-primary" style="font-size:11px;padding:4px 10px" onclick="openChat({id:'${m.adopterId}',name:'Adopter',imgEmoji:'👤',imgSrc:''})">Message</button>
+      </div>`).join('');
+  } else {
+    reqEl.innerHTML='<div style="color:#999;font-size:13px;padding:8px 0">No requests yet. Add cats and start swiping!</div>';
+  }
+  const grid=document.getElementById('catProfilesGrid');grid.innerHTML='';
   const allCats=LS.get('meowtch_cats')||[];
   userCats=allCats.filter(c=>c.ownerId===currentUser.uid);
   userCats.forEach(cat=>{
-    const card=document.createElement('div');
-    card.className='cat-profile-card';
+    const card=document.createElement('div');card.className='cat-profile-card';
     card.innerHTML=`
-      ${cat.photoURL
-        ?`<img class="cat-profile-img" src="${cat.photoURL}" alt="${cat.name}">`
-        :`<div class="cat-profile-img-placeholder">🐱</div>`}
+      ${cat.photoURL?`<img class="cat-profile-img" src="${cat.photoURL}" alt="${cat.name}">`:`<div class="cat-profile-img-placeholder">🐱</div>`}
       <div class="cat-profile-info">
         <div class="cat-profile-name">${cat.name}</div>
         <div class="cat-profile-breed">${cat.breed||''}</div>
@@ -922,15 +910,34 @@ function loadOwnerDashboard(){
       </div>`;
     grid.appendChild(card);
   });
-  const add=document.createElement('div');
-  add.className='add-cat-card';
-  add.innerHTML='<span>➕</span><span>Add a Cat</span>';
-  add.onclick=()=>openAddCat();
+  const add=document.createElement('div');add.className='add-cat-card';
+  add.innerHTML='<span>➕</span><span>Add a Cat</span>';add.onclick=openAddCat;
   grid.appendChild(add);
 }
-
+function saveOwnerProfile(){
+  if(!currentUser)return;
+  const bio=document.getElementById('ownerBio').value.trim();
+  const loc=document.getElementById('ownerLocationInput').value.trim();
+  const users=LS.get('meowtch_users');
+  if(users[currentUser.uid]){users[currentUser.uid]={...users[currentUser.uid],bio,location:loc};LS.set('meowtch_users',users);}
+  currentUserData={...currentUserData,bio,location:loc};
+  LS.set('meowtch_session',{uid:currentUser.uid,...currentUserData});toast('Profile saved! 🐾');
+}
+function uploadOwnerAvatar(input){
+  if(!input.files[0]||!currentUser)return;
+  const r=new FileReader();
+  r.onload=e=>{
+    const url=e.target.result;const users=LS.get('meowtch_users');
+    if(users[currentUser.uid]){users[currentUser.uid].avatarURL=url;LS.set('meowtch_users',users);}
+    currentUserData={...currentUserData,avatarURL:url};
+    LS.set('meowtch_session',{uid:currentUser.uid,...currentUserData});
+    const el=document.getElementById('ownerAvatarDisplay');
+    el.style.backgroundImage=`url(${url})`;el.style.backgroundSize='cover';el.textContent='';
+    toast('Avatar updated! 🐾');
+  };r.readAsDataURL(input.files[0]);
+}
 function openAddCat(){
-  editingCatId=null; catImgFile=null;
+  editingCatId=null;catImgFile=null;
   document.getElementById('catModalTitle').textContent='Add a Cat Profile';
   ['catName','catAge','catBreed','catLocation','catBioInput'].forEach(id=>document.getElementById(id).value='');
   document.getElementById('catLocation').value=currentUserData?.location||'';
@@ -939,180 +946,117 @@ function openAddCat(){
   document.getElementById('catModal').classList.add('show');
 }
 function openEditCat(id){
-  const cat=userCats.find(c=>c.id===id); if(!cat) return;
-  editingCatId=id; catImgFile=null;
+  const cat=userCats.find(c=>c.id===id);if(!cat)return;
+  editingCatId=id;catImgFile=null;
   document.getElementById('catModalTitle').textContent='Edit Cat Profile';
-  document.getElementById('catName').value=cat.name||'';
-  document.getElementById('catAge').value=cat.ageNum||'';
-  document.getElementById('catBreed').value=cat.breed||'';
-  document.getElementById('catLocation').value=cat.location||'';
-  document.getElementById('catBioInput').value=cat.bio||'';
+  document.getElementById('catName').value=cat.name||'';document.getElementById('catAge').value=cat.ageNum||'';
+  document.getElementById('catBreed').value=(cat.breed||'').replace(/📍.*•\s*/,'').trim();
+  document.getElementById('catLocation').value=cat.location||'';document.getElementById('catBioInput').value=cat.bio||'';
   if(cat.photoURL){const p=document.getElementById('catImgPreview');p.src=cat.photoURL;p.classList.add('show');}
   else document.getElementById('catImgPreview').classList.remove('show');
-  document.querySelectorAll('.personality-chip').forEach(c=>{
-    c.classList.toggle('selected',(cat.traits||[]).some(t=>t[0]===c.textContent.trim()));
-  });
+  document.querySelectorAll('.personality-chip').forEach(c=>{c.classList.toggle('selected',(cat.traits||[]).some(t=>t[0]===c.textContent.trim()));});
   document.getElementById('catModal').classList.add('show');
 }
 function closeCatModal(){document.getElementById('catModal').classList.remove('show');}
 function previewCatImg(input){
-  catImgFile=input.files[0]; if(!catImgFile) return;
-  const r=new FileReader();
-  r.onload=e=>{const p=document.getElementById('catImgPreview');p.src=e.target.result;p.classList.add('show');};
-  r.readAsDataURL(catImgFile);
+  catImgFile=input.files[0];if(!catImgFile)return;
+  const r=new FileReader();r.onload=e=>{const p=document.getElementById('catImgPreview');p.src=e.target.result;p.classList.add('show');};r.readAsDataURL(catImgFile);
 }
 async function saveCatProfile(){
   if(!currentUser){toast('Please log in first!');return;}
-  const name=document.getElementById('catName').value.trim();
-  const age=document.getElementById('catAge').value;
-  const breed=document.getElementById('catBreed').value.trim();
-  const loc=document.getElementById('catLocation').value.trim();
+  const name=document.getElementById('catName').value.trim();const age=document.getElementById('catAge').value;
+  const breed=document.getElementById('catBreed').value.trim();const loc=document.getElementById('catLocation').value.trim();
   const bio=document.getElementById('catBioInput').value.trim();
   if(!name){toast('Please enter a cat name!');return;}
-
   const traits=Array.from(document.querySelectorAll('.personality-chip.selected')).map(c=>[c.textContent.trim(),'teal']);
   let photoURL='';
-  if(catImgFile){
-    photoURL=await new Promise(res=>{const r=new FileReader();r.onload=e=>res(e.target.result);r.readAsDataURL(catImgFile);});
-  } else if(editingCatId){
-    photoURL=userCats.find(c=>c.id===editingCatId)?.photoURL||'';
-  }
-
-  const data={name,ageNum:Number(age),age:age?age+' yr':'?',breed,location:loc,bio,traits,photoURL,
-    ownerId:currentUser.uid,ownerName:currentUserData?.name||'',updatedAt:Date.now()};
-
+  if(catImgFile){photoURL=await new Promise(res=>{const r=new FileReader();r.onload=e=>res(e.target.result);r.readAsDataURL(catImgFile);});}
+  else if(editingCatId){photoURL=userCats.find(c=>c.id===editingCatId)?.photoURL||'';}
+  const data={name,ageNum:Number(age),age:age?age+' yr':'?',breed:loc?`📍 ${loc} • ${breed}`:breed,location:loc,bio,traits,photoURL,imgEmoji:'🐱',ownerId:currentUser.uid,ownerName:currentUserData?.name||'',updatedAt:Date.now()};
   const allCats=LS.get('meowtch_cats')||[];
-  if(editingCatId){
-    const idx=allCats.findIndex(c=>c.id===editingCatId);
-    if(idx>-1) allCats[idx]={...allCats[idx],...data};
-    toast('Cat profile updated! 🐾');
-  } else {
-    data.id='cat_'+Date.now(); data.createdAt=Date.now();
-    allCats.push(data); toast('Cat profile created! 🐾');
-  }
-  LS.set('meowtch_cats',allCats);
-  closeCatModal();
-  loadOwnerDashboard();
-  const stored=LS.get('meowtch_cats')||[];
-  baseCats=[...stored,...demoCats];
-  updateStats();
+  if(editingCatId){const idx=allCats.findIndex(c=>c.id===editingCatId);if(idx>-1)allCats[idx]={...allCats[idx],...data};toast('Cat profile updated! 🐾');}
+  else{data.id='cat_'+Date.now();data.createdAt=Date.now();allCats.push(data);toast('Cat profile created! 🐾');}
+  LS.set('meowtch_cats',allCats);closeCatModal();loadOwnerDashboard();
+  baseCats=[...(LS.get('meowtch_cats')||[]),...demoCats];updateStats();
 }
 function deleteCat(id){
-  if(!confirm('Remove this cat profile?')) return;
+  if(!confirm('Remove this cat profile?'))return;
   LS.set('meowtch_cats',(LS.get('meowtch_cats')||[]).filter(c=>c.id!==id));
-  toast('Cat profile removed.');
-  loadOwnerDashboard();
-  const stored=LS.get('meowtch_cats')||[];
-  baseCats=stored.length>0?[...stored,...demoCats]:[...demoCats];
-  updateStats();
+  toast('Cat profile removed.');loadOwnerDashboard();
+  baseCats=[...(LS.get('meowtch_cats')||[]),...demoCats];updateStats();
 }
 
-/* ─── ADOPTER PROFILE ─── */
+/* ADOPTER PROFILE */
 function loadAdopterProfile(){
-  if(!currentUser) return;
+  if(!currentUser)return;
   document.getElementById('adopterName').textContent=currentUserData?.name||'Your Name';
   document.getElementById('adopterEmail').textContent=currentUser.email||'';
   document.getElementById('adopterWelcome').textContent=`Welcome back, ${currentUserData?.name||'Adopter'}!`;
-  if(currentUserData?.bio)      document.getElementById('adopterBio').value=currentUserData.bio;
-  if(currentUserData?.location) document.getElementById('adopterLocation').value=currentUserData.location;
-  if(currentUserData?.living)   document.getElementById('adopterLiving').value=currentUserData.living;
-
+  if(currentUserData?.bio)document.getElementById('adopterBio').value=currentUserData.bio;
+  if(currentUserData?.location)document.getElementById('adopterLocation').value=currentUserData.location;
+  if(currentUserData?.living)document.getElementById('adopterLiving').value=currentUserData.living;
   const matches=(LS.get('meowtch_matches')||[]).filter(m=>m.adopterId===currentUser.uid);
   const grid=document.getElementById('adoptedCatsGrid');
-  if(!matches.length){
-    grid.innerHTML='<div style="color:#999;font-size:13px;grid-column:1/-1">Start swiping to find your match!</div>';
-    return;
-  }
+  if(!matches.length){grid.innerHTML='<div style="color:#999;font-size:13px;grid-column:1/-1">Start swiping to find your match!</div>';return;}
   grid.innerHTML='';
   matches.forEach(m=>{
-    const card=document.createElement('div');
-    card.className='adopted-cat-card';
-    if(m.catImgSrc){
-      card.innerHTML=`<img class="adopted-cat-img" src="${m.catImgSrc}" alt="${m.catName}"
-        onerror="this.outerHTML='<div class=&quot;adopted-cat-img-placeholder&quot;>${m.catEmoji||'🐱'}</div>'">`;
-    } else {
-      card.innerHTML=`<div class="adopted-cat-img-placeholder">${m.catEmoji||'🐱'}</div>`;
-    }
+    const card=document.createElement('div');card.className='adopted-cat-card';
+    if(m.catImgSrc){card.innerHTML=`<img class="adopted-cat-img" src="${m.catImgSrc}" alt="${m.catName}" onerror="this.outerHTML='<div class=adopted-cat-img-placeholder>${m.catEmoji||'🐱'}</div>'">`;}
+    else{card.innerHTML=`<div class="adopted-cat-img-placeholder">${m.catEmoji||'🐱'}</div>`;}
     card.innerHTML+=`<div class="adopted-cat-name">${m.catName}</div>`;
+    card.onclick=()=>openChat({id:m.catId,name:m.catName,imgEmoji:m.catEmoji||'🐱',imgSrc:m.catImgSrc||''});
     grid.appendChild(card);
   });
 }
 function saveAdopterProfile(){
-  if(!currentUser) return;
+  if(!currentUser)return;
   const bio=document.getElementById('adopterBio').value.trim();
   const loc=document.getElementById('adopterLocation').value.trim();
   const liv=document.getElementById('adopterLiving').value;
   const users=LS.get('meowtch_users');
-  if(users[currentUser.uid]){
-    users[currentUser.uid]={...users[currentUser.uid],bio,location:loc,living:liv};
-    LS.set('meowtch_users',users);
-  }
+  if(users[currentUser.uid]){users[currentUser.uid]={...users[currentUser.uid],bio,location:loc,living:liv};LS.set('meowtch_users',users);}
   currentUserData={...currentUserData,bio,location:loc,living:liv};
-  LS.set('meowtch_session',{uid:currentUser.uid,...currentUserData});
-  toast('Profile saved! 🐾');
+  LS.set('meowtch_session',{uid:currentUser.uid,...currentUserData});toast('Profile saved! 🐾');
 }
 function uploadAdopterAvatar(input){
-  if(!input.files[0]||!currentUser) return;
+  if(!input.files[0]||!currentUser)return;
   const r=new FileReader();
   r.onload=e=>{
-    const url=e.target.result;
-    const users=LS.get('meowtch_users');
+    const url=e.target.result;const users=LS.get('meowtch_users');
     if(users[currentUser.uid]){users[currentUser.uid].avatarURL=url;LS.set('meowtch_users',users);}
     currentUserData={...currentUserData,avatarURL:url};
     LS.set('meowtch_session',{uid:currentUser.uid,...currentUserData});
     const el=document.getElementById('adopterAvatarDisplay');
-    const img=document.createElement('img');
-    img.src=url; img.className='profile-avatar';
-    el.replaceWith(img);
+    const img=document.createElement('img');img.src=url;img.className='profile-avatar';el.replaceWith(img);
     toast('Avatar updated! 🐾');
-  };
-  r.readAsDataURL(input.files[0]);
+  };r.readAsDataURL(input.files[0]);
 }
 
-/* ─── HEARTS ─── */
+/* FX */
 function spawnHearts(){
   const emojis=['🐾','✨','💚','🌿','🍃','🌸','💛'];
   const container=document.getElementById('heartsContainer');
   for(let i=0;i<14;i++){
     setTimeout(()=>{
-      const h=document.createElement('span');
-      h.className='falling-heart';
+      const h=document.createElement('span');h.className='falling-heart';
       h.textContent=emojis[Math.floor(Math.random()*emojis.length)];
-      h.style.left=Math.random()*100+'vw';
-      h.style.animationDuration=(.8+Math.random()*.8)+'s';
-      h.style.fontSize=(14+Math.random()*14)+'px';
-      container.appendChild(h);
-      setTimeout(()=>h.remove(),1600);
+      h.style.left=Math.random()*100+'vw';h.style.animationDuration=(.8+Math.random()*.8)+'s';h.style.fontSize=(14+Math.random()*14)+'px';
+      container.appendChild(h);setTimeout(()=>h.remove(),1600);
     },i*80);
   }
 }
-
 document.addEventListener('mousemove',e=>{
   if(Math.random()>.97){
-    const p=document.createElement('span');
-    p.className='paw-trail'; p.textContent='🐾';
-    p.style.left=e.clientX+'px'; p.style.top=e.clientY+'px';
-    document.body.appendChild(p);
-    setTimeout(()=>p.remove(),900);
+    const p=document.createElement('span');p.className='paw-trail';p.textContent='🐾';
+    p.style.left=e.clientX+'px';p.style.top=e.clientY+'px';document.body.appendChild(p);setTimeout(()=>p.remove(),900);
   }
 });
-
-/* ─── ROTATING TIP ─── */
 let tipIndex=0;
 function rotateTip(){
   const el=document.getElementById('adoptionTip');
-  if(el){
-    el.style.opacity=0;
-    setTimeout(()=>{
-      el.textContent=adoptionTips[tipIndex%adoptionTips.length];
-      tipIndex++;
-      el.style.transition='opacity .6s';
-      el.style.opacity=1;
-    },400);
-  }
+  if(el){el.style.opacity=0;setTimeout(()=>{el.textContent=adoptionTips[tipIndex%adoptionTips.length];tipIndex++;el.style.transition='opacity .6s';el.style.opacity=1;},400);}
   setTimeout(rotateTip,8000);
 }
-
 function showAbout(){toast('Meowtch — by TAC0MI Company 2026 🐾 Connecting cats with forever homes!');}
 function showContact(){toast('Contact us at: hello@meowtch.com 🐾');}
 </script>
